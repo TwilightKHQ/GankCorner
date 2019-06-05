@@ -3,6 +3,7 @@ package com.gankcorner.Utils;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Path;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
@@ -10,24 +11,24 @@ import android.view.View;
 
 /*
  * 为ImageView添加圆角效果
+ * 图片尺寸为宽度铺满高度自适应
  */
-
-public class CustomRoundAngleImageView extends AppCompatImageView {
+public class CustomImageView extends AppCompatImageView {
 
     float width, height;
     int radian = 20; //圆角大小
 
-    public CustomRoundAngleImageView(Context context) {
+    public CustomImageView(Context context) {
         this(context, null);
         init(context, null);
     }
 
-    public CustomRoundAngleImageView(Context context, AttributeSet attrs) {
+    public CustomImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
         init(context, attrs);
     }
 
-    public CustomRoundAngleImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -65,4 +66,17 @@ public class CustomRoundAngleImageView extends AppCompatImageView {
         super.onDraw(canvas);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        Drawable d = getDrawable();
+        if (d != null) {
+            //宽度铺满半个屏幕， 高度自适应
+            int widthPix = MeasureSpec.getSize(widthMeasureSpec) / 2;
+            //高度根据使得图片的宽度充满屏幕计算而得
+            int heightPix = (int) Math.ceil((float) widthPix * (float) d.getIntrinsicHeight() / (float) d.getIntrinsicWidth());
+            setMeasuredDimension(widthPix, heightPix);
+        } else {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
+    }
 }

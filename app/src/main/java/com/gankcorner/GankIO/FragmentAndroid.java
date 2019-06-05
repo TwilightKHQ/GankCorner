@@ -54,7 +54,7 @@ public class FragmentAndroid extends Fragment {
     /**
      * 初始化RecyclerView
      */
-    private void initView(){
+    private void initView() {
         // 定义一个线性布局管理器
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         // 设置布局管理器
@@ -75,7 +75,8 @@ public class FragmentAndroid extends Fragment {
                 //当前RecyclerView的所有子项个数
                 final int totalItemCount = manager.getItemCount();
                 if (visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 3 && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    getGank("Android", numPerPage, totalItemCount/numPerPage + 1);
+                    getGank("Android", numPerPage, totalItemCount / numPerPage + 1);
+                    Log.d("currentNum", "Page: " + totalItemCount / numPerPage);
                 }
             }
         });
@@ -122,9 +123,9 @@ public class FragmentAndroid extends Fragment {
         });
     }
 
-    private void addData(GankBean gankBean){
+    private void addData(GankBean gankBean) {
         mGankArticle = new ArrayList<>();
-        for(int i = 0; i < numPerPage; i++){
+        for (int i = 0; i < numPerPage; i++) {
             GankBean.ResultsBean resultsBean = gankBean.getResults().get(i);
             GankArticle gankArticle = new GankArticle(resultsBean.getWho(), resultsBean.getDesc(),
                     resultsBean.getPublishedAt(), resultsBean.getUrl(), resultsBean.getImages());
