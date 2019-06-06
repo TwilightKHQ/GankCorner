@@ -15,12 +15,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gankcorner.Utils.BottomDialogFragment;
+
 import static android.view.KeyEvent.KEYCODE_BACK;
 
-public class ActivityWeb extends AppCompatActivity {
+public class ActivityWeb extends AppCompatActivity implements View.OnClickListener {
 
-    private Toolbar toolbar;
-    private ImageButton closeButton;
     private TextView webTitle;
     private WebView webView;
 
@@ -42,58 +42,38 @@ public class ActivityWeb extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
 
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //返回上一个Activity
-                ActivityWeb.this.finish();
-            }
-        });
+//        closeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //返回上一个Activity
+//                ActivityWeb.this.finish();
+//            }
+//        });
 
     }
 
     private void initView() {
         //加载顶部的ToolBar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //动态设置ToolBar标题
         getSupportActionBar().setTitle("");
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
 
-        closeButton = (ImageButton) findViewById(R.id.web_exit);
+        ImageButton backButton = (ImageButton) findViewById(R.id.web_back);
+        backButton.setOnClickListener(this);
+        ImageButton closeButton = (ImageButton) findViewById(R.id.web_exit);
+        closeButton.setOnClickListener(this);
 
         webTitle = (TextView) findViewById(R.id.web_title);
         webTitle.setText(desc);
 
+        ImageButton shareButton = (ImageButton) findViewById(R.id.web_share);
+        shareButton.setOnClickListener(this);
+        ImageButton moreButton = (ImageButton) findViewById(R.id.more_item);
+        moreButton.setOnClickListener(this);
+
         webView = (WebView) findViewById(R.id.web_page);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.web_menu, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.web_share:
-                Toast.makeText(ActivityWeb.this, "分享", Toast.LENGTH_SHORT).show();
-            case R.id.refresh:
-                Toast.makeText(ActivityWeb.this, "刷新", Toast.LENGTH_SHORT).show();
-            case android.R.id.home:
-                if (webView.canGoBack()){ //回退至上一个页面
-                    webView.goBack();
-                    return true;
-                } else { //返回上一个Activity
-                    ActivityWeb.this.finish();
-                }
-        }
-        return true;
     }
 
     @Override
@@ -103,5 +83,30 @@ public class ActivityWeb extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.web_back:
+                if (webView.canGoBack()){ //回退至上一个页面
+                    webView.goBack();
+                } else { //结束当前Activity
+                    ActivityWeb.this.finish();
+                }
+                break;
+            case R.id.web_exit:
+                //结束当前Activity
+                Toast.makeText(ActivityWeb.this, "结束", Toast.LENGTH_SHORT).show();
+                ActivityWeb.this.finish();
+                break;
+            case R.id.web_share:
+                Toast.makeText(ActivityWeb.this, "分享", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.more_item:
+                BottomDialogFragment bottomDialogFragment = new BottomDialogFragment();
+                bottomDialogFragment.show(ActivityWeb.this.getFragmentManager(), "bottomDialogFragment");
+                break;
+        }
     }
 }

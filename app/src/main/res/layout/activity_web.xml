@@ -15,25 +15,68 @@
         android:background="@color/white"
         app:contentInsetStartWithNavigation="0dp">
 
-        <ImageButton
-            android:id="@+id/web_exit"
-            android:src="@mipmap/close"
-            android:background="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <!--设置标题具有跑马灯效果-->
-        <TextView
-            android:id="@+id/web_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:textSize="18sp"/>
+            <ImageButton
+                android:id="@+id/web_back"
+                android:src="@mipmap/back"
+                android:background="@color/white"
+                android:layout_marginRight="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/web_exit"
+                android:src="@mipmap/exit"
+                android:background="@color/white"
+                android:layout_toRightOf="@id/web_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--设置标题具有跑马灯效果-->
+            <TextView
+                android:id="@+id/web_title"
+                android:layout_toRightOf="@id/web_exit"
+                android:layout_toLeftOf="@id/web_share"
+                android:layout_alignBaseline="@id/web_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textSize="18sp"
+                android:layout_marginRight="8dp"/>
+
+            <ImageButton
+                android:id="@+id/web_share"
+                android:src="@mipmap/send"
+                android:background="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@id/more_item" />
+
+            <ImageButton
+                android:id="@+id/more_item"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="end"
+                android:background="@color/white"
+                android:src="@mipmap/more" />
+
+        </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
 
