@@ -83,6 +83,8 @@ public class ActivityWeb extends AppCompatActivity {
         switch (menuItem.getItemId()) {
             case R.id.web_share:
                 Toast.makeText(ActivityWeb.this, "分享", Toast.LENGTH_SHORT).show();
+            case R.id.refresh:
+                Toast.makeText(ActivityWeb.this, "刷新", Toast.LENGTH_SHORT).show();
             case android.R.id.home:
                 if (webView.canGoBack()){ //回退至上一个页面
                     webView.goBack();
