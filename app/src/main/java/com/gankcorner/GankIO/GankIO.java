@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gankcorner.GankIO.GankioFragment.FragmentAndroid;
+import com.gankcorner.GankIO.GankioFragment.FragmentiOS;
 import com.gankcorner.R;
 
 import java.util.ArrayList;

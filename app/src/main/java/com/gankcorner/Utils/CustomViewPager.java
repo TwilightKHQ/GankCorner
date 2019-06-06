@@ -20,6 +20,7 @@ public class CustomViewPager extends ViewPager {
 
     /**
      * 设置ViewPager能否滑动换页
+     *
      * @param CanScroll false 不能滑动， true 可以滑动
      */
     public void setCanScroll(boolean CanScroll) {

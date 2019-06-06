@@ -29,7 +29,7 @@ public class RetrofitUtil {
                 Log.d("Test", "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 GankBean gankBean = response.body();
-                String  Desc = null;
+                String Desc = null;
                 if (gankBean != null) {
                     Desc = gankBean.getResults().get(0).getDesc();
                 }

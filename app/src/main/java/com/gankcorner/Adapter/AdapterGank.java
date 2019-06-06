@@ -60,7 +60,7 @@ public class AdapterGank extends RecyclerView.Adapter<AdapterGank.ViewHolder> {
         viewHolder.who.setText(gankArticle.getWho());
         viewHolder.desc.setText(gankArticle.getDesc());
         viewHolder.publishedAt.setText(gankArticle.getPublishedAt().substring(5, 10));
-        Log.d("Url", "Position"+ position + " Desc1: " + gankArticle.getDesc());
+        Log.d("Url", "Position" + position + " Desc1: " + gankArticle.getDesc());
         //标题的点击事件
         viewHolder.desc.setOnClickListener(new View.OnClickListener() {
             @Override

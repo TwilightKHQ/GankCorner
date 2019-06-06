@@ -4,24 +4,31 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gankcorner.Adapter.AdapterMenuItem;
+import com.gankcorner.Bean.MenuItem;
 import com.gankcorner.Utils.BottomDialogFragment;
+import com.gankcorner.Utils.ContextUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
 public class ActivityWeb extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView webTitle;
     private WebView webView;
 
     private String desc;
@@ -37,20 +44,14 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         desc = intent.getStringExtra("page_desc");
         url = intent.getStringExtra("page_url");
 
+
         initView();
 
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
 
-//        closeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //返回上一个Activity
-//                ActivityWeb.this.finish();
-//            }
-//        });
-
     }
+
 
     private void initView() {
         //加载顶部的ToolBar
@@ -65,7 +66,7 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         ImageButton closeButton = (ImageButton) findViewById(R.id.web_exit);
         closeButton.setOnClickListener(this);
 
-        webTitle = (TextView) findViewById(R.id.web_title);
+        TextView webTitle = (TextView) findViewById(R.id.web_title);
         webTitle.setText(desc);
 
         ImageButton shareButton = (ImageButton) findViewById(R.id.web_share);
@@ -74,6 +75,8 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         moreButton.setOnClickListener(this);
 
         webView = (WebView) findViewById(R.id.web_page);
+
+
     }
 
     @Override
@@ -89,7 +92,7 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.web_back:
-                if (webView.canGoBack()){ //回退至上一个页面
+                if (webView.canGoBack()) { //回退至上一个页面
                     webView.goBack();
                 } else { //结束当前Activity
                     ActivityWeb.this.finish();
@@ -109,4 +112,5 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
                 break;
         }
     }
+
 }

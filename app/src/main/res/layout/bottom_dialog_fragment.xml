@@ -3,26 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:orientation="vertical"
-    android:background="@color/white" >
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <View
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="120dp"/>
-    <View
-        android:background="@color/grayWhite"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+        android:layout_height="3dp"
+        android:background="@color/grayWhite" />
 
     <TextView
         android:id="@+id/cancel"
-        android:text="取消"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
 </LinearLayout>

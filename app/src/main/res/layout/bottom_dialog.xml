@@ -4,37 +4,38 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    android:orientation="vertical">
     <!-- 注意  clipChildren 根布局 false-->
     <LinearLayout
         android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
         android:clipChildren="false"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
         <!-- 注意 clipChildren  = false-->
         <!-- 注意 你裁剪的是哪个布局那么他的父亲布局得有该属性-->
 
         <View
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="120dp"/>
+            android:layout_height="120dp"
+            android:background="@color/white" />
 
         <View
-            android:background="@color/grayWhite"
             android:layout_width="match_parent"
-            android:layout_height="3dp"/>
+            android:layout_height="3dp"
+            android:background="@color/grayWhite" />
 
         <Button
             android:id="@+id/cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:textSize="16sp"
             android:background="@color/white"
-            android:text="取消" />
+            android:text="取消"
+            android:textSize="16sp" />
     </LinearLayout>
+
 </RelativeLayout>
