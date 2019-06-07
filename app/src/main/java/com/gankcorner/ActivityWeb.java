@@ -44,7 +44,6 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         desc = intent.getStringExtra("page_desc");
         url = intent.getStringExtra("page_url");
 
-
         initView();
 
         webView.setWebViewClient(new WebViewClient());
@@ -75,7 +74,6 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         moreButton.setOnClickListener(this);
 
         webView = (WebView) findViewById(R.id.web_page);
-
 
     }
 

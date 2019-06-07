@@ -2,7 +2,7 @@ package com.gankcorner.Utils;
 
 import android.util.Log;
 
-import com.gankcorner.Bean.GankBean;
+import com.gankcorner.Bean.GankArticleBean;
 import com.gankcorner.Interface.Gank;
 
 import retrofit2.Call;
@@ -21,23 +21,23 @@ public class RetrofitUtil {
 
         Gank requestGankInfo = retrofit.create(Gank.class);
 
-        Call<GankBean> call = requestGankInfo.getArticleList(type, num, page);
+        Call<GankArticleBean> call = requestGankInfo.getArticleList(type, num, page);
 
-        call.enqueue(new Callback<GankBean>() {
+        call.enqueue(new Callback<GankArticleBean>() {
             @Override
-            public void onResponse(Call<GankBean> call, Response<GankBean> response) {
+            public void onResponse(Call<GankArticleBean> call, Response<GankArticleBean> response) {
                 Log.d("Test", "response: " + response.toString());
                 //完成解析后可以直接获取数据
-                GankBean gankBean = response.body();
+                GankArticleBean gankArticleBean = response.body();
                 String Desc = null;
-                if (gankBean != null) {
-                    Desc = gankBean.getResults().get(0).getDesc();
+                if (gankArticleBean != null) {
+                    Desc = gankArticleBean.getResults().get(0).getDesc();
                 }
                 Log.d("Test", "UpdateInfo: " + Desc);
             }
 
             @Override
-            public void onFailure(Call<GankBean> call, Throwable t) {
+            public void onFailure(Call<GankArticleBean> call, Throwable t) {
 
             }
         });

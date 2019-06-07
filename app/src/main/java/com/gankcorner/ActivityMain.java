@@ -1,7 +1,6 @@
 package com.gankcorner;
 
 import android.annotation.SuppressLint;
-import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
@@ -10,22 +9,20 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.gankcorner.Adapter.AdapterBottomFragment;
 import com.gankcorner.Fragment.Fragment_Four;
-import com.gankcorner.GankIO.GankIO;
-import com.gankcorner.Fragment.Fragment_Three;
+import com.gankcorner.GankIO.GankIOPage;
 import com.gankcorner.Fragment.Fragment_Two;
 import com.gankcorner.Utils.CustomViewPager;
+import com.gankcorner.WanAndroid.WanAndroidPage;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity {
 
     private Toolbar toolbar;
     private CustomViewPager mViewPager;
@@ -49,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fragmentList.add(new Fragment_Three());
+        fragmentList.add(new WanAndroidPage());
         fragmentList.add(new Fragment_Two());
         fragmentList.add(new Fragment_Four());
-        fragmentList.add(new GankIO());
+        fragmentList.add(new GankIOPage());
         AdapterBottomFragment adapterBottomFragment = new AdapterBottomFragment(getSupportFragmentManager(),
                 this, fragmentList);
         mViewPager.setAdapter(adapterBottomFragment);
@@ -66,16 +63,16 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //这里设置为：当点击到某子项，ViewPager就滑动到对应位置
                 switch (item.getItemId()) {
-                    case R.id.gank_io:
+                    case R.id.wan_android:
                         mViewPager.setCurrentItem(0);
                         return true;
-                    case R.id.navigation_dashboard:
+                    case R.id.page_2:
                         mViewPager.setCurrentItem(1);
                         return true;
-                    case R.id.navigation_notifications:
+                    case R.id.page_3:
                         mViewPager.setCurrentItem(2);
                         return true;
-                    case R.id.navigation_setting:
+                    case R.id.gank_io:
                         mViewPager.setCurrentItem(3);
                         return true;
                     default:

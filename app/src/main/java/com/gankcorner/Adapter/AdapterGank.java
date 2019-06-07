@@ -17,15 +17,15 @@ import com.bumptech.glide.request.RequestOptions;
 import com.gankcorner.Bean.GankArticle;
 import com.gankcorner.R;
 import com.gankcorner.ActivityWeb;
+import com.gankcorner.Utils.CommonUtils;
 
 import java.util.List;
 
 public class AdapterGank extends RecyclerView.Adapter<AdapterGank.ViewHolder> {
 
     private Context mContext;
-    private List<GankArticle> mGankArticleList;
-
     private GankArticle gankArticle;
+    private List<GankArticle> mGankArticleList;
 
     public AdapterGank(Context context, List<GankArticle> gankArticleList) {
         this.mContext = context;
@@ -91,9 +91,9 @@ public class AdapterGank extends RecyclerView.Adapter<AdapterGank.ViewHolder> {
 //            int height = option.outHeight;
 //            int width = option.outWidth;
 //            Log.i("wk", "图片的宽度:" + width + "图片的高度:" + height);
-
+            int widthPix = CommonUtils.getWidthPix();
             RequestOptions options = new RequestOptions()
-                    .override(dm.widthPixels, (dm.widthPixels) / 2);
+                    .override(widthPix, widthPix / 2);
             Glide.with(mContext)
                     .load(gankArticle.getImage().get(0))
                     .apply(options)
@@ -123,5 +123,4 @@ public class AdapterGank extends RecyclerView.Adapter<AdapterGank.ViewHolder> {
         }
         notifyDataSetChanged();
     }
-
 }

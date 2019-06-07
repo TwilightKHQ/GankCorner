@@ -13,9 +13,10 @@ import android.view.ViewGroup;
 
 import com.gankcorner.Adapter.AdapterGank;
 import com.gankcorner.Bean.GankArticle;
-import com.gankcorner.Bean.GankBean;
+import com.gankcorner.Bean.GankArticleBean;
 import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
+import com.gankcorner.Utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,17 +36,15 @@ public class FragmentAndroid extends Fragment {
 
     private int numPerPage = 10; //每页的个数
 
+    private boolean gettingData = false; //当前是否正在请求数据
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_android, container, false);
+        View view = inflater.inflate(R.layout.gank_android, container, false);
+        initView(view);
 
-        // 初始化控件
-        mRecyclerView = view.findViewById(R.id.recycle_view);
-        mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-
-        initView();
         getGank("Android", numPerPage, 1);
 
         return view;
@@ -54,7 +53,12 @@ public class FragmentAndroid extends Fragment {
     /**
      * 初始化RecyclerView
      */
-    private void initView() {
+    private void initView(View view) {
+
+        // 初始化控件
+        mRecyclerView = view.findViewById(R.id.recycle_view);
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+
         // 定义一个线性布局管理器
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         // 设置布局管理器
@@ -67,16 +71,20 @@ public class FragmentAndroid extends Fragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                //SCROLL_STATE_IDLE为停止滑动状态
-                //屏幕中最后一个可见子项的position
-                final int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
-                //当前屏幕所看到的子项个数
-                final int visibleItemCount = manager.getChildCount();
-                //当前RecyclerView的所有子项个数
-                final int totalItemCount = manager.getItemCount();
-                if (visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 3 && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    getGank("Android", numPerPage, totalItemCount / numPerPage + 1);
-                    Log.d("currentNum", "Page: " + totalItemCount / numPerPage);
+//                //SCROLL_STATE_IDLE为停止滑动状态
+//                //屏幕中最后一个可见子项的position
+//                final int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
+//                //当前屏幕所看到的子项个数
+//                final int visibleItemCount = manager.getChildCount();
+//                //当前RecyclerView的所有子项个数
+//                final int totalItemCount = manager.getItemCount();
+//                if (visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 2 && newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    getGank("Android", numPerPage, totalItemCount / numPerPage + 1);
+//                    Log.d("currentNum", "Page: " + totalItemCount / numPerPage);
+//                }
+                if (CommonUtils.isWillBottom(recyclerView) && !gettingData) {
+                    getGank("Android",numPerPage, manager.getItemCount() / numPerPage + 1);
+                    Log.d("currentPage", "onScrollStateChanged: "+ manager.getItemCount() / numPerPage);
                 }
             }
         });
@@ -91,6 +99,7 @@ public class FragmentAndroid extends Fragment {
     }
 
     private void getGank(String type, final int num, int page) {
+        gettingData = true;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://gank.io/api/data/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -98,35 +107,36 @@ public class FragmentAndroid extends Fragment {
 
         Gank requestGankInfo = retrofit.create(Gank.class);
 
-        Call<GankBean> call = requestGankInfo.getArticleList(type, num, page);
+        Call<GankArticleBean> call = requestGankInfo.getArticleList(type, num, page);
 
-        call.enqueue(new Callback<GankBean>() {
+        call.enqueue(new Callback<GankArticleBean>() {
             @Override
-            public void onResponse(Call<GankBean> call, Response<GankBean> response) {
+            public void onResponse(Call<GankArticleBean> call, Response<GankArticleBean> response) {
                 Log.d("Test", "response: " + response.toString());
                 //完成解析后可以直接获取数据
-                GankBean gankBean = response.body();
+                GankArticleBean gankArticleBean = response.body();
 //                String  Desc = null;
-//                if (gankBean != null) {
-//                    Desc = gankBean.getResults().get(0).getDesc();
+//                if (gankArticleBean != null) {
+//                    Desc = gankArticleBean.getResults().get(0).getDesc();
 //                }
 //                Log.d("Test", "UpdateInfo: " + Desc);
-                addData(gankBean);
+                addData(gankArticleBean);
                 mSwipeRefreshLayout.setRefreshing(false);
+                gettingData = false;
                 Log.d("SwipeRefreshLayout", "onResponse: 加载完成");
             }
 
             @Override
-            public void onFailure(Call<GankBean> call, Throwable t) {
+            public void onFailure(Call<GankArticleBean> call, Throwable t) {
 
             }
         });
     }
 
-    private void addData(GankBean gankBean) {
+    private void addData(GankArticleBean gankArticleBean) {
         mGankArticle = new ArrayList<>();
         for (int i = 0; i < numPerPage; i++) {
-            GankBean.ResultsBean resultsBean = gankBean.getResults().get(i);
+            GankArticleBean.ResultsBean resultsBean = gankArticleBean.getResults().get(i);
             GankArticle gankArticle = new GankArticle(resultsBean.getWho(), resultsBean.getDesc(),
                     resultsBean.getPublishedAt(), resultsBean.getUrl(), resultsBean.getImages());
             Log.d("GankArticle", "addData: " + gankArticle.getDesc());

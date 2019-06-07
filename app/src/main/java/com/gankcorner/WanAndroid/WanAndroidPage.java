@@ -1,23 +1,23 @@
-package com.gankcorner.GankIO;
-
+package com.gankcorner.WanAndroid;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gankcorner.GankIO.GankioFragment.FragmentAndroid;
-import com.gankcorner.GankIO.GankioFragment.FragmentiOS;
 import com.gankcorner.R;
+import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentHome;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GankIO extends Fragment {
+public class WanAndroidPage extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
@@ -28,7 +28,7 @@ public class GankIO extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.gank_layout, container, false);
+        View view = inflater.inflate(R.layout.layout_gank, container, false);
 
         initView(view);
 
@@ -38,16 +38,18 @@ public class GankIO extends Fragment {
     private void initView(View view) {
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
-
-        tabLayout.addTab(tabLayout.newTab().setText("Android"));
-        tabLayout.addTab(tabLayout.newTab().setText("iOS"));
+        tabLayout.addTab(tabLayout.newTab().setText("玩Android"));
+        tabLayout.addTab(tabLayout.newTab().setText("知识体系"));
+        tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
 
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
-        fragmentList.add(new FragmentAndroid());
-        titleList.add("Android");
-        fragmentList.add(new FragmentiOS());
-        titleList.add("iOS");
+        fragmentList.add(new FragmentHome());
+        titleList.add("玩Android");
+        fragmentList.add(new FragmentHome());
+        titleList.add("知识体系");
+        fragmentList.add(new FragmentHome());
+        titleList.add("导航数据");
 
         //在Fragment当中
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
@@ -69,6 +71,5 @@ public class GankIO extends Fragment {
         //将TabLayout与ViewPager联系起来
         tabLayout.setupWithViewPager(mViewPager);
     }
-
 
 }

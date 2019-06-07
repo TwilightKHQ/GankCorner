@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.gankcorner.R;
+import com.gankcorner.Utils.BottomDialog;
 
 public class Fragment_Four extends Fragment {
 
@@ -20,11 +21,12 @@ public class Fragment_Four extends Fragment {
         View view = inflater.inflate(R.layout.fragment_four, container, false);
 
         Button button = (Button) view.findViewById(R.id.button_center);
-        button.setText("Fragment_Four");
+        button.setText("Fragment_Home");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "FragmentOne Clicked.", Toast.LENGTH_SHORT).show();
+                final BottomDialog bottomDialog = new BottomDialog(getContext(), R.style.BottomDialog);
+                bottomDialog.show();
             }
         });
 

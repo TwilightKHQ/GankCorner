@@ -2,11 +2,11 @@ package com.gankcorner.Bean;
 
 import java.util.List;
 
-public class GankBean {
+public class GankArticleBean {
 //    private String who;
 //    private String url;
 //
-//    public GankBean(String name, String url) {
+//    public GankArticleBean(String name, String url) {
 //        this.who = name;
 //        this.url = url;
 //    }
@@ -25,7 +25,7 @@ public class GankBean {
      */
 
     private boolean error;
-    private List<GankBean.ResultsBean> results;
+    private List<GankArticleBean.ResultsBean> results;
 
     public boolean isError() {
         return error;
@@ -35,11 +35,11 @@ public class GankBean {
         this.error = error;
     }
 
-    public List<GankBean.ResultsBean> getResults() {
+    public List<GankArticleBean.ResultsBean> getResults() {
         return results;
     }
 
-    public void setResults(List<GankBean.ResultsBean> results) {
+    public void setResults(List<GankArticleBean.ResultsBean> results) {
         this.results = results;
     }
 

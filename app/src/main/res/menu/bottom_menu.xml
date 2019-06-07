@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/gank_io"
+        android:id="@+id/wan_android"
         android:icon="@mipmap/home"
-        android:title="@string/bottom_one" />
+        android:title="@string/wan_android" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/page_2"
         android:icon="@mipmap/know"
         android:title="@string/bottom_two" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@mipmap/project"
+        android:id="@+id/page_3"
+        android:icon="@mipmap/navigation"
         android:title="@string/bottom_three" />
 
     <item
-        android:id="@+id/navigation_setting"
-        android:icon="@mipmap/navigation"
-        android:title="@string/bottom_four" />
+        android:id="@+id/gank_io"
+        android:icon="@mipmap/project"
+        android:title="@string/bottom_one" />
 
 </menu>

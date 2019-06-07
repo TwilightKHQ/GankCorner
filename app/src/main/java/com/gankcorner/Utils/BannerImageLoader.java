@@ -11,6 +11,8 @@ import com.youth.banner.loader.ImageLoader;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+import static com.gankcorner.Utils.CommonUtils.dip2px;
+import static com.gankcorner.Utils.ContextUtil.getContext;
 
 /**
  * 自定义的Banner图片加载器
@@ -31,7 +33,7 @@ public class BannerImageLoader extends ImageLoader {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 //设置图片加载的优先级
                 .priority(Priority.HIGH)
-                .transform(new RoundedCornersTransformation(dip2px(ContextUtil.getContext(), 30), 0))
+                .transform(new RoundedCornersTransformation(dip2px(getContext(), 30), 0))
                 .into(imageView);
     }
 
@@ -41,14 +43,4 @@ public class BannerImageLoader extends ImageLoader {
 //         //使用fresco，需要创建它提供的ImageView，当然你也可以用自己自定义的具有图片加载功能的ImageView
 //		return new CustomImageView(context);
 //    }
-
-    /**
-     * dp转px
-     * 16dp - 48px
-     * 17dp - 51px
-     */
-    public static int dip2px(Context context, float dpValue) {
-        float scale = context.getResources().getDisplayMetrics().density;
-        return (int) ((dpValue * scale) + 0.5f);
-    }
 }
