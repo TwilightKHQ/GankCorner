@@ -101,7 +101,7 @@ public class FragmentAndroid extends Fragment {
     private void getGank(String type, final int num, int page) {
         gettingData = true;
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://gank.io/api/data/")
+                .baseUrl("https://gank.io/api/data/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
