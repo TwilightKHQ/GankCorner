@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="13dp"
                 android:background="@color/white"
-                android:src="@mipmap/back" />
+                app:srcCompat="@mipmap/back" />
 
             <ImageButton
                 android:id="@+id/web_exit"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/web_back"
                 android:background="@color/white"
-                android:src="@mipmap/exit" />
+                app:srcCompat="@mipmap/exit" />
 
             <!--设置标题具有跑马灯效果-->
             <TextView
@@ -61,7 +61,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@id/more_item"
                 android:background="@color/white"
-                android:src="@mipmap/send" />
+                app:srcCompat="@mipmap/send" />
 
             <ImageButton
                 android:id="@+id/more_item"
@@ -73,7 +73,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@color/white"
-                android:src="@mipmap/more" />
+                app:srcCompat="@mipmap/more" />
 
         </RelativeLayout>
 

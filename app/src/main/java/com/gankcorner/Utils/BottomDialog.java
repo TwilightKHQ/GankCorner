@@ -2,6 +2,7 @@ package com.gankcorner.Utils;
 
 import android.app.Dialog;
 import android.content.Context;
+
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.LayoutInflater;

@@ -16,6 +16,7 @@ import com.gankcorner.Bean.GankArticle;
 import com.gankcorner.Bean.GankArticleBean;
 import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
+import com.gankcorner.Utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,8 @@ public class FragmentiOS extends Fragment {
     private List<GankArticle> mGankArticle = new ArrayList<>();
 
     private int numPerPage = 10; //每页的个数
+
+    private boolean gettingData = false; //当前是否正在请求数据
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,16 +70,9 @@ public class FragmentiOS extends Fragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                //SCROLL_STATE_IDLE为停止滑动状态
-                //屏幕中最后一个可见子项的position
-                final int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
-                //当前屏幕所看到的子项个数
-                final int visibleItemCount = manager.getChildCount();
-                //当前RecyclerView的所有子项个数
-                final int totalItemCount = manager.getItemCount();
-                if (visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 2 && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    getGank("iOS", numPerPage, totalItemCount / numPerPage + 1);
-                    Log.d("currentNum", "Page: " + totalItemCount / numPerPage);
+                if (CommonUtils.isWillBottom(recyclerView) && !gettingData) {
+                    getGank("iOS",numPerPage, manager.getItemCount() / numPerPage + 1);
+                    Log.d("currentPage", "onScrollStateChanged: "+ manager.getItemCount() / numPerPage);
                 }
             }
         });
@@ -85,12 +81,13 @@ public class FragmentiOS extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getGank("Android", numPerPage, 1);
+                getGank("iOS", numPerPage, 1);
             }
         });
     }
 
     private void getGank(String type, final int num, int page) {
+        gettingData = true;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://gank.io/api/data/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -113,6 +110,7 @@ public class FragmentiOS extends Fragment {
 //                Log.d("Test", "UpdateInfo: " + Desc);
                 addData(gankArticleBean);
                 mSwipeRefreshLayout.setRefreshing(false);
+                gettingData = false;
                 Log.d("SwipeRefreshLayout", "onResponse: 加载完成");
             }
 
@@ -132,7 +130,11 @@ public class FragmentiOS extends Fragment {
             Log.d("GankArticle", "addData: " + gankArticle.getDesc());
             mGankArticle.add(gankArticle);
         }
-        adapterGank.updateList(mGankArticle);
+        if (mSwipeRefreshLayout.isRefreshing()){
+            adapterGank.refreshList(mGankArticle);
+        } else {
+            adapterGank.updateList(mGankArticle);
+        }
     }
 
 }

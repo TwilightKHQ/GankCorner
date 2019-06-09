@@ -1,6 +1,6 @@
 package com.gankcorner.Bean;
 
-public class WanAndroidArticle {
+public class WanArticle {
         private String author;
         private String chapterName;
         private String link;
@@ -8,8 +8,8 @@ public class WanAndroidArticle {
         private String superChapterName;
         private String title;
 
-        public WanAndroidArticle(String author, String chapterName, String link, String niceDate,
-                                 String superChapterName, String title) {
+        public WanArticle(String author, String chapterName, String link, String niceDate,
+                          String superChapterName, String title) {
             this.author = author;
             this.chapterName = chapterName;
             this.link = link;

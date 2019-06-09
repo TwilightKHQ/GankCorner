@@ -1,29 +1,20 @@
 package com.gankcorner;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gankcorner.Adapter.AdapterMenuItem;
-import com.gankcorner.Bean.MenuItem;
-import com.gankcorner.Utils.BottomDialogFragment;
-import com.gankcorner.Utils.ContextUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.gankcorner.Utils.BottomDialogFragment;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
@@ -98,7 +89,6 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.web_exit:
                 //结束当前Activity
-                Toast.makeText(ActivityWeb.this, "结束", Toast.LENGTH_SHORT).show();
                 ActivityWeb.this.finish();
                 break;
             case R.id.web_share:
@@ -106,7 +96,7 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.more_item:
                 BottomDialogFragment bottomDialogFragment = new BottomDialogFragment();
-                bottomDialogFragment.show(ActivityWeb.this.getFragmentManager(), "bottomDialogFragment");
+                bottomDialogFragment.show(ActivityWeb.this.getSupportFragmentManager(), "bottomDialogFragment");
                 break;
         }
     }

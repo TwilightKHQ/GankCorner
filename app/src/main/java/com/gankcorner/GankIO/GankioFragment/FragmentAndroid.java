@@ -142,7 +142,11 @@ public class FragmentAndroid extends Fragment {
             Log.d("GankArticle", "addData: " + gankArticle.getDesc());
             mGankArticle.add(gankArticle);
         }
-        adapterGank.updateList(mGankArticle);
+        if (mSwipeRefreshLayout.isRefreshing()){
+            adapterGank.refreshList(mGankArticle);
+        } else {
+            adapterGank.updateList(mGankArticle);
+        }
     }
 
 }

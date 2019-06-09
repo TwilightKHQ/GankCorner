@@ -18,20 +18,20 @@ public class AdapterMenuItem extends RecyclerView.Adapter<AdapterMenuItem.ViewHo
 
     private List<MenuItem> menuItemList;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public AdapterMenuItem(List<MenuItem> menuItem) {
+        menuItemList = menuItem;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView itemName;
         ImageView itemImage;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             itemName = (TextView) itemView.findViewById(R.id.item_name);
             itemImage = (ImageView) itemView.findViewById(R.id.item_image);
         }
-    }
-
-    public AdapterMenuItem(List<MenuItem> menuItem) {
-        menuItemList = menuItem;
     }
 
     @NonNull

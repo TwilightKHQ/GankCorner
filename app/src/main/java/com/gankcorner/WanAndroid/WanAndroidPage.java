@@ -1,17 +1,19 @@
 package com.gankcorner.WanAndroid;
 
 import android.os.Bundle;
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.gankcorner.R;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentHome;
+import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentTest;
+import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentKnowledge;
 
 
 import java.util.ArrayList;
@@ -46,9 +48,9 @@ public class WanAndroidPage extends Fragment {
         titleList = new ArrayList<>();
         fragmentList.add(new FragmentHome());
         titleList.add("玩Android");
-        fragmentList.add(new FragmentHome());
+        fragmentList.add(new FragmentKnowledge());
         titleList.add("知识体系");
-        fragmentList.add(new FragmentHome());
+        fragmentList.add(new FragmentTest());
         titleList.add("导航数据");
 
         //在Fragment当中

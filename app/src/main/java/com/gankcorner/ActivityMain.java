@@ -1,13 +1,16 @@
 package com.gankcorner;
 
 import android.annotation.SuppressLint;
+
+
+import android.os.Bundle;
+
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -55,8 +58,6 @@ public class ActivityMain extends AppCompatActivity {
         mViewPager.setAdapter(adapterBottomFragment);
         mViewPager.setCanScroll(false);
 
-        disableShiftMode();
-
         //导航栏点击事件和ViewPager滑动事件,让两个控件相互关联
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -81,28 +82,6 @@ public class ActivityMain extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    //解决底部导航栏大小不均的问题
-    @SuppressLint("RestrictedApi")
-    private void disableShiftMode() {
-        BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
-        try {
-            Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
-            shiftingMode.setAccessible(true);
-            shiftingMode.setBoolean(menuView, false);
-            shiftingMode.setAccessible(false);
-
-            for (int i = 0; i < menuView.getChildCount(); i++) {
-                BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(i);
-                itemView.setShiftingMode(false);
-                itemView.setChecked(itemView.getItemData().isChecked());
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
     }
 
 }

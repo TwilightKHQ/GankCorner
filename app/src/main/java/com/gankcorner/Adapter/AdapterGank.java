@@ -117,6 +117,14 @@ public class AdapterGank extends RecyclerView.Adapter<AdapterGank.ViewHolder> {
         return mGankArticleList.size();
     }
 
+    public void refreshList(List<GankArticle> Data) {
+        if (Data != null) {
+            mGankArticleList.clear();
+            mGankArticleList.addAll(Data);
+        }
+        notifyDataSetChanged();
+    }
+
     public void updateList(List<GankArticle> newData) {
         if (newData != null) {
             mGankArticleList.addAll(newData);

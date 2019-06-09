@@ -1,16 +1,13 @@
 package com.gankcorner.Fragment;
 
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
+
 
 import com.gankcorner.R;
 import com.gankcorner.Utils.BottomDialogFragment;
@@ -29,7 +26,7 @@ public class Fragment_Two extends Fragment {
             @Override
             public void onClick(View v) {
                 BottomDialogFragment bottomDialogFragment = new BottomDialogFragment();
-                bottomDialogFragment.show(getActivity().getFragmentManager(), "bottomDialogFragment");
+                bottomDialogFragment.show(getActivity().getSupportFragmentManager(), "bottomDialogFragment");
             }
         });
 

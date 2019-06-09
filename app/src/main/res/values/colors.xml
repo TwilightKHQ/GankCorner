@@ -8,5 +8,7 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="grayWhite">#EAEAEA</color>
+    <color name="grayWhite">#F1F3F4</color>
+    <color name="snow">#FAFAFA</color>
+
 </resources>
