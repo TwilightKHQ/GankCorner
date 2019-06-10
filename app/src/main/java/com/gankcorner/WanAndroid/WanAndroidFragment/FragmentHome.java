@@ -129,10 +129,12 @@ public class FragmentHome extends Fragment {
                 //完成解析后可以直接获取数据
                 WanArticleBean wanArticleBean = response.body();
                 String Desc = null;
+                int size = 0;
                 if (wanArticleBean != null) {
                     Desc = wanArticleBean.getData().getDatas().get(0).getTitle();
+                    size = wanArticleBean.getData().getDatas().size();
                 }
-                Log.d("Test", "UpdateInfo: " + Desc);
+                Log.d("Test", "String: " + Desc + " Size:" + size);
                 currentPage = wanArticleBean.getData().getCurPage();
                 Log.d("currentPage", "onResponse: " + currentPage);
                 addArticleData(wanArticleBean);
@@ -259,11 +261,10 @@ public class FragmentHome extends Fragment {
         mBannerView.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                String urlPath = mBannerListList.get(position).getUrlPath();
                 Intent intent = new Intent(getContext(), ActivityWeb.class);
                 intent.putExtra("page_desc", mBannerListList.get(position).getTitle());
                 intent.putExtra("page_url", mBannerListList.get(position).getUrlPath());
-                ContextUtil.getContext().startActivity(intent);
+                getContext().startActivity(intent);
             }
         });
     }

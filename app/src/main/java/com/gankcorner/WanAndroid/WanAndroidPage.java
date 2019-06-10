@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.gankcorner.R;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentHome;
+import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentNavigation;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentTest;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentKnowledge;
 
@@ -43,6 +44,7 @@ public class WanAndroidPage extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("玩Android"));
         tabLayout.addTab(tabLayout.newTab().setText("知识体系"));
         tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
+        tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
 
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
@@ -50,6 +52,8 @@ public class WanAndroidPage extends Fragment {
         titleList.add("玩Android");
         fragmentList.add(new FragmentKnowledge());
         titleList.add("知识体系");
+        fragmentList.add(new FragmentNavigation());
+        titleList.add("导航数据");
         fragmentList.add(new FragmentTest());
         titleList.add("导航数据");
 

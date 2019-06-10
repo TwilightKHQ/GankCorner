@@ -1,5 +1,6 @@
 package com.gankcorner;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
@@ -25,6 +27,7 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
     private String desc;
     private String url;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,17 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         url = intent.getStringExtra("page_url");
 
         initView();
+
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);//设置js可以直接打开窗口，如window.open()，默认为false
+        settings.setJavaScriptEnabled(true);//是否允许执行js，默认为false。设置true时，会提醒可能造成XSS漏洞
+        settings.setSupportZoom(true);//是否可以缩放，默认true
+        settings.setBuiltInZoomControls(true);//是否显示缩放按钮，默认false
+        settings.setUseWideViewPort(true);//设置此属性，可任意比例缩放。大视图模式
+        settings.setLoadWithOverviewMode(true);//和setUseWideViewPort(true)一起解决网页自适应问题
+        settings.setAppCacheEnabled(true);//是否使用缓存
+        settings.setDomStorageEnabled(true);//DOM Storage
+
 
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);

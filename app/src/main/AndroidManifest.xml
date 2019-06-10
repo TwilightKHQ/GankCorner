@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
+        android:usesCleartextTraffic="true">
         <activity android:name=".ActivityWeb" />
         <activity android:name=".ActivityMain">
             <intent-filter>
