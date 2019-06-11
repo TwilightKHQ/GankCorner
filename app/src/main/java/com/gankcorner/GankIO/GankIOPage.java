@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gankcorner.GankIO.GankioFragment.FragmentAndroid;
+import com.gankcorner.GankIO.GankioFragment.FragmentTest;
 import com.gankcorner.GankIO.GankioFragment.FragmentiOS;
 import com.gankcorner.R;
 
@@ -48,6 +49,8 @@ public class GankIOPage extends Fragment {
         titleList.add("Android");
         fragmentList.add(new FragmentiOS());
         titleList.add("iOS");
+        fragmentList.add(new FragmentTest());
+        titleList.add("Test");
 
         //在Fragment当中
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
@@ -69,6 +72,4 @@ public class GankIOPage extends Fragment {
         //将TabLayout与ViewPager联系起来
         tabLayout.setupWithViewPager(mViewPager);
     }
-
-
 }
