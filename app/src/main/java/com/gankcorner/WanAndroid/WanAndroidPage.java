@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.gankcorner.R;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentHome;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentNavigation;
-import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentTest;
+import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentNavigationTest;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentKnowledge;
 
 
@@ -41,21 +41,21 @@ public class WanAndroidPage extends Fragment {
     private void initView(View view) {
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
-        tabLayout.addTab(tabLayout.newTab().setText("玩Android"));
+        tabLayout.addTab(tabLayout.newTab().setText("玩安卓"));
         tabLayout.addTab(tabLayout.newTab().setText("知识体系"));
         tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
-        tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
+//        tabLayout.addTab(tabLayout.newTab().setText("测试"));
 
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
         fragmentList.add(new FragmentHome());
-        titleList.add("玩Android");
+        titleList.add("玩安卓");
         fragmentList.add(new FragmentKnowledge());
         titleList.add("知识体系");
         fragmentList.add(new FragmentNavigation());
         titleList.add("导航数据");
-        fragmentList.add(new FragmentTest());
-        titleList.add("导航数据");
+//        fragmentList.add(new FragmentNavigationTest());
+//        titleList.add("测试");
 
         //在Fragment当中
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {

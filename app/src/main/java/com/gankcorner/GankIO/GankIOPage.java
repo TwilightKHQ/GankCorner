@@ -2,6 +2,7 @@ package com.gankcorner.GankIO;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gankcorner.GankIO.GankioFragment.FragmentAndroid;
-import com.gankcorner.GankIO.GankioFragment.FragmentTest;
 import com.gankcorner.GankIO.GankioFragment.FragmentiOS;
 import com.gankcorner.R;
 
@@ -26,7 +26,7 @@ public class GankIOPage extends Fragment {
     private List<Fragment> fragmentList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.layout_gank, container, false);
@@ -49,8 +49,6 @@ public class GankIOPage extends Fragment {
         titleList.add("Android");
         fragmentList.add(new FragmentiOS());
         titleList.add("iOS");
-        fragmentList.add(new FragmentTest());
-        titleList.add("Test");
 
         //在Fragment当中
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {

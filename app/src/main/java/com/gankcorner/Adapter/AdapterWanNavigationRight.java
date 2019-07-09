@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gankcorner.ActivityWeb;
-import com.gankcorner.Bean.WanKnowledge;
 import com.gankcorner.Bean.WanNavigation;
 import com.gankcorner.R;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -22,7 +20,7 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterWanNavigation extends RecyclerView.Adapter<AdapterWanNavigation.ViewHolder> {
+public class AdapterWanNavigationRight extends RecyclerView.Adapter<AdapterWanNavigationRight.ViewHolder> {
 
     private Context mContext;
     private WanNavigation wanNavigation;
@@ -30,7 +28,7 @@ public class AdapterWanNavigation extends RecyclerView.Adapter<AdapterWanNavigat
     private List<List<String>> mTags = new ArrayList<>();
     private List<List<String>> mUrls = new ArrayList<>();
 
-    public AdapterWanNavigation(Context context, List<WanNavigation> mWanNavigationList) {
+    public AdapterWanNavigationRight(Context context, List<WanNavigation> mWanNavigationList) {
         this.mContext = context;
         this.mWanNavigationList = mWanNavigationList;
     }
@@ -55,7 +53,7 @@ public class AdapterWanNavigation extends RecyclerView.Adapter<AdapterWanNavigat
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterWanNavigation.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull AdapterWanNavigationRight.ViewHolder holder, final int position) {
         wanNavigation = mWanNavigationList.get(position);
         holder.tagTitle.setText(wanNavigation.getName());
         List<String> tagList = wanNavigation.getTagList();

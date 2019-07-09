@@ -13,9 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.ActivityWeb;
 import com.gankcorner.Adapter.AdapterWanArticle;
+import com.gankcorner.Adapter.AdapterWanArticleTest;
 import com.gankcorner.Bean.BannerBean;
 import com.gankcorner.Bean.BannerList;
 import com.gankcorner.Bean.WanArticle;
@@ -24,6 +27,7 @@ import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BannerImageLoader;
 import com.gankcorner.Utils.CommonUtils;
+import com.gankcorner.Utils.ContextUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -39,12 +43,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.gankcorner.Utils.CommonUtils.getHeightPix;
 
-public class FragmentHome extends Fragment {
+public class FragmentNavigationTest extends Fragment {
 
     private Banner mBannerView;
     private List<BannerList> mBannerListList;
 
-    private AdapterWanArticle adapterWanArticle;
+    private AdapterWanArticleTest adapterWanArticle;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<WanArticle> mWanArticleList = new ArrayList<>();
@@ -61,6 +65,7 @@ public class FragmentHome extends Fragment {
         View view = inflater.inflate(R.layout.wanandroid_home, container, false);
 
         initViews(view);
+        initClickEvents();
         initData();
 
         return view;
@@ -75,14 +80,24 @@ public class FragmentHome extends Fragment {
         // 设置线性布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // 设置adapter
-        adapterWanArticle = new AdapterWanArticle(getContext(), mWanArticleList);
-        //设置HeaderView
-        View header = LayoutInflater.from(getContext()).inflate(R.layout.item_banner, null);
-        mBannerView = header.findViewById(R.id.banner);
+        adapterWanArticle = new AdapterWanArticleTest(R.layout.item_wanandroid, mWanArticleList);
+//        //设置HeaderView
+        View headerView = getHeaderView(0, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterWanArticle.addHeaderView(getHeaderView(1, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "banner", Toast.LENGTH_SHORT).show();
+                    }
+                }), 0);
+            }
+        });
         //设置banner的高度为手机屏幕的四分之一
-        mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));
-        adapterWanArticle.setHeaderView(mBannerView);
+//        mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));
+//        adapterWanArticle.setHeaderView(mBannerView);
         mRecyclerView.setAdapter(adapterWanArticle);
+        adapterWanArticle.addHeaderView(headerView);
         // 快要滑动到底部时自动加载更多
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -102,6 +117,48 @@ public class FragmentHome extends Fragment {
                 getWanAndroidArticle(0);
             }
         });
+    }
+
+    private void initClickEvents() {
+        adapterWanArticle.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(getContext(), "123456", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        adapterWanArticle.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()) {
+                    case R.id.chapterName:
+                        Toast.makeText(getContext(), "987564132", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.card_view:
+                        Intent intent = new Intent(getContext(), ActivityWeb.class);
+                        //在滑动gankArticle会的值会变化，导致传递的字符串不对
+//                Log.d("Url", "Position"+ position + " Desc0: " + gankArticle.getDesc());
+//                Log.d("Url", "Position"+ position + " Desc: " + mGankArticleList.get(position).getDesc());
+                        intent.putExtra("page_desc",
+                                mWanArticleList.get(position).getTitle());
+                        intent.putExtra("page_url",
+                                mWanArticleList.get(position).getLink());
+                        getContext().startActivity(intent);
+                        break;
+                    case R.id.home_share:
+                        Toast.makeText(ContextUtil.getContext(),
+                                "分享：" + mWanArticleList.get(position).getTitle(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.more_item:
+                        Toast.makeText(ContextUtil.getContext(),
+                                "更多：" + mWanArticleList.get(position).getAuthor(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+
     }
 
     private void initData() {
@@ -159,9 +216,9 @@ public class FragmentHome extends Fragment {
             mWanArticleList.add(wanArticle);
         }
         if (mSwipeRefreshLayout.isRefreshing()) {
-            adapterWanArticle.refreshList(mWanArticleList);
+            adapterWanArticle.setNewData(mWanArticleList);
         } else {
-            adapterWanArticle.updateList(mWanArticleList);
+            adapterWanArticle.addData(mWanArticleList);
         }
     }
 
@@ -187,7 +244,7 @@ public class FragmentHome extends Fragment {
                     Desc = bannerBean.getData().get(0).getDesc();
                 }
                 Log.d("Test", "UpdateInfo: " + Desc);
-                SetBanner(bannerBean);
+//                SetBanner(bannerBean);
             }
 
             @Override
@@ -219,8 +276,7 @@ public class FragmentHome extends Fragment {
     //设置Banner的数据
     private void initBannerData(BannerBean bannerBean) {
         mBannerListList = new ArrayList<>();
-        Log.i("========zzq", "initBannerData: " + bannerBean.getData().size());
-        for (int i = 0; i < bannerBean.getData().size(); i++) {
+        for (int i = 0; i < 8; i++) {
             BannerBean.DataBean dataBean = bannerBean.getData().get(i);
             BannerList bannerList = new BannerList(dataBean.getTitle(), dataBean.getImagePath(),
                     dataBean.getUrl());
@@ -267,6 +323,13 @@ public class FragmentHome extends Fragment {
                 getContext().startActivity(intent);
             }
         });
+    }
+
+    private View getHeaderView(int type, View.OnClickListener listener) {
+        View view = getLayoutInflater().inflate(R.layout.item_banner_test, (ViewGroup) mRecyclerView.getParent(), false);
+        mBannerView = view.findViewById(R.id.banner);
+        view.setOnClickListener(listener);
+        return view;
     }
 
 }

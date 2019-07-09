@@ -65,7 +65,7 @@ public class BottomDialogFragment extends DialogFragment {
 
     private void initView(Dialog dialog) {
 
-        RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recycle_view);
+        RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.left_recycle_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(ContextUtil.getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);

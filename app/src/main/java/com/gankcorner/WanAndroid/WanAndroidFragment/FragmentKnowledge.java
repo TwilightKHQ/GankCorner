@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.gankcorner.Adapter.AdapterWanKnowledge;
 import com.gankcorner.Bean.WanKnowledgeBean;
 import com.gankcorner.Bean.WanKnowledge;
-import com.gankcorner.Bean.WanWeChatBean;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
 
@@ -54,7 +53,7 @@ public class FragmentKnowledge extends Fragment {
     private void initViews(View view) {
 
         // 初始化控件
-        mRecyclerView = view.findViewById(R.id.recycle_view);
+        mRecyclerView = view.findViewById(R.id.left_recycle_view);
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
 
         // 设置线性布局管理器
@@ -76,55 +75,8 @@ public class FragmentKnowledge extends Fragment {
     }
 
     private void initData() {
-//        getWanWeChat();
         getWanKnowledge();
     }
-
-//    private void getWanWeChat() {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://www.wanandroid.com/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        final WanAndroid requestWanWeChat = retrofit.create(WanAndroid.class);
-//
-//        Call<WanWeChatBean> call = requestWanWeChat.getWeChatList();
-//
-//        call.enqueue(new Callback<WanWeChatBean>() {
-//            @Override
-//            public void onResponse(@NonNull Call<WanWeChatBean> call, @NonNull Response<WanWeChatBean> response) {
-//                Log.d("Test", "response: " + response.toString());
-//                //完成解析后可以直接获取数据
-//                WanWeChatBean wanWeChatBean = response.body();
-//                String Desc = null;
-//                if (wanWeChatBean != null) {
-//                    Desc = wanWeChatBean.getData().get(0).getName();
-//                }
-//                Log.d("WanKnowledgeBean", "UpdateInfo: " + Desc);
-////                addKnowledgeData(wanWeChatBean, 1);
-//                List<String> tagList = new ArrayList<>();
-//                for (WanWeChatBean.DataBean dataBean : wanWeChatBean.getData()) {
-//                    tagList.add(dataBean.getName());
-//                    Log.d("tagList", "addKnowledgeData: " + dataBean.getName());
-//                }
-//                WanKnowledge wanKnowledge = new WanKnowledge("公众号", tagList);
-//                tempList.add(0, wanKnowledge);
-//
-//                //更新请求状态以及列表信息
-//                requestWeChat = false;
-//                if (!requestKnowledge) {
-//                    mSwipeRefreshLayout.setRefreshing(false);
-//                    mWanKnowledgeList.add(0, wanKnowledge);
-//                    adapterWanNavigation.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(@NonNull Call<WanWeChatBean> call, @NonNull Throwable t) {
-//
-//            }
-//        });
-//    }
 
     //获取WanAndroid的体系数据
     private void getWanKnowledge() {
@@ -152,10 +104,10 @@ public class FragmentKnowledge extends Fragment {
                     List<String> tagList = new ArrayList<>();
                     for (WanKnowledgeBean.DataBean.ChildrenBean childrenBean : dataBean.getChildren()) {
                         tagList.add(childrenBean.getName());
-                        Log.d("tagList", "addKnowledgeData: " + childrenBean.getName());
+//                        Log.d("tagList", "addKnowledgeData: " + childrenBean.getName());
                     }
                     WanKnowledge wanKnowledge = new WanKnowledge(dataBean.getName(), tagList);
-                    Log.d("tagTitle", "addKnowledgeData: " + dataBean.getName());
+//                    Log.d("tagTitle", "addKnowledgeData: " + dataBean.getName());
                     tempList.add(wanKnowledge);
                 }
                 //更新请求状态以及列表信息

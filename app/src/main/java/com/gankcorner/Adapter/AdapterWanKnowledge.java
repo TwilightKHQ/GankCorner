@@ -3,7 +3,6 @@ package com.gankcorner.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,11 +55,11 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
         holder.tagTitle.setText(wanKnowledge.getName());
         List<String> tagList = wanKnowledge.getTagList();
         mTags.add(position, tagList);
-        Log.d("mTags", "Size: " + mTags.size());
+//        Log.d("mTags", "Size: " + mTags.size());
         if (mTags.size() > (position + 1)) {
             mTags.remove(position + 1);
         }
-        Log.d("mTags", "mTags: " + mTags.get(mTags.size() - 1));
+//        Log.d("mTags", "mTags: " + mTags.get(mTags.size() - 1));
         holder.tagFlowLayout.setAdapter(new TagAdapter<String>(tagList) {
             @Override
             public View getView(FlowLayout parent, int position, String s) {

@@ -1,7 +1,9 @@
 package com.gankcorner.GankIO.GankioFragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gankcorner.ActivityWeb;
 import com.gankcorner.Adapter.AdapterGank;
 import com.gankcorner.Bean.GankArticle;
 import com.gankcorner.Bean.GankArticleBean;
@@ -39,13 +43,12 @@ public class FragmentAndroid extends Fragment {
     private boolean gettingData = false; //当前是否正在请求数据
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.gank_android, container, false);
-        initView(view);
 
-        getGank("Android", numPerPage, 1);
+        initView(view);
 
         return view;
     }
@@ -54,42 +57,44 @@ public class FragmentAndroid extends Fragment {
      * 初始化RecyclerView
      */
     private void initView(View view) {
-
         // 初始化控件
-        mRecyclerView = view.findViewById(R.id.recycle_view);
+        mRecyclerView = view.findViewById(R.id.left_recycle_view);
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-
         // 定义一个线性布局管理器
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         // 设置布局管理器
         mRecyclerView.setLayoutManager(manager);
         // 设置adapter
-        adapterGank = new AdapterGank(getContext(), mGankArticle);
+        adapterGank = new AdapterGank(R.layout.item_gank, mGankArticle);
+        adapterGank.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        adapterGank.isFirstOnly(false);
+        adapterGank.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(getContext(), ActivityWeb.class);
+                //在滑动gankArticle会的值会变化，导致传递的字符串不对
+//                Log.d("Url", "Position"+ position + " Desc: " + adapterGank.getData().get(position).getDesc());
+                intent.putExtra("page_desc", adapterGank.getData().get(position).getDesc());
+                intent.putExtra("page_url", adapterGank.getData().get(position).getUrl());
+                getContext().startActivity(intent);
+            }
+        });
         mRecyclerView.setAdapter(adapterGank);
         //快要滑动到底部时自动加载更多
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-//                //SCROLL_STATE_IDLE为停止滑动状态
-//                //屏幕中最后一个可见子项的position
-//                final int lastVisibleItemPosition = manager.findLastVisibleItemPosition();
-//                //当前屏幕所看到的子项个数
-//                final int visibleItemCount = manager.getChildCount();
-//                //当前RecyclerView的所有子项个数
-//                final int totalItemCount = manager.getItemCount();
-//                if (visibleItemCount > 0 && lastVisibleItemPosition >= totalItemCount - 2 && newState == RecyclerView.SCROLL_STATE_IDLE) {
-//                    getGank("Android", numPerPage, totalItemCount / numPerPage + 1);
-//                    Log.d("currentNum", "Page: " + totalItemCount / numPerPage);
-//                }
                 if (CommonUtils.isWillBottom(recyclerView) && !gettingData) {
-                    getGank("Android",numPerPage, manager.getItemCount() / numPerPage + 1);
-                    Log.d("currentPage", "onScrollStateChanged: "+ manager.getItemCount() / numPerPage);
+                    getGank("Android", numPerPage, manager.getItemCount() / numPerPage + 1);
+                    Log.d("currentPage", "onScrollStateChanged: " + manager.getItemCount() / numPerPage);
                 }
             }
         });
-
         mSwipeRefreshLayout.setColorSchemeResources(R.color.bilibili);
+        mSwipeRefreshLayout.measure(0, 0);
+        mSwipeRefreshLayout.setRefreshing(true);
+        getGank("Android", numPerPage, 1);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -121,9 +126,8 @@ public class FragmentAndroid extends Fragment {
 //                }
 //                Log.d("Test", "UpdateInfo: " + Desc);
                 addData(gankArticleBean);
-                mSwipeRefreshLayout.setRefreshing(false);
                 gettingData = false;
-                Log.d("SwipeRefreshLayout", "onResponse: 加载完成");
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -139,14 +143,13 @@ public class FragmentAndroid extends Fragment {
             GankArticleBean.ResultsBean resultsBean = gankArticleBean.getResults().get(i);
             GankArticle gankArticle = new GankArticle(resultsBean.getWho(), resultsBean.getDesc(),
                     resultsBean.getPublishedAt(), resultsBean.getUrl(), resultsBean.getImages());
-            Log.d("GankArticle", "addData: " + gankArticle.getDesc());
+//            Log.d("GankArticle", "addData: " + gankArticle.getDesc());
             mGankArticle.add(gankArticle);
         }
-        if (mSwipeRefreshLayout.isRefreshing()){
-            adapterGank.refreshList(mGankArticle);
+        if (mSwipeRefreshLayout.isRefreshing()) {
+            adapterGank.setNewData(mGankArticle);
         } else {
-            adapterGank.updateList(mGankArticle);
+            adapterGank.addData(mGankArticle);
         }
     }
-
 }

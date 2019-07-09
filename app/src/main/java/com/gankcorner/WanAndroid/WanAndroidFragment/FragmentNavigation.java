@@ -10,7 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gankcorner.Adapter.AdapterWanNavigation;
+import com.gankcorner.Adapter.AdapterWanNavigationRight;
+import com.gankcorner.Adapter.AdapterWanNavigationLeft;
 import com.gankcorner.Bean.WanNavigation;
 import com.gankcorner.Bean.WanNavigationBean;
 import com.gankcorner.Interface.WanAndroid;
@@ -27,9 +28,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentNavigation extends Fragment {
 
-    AdapterWanNavigation adapterWanNavigation;
+    AdapterWanNavigationLeft adapterWanNavigationLeft;
+    AdapterWanNavigationRight adapterWanNavigationRight;
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView leftRecyclerView;
+    private RecyclerView rightRecyclerView;
     private List<WanNavigation> mWanNavigationList = new ArrayList<>();
     private List<WanNavigation> tempList = new ArrayList<>();
 
@@ -38,7 +41,7 @@ public class FragmentNavigation extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.wanandroid_navigation, container, false);
+        View view = inflater.inflate(R.layout.wanandroid_test, container, false);
 
         initViews(view);
         initData();
@@ -49,13 +52,22 @@ public class FragmentNavigation extends Fragment {
     private void initViews(View view) {
 
         // 初始化控件
-        mRecyclerView = view.findViewById(R.id.recycle_view);
+        leftRecyclerView = view.findViewById(R.id.left_recycle_view);
 
         // 设置线性布局管理器
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        leftRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // 设置adapter
-        adapterWanNavigation = new AdapterWanNavigation(getContext(), mWanNavigationList);
-        mRecyclerView.setAdapter(adapterWanNavigation);
+        adapterWanNavigationLeft = new AdapterWanNavigationLeft(R.layout.item_navigation_left, mWanNavigationList);
+        leftRecyclerView.setAdapter(adapterWanNavigationLeft);
+
+        // 初始化控件
+        rightRecyclerView = view.findViewById(R.id.right_recycler_view);
+
+        // 设置线性布局管理器
+        rightRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        // 设置adapter
+        adapterWanNavigationRight = new AdapterWanNavigationRight(getContext(), mWanNavigationList);
+        rightRecyclerView.setAdapter(adapterWanNavigationRight);
     }
 
     private void initData() {
@@ -90,15 +102,16 @@ public class FragmentNavigation extends Fragment {
                     for (WanNavigationBean.DataBean.ArticlesBean articlesBean : dataBean.getArticles()) {
                         tagList.add(articlesBean.getTitle());
                         urlList.add(articlesBean.getLink());
-                        Log.d("tagList", "addKnowledgeData: " + articlesBean.getTitle());
-                        Log.d("tagList", "addKnowledgeData: " + articlesBean.getLink());
+//                        Log.d("tagList", "addKnowledgeData: " + articlesBean.getTitle());
+//                        Log.d("tagList", "addKnowledgeData: " + articlesBean.getLink());
                     }
                     WanNavigation wanNavigation = new WanNavigation(dataBean.getName(), tagList, urlList);
-                    Log.d("tagTitle", "addKnowledgeData: " + dataBean.getName());
+//                    Log.d("tagTitle", "addKnowledgeData: " + dataBean.getName());
                     tempList.add(wanNavigation);
                 }
                 //更新请求状态以及列表信息
-                adapterWanNavigation.refreshList(tempList);
+                adapterWanNavigationRight.refreshList(tempList);
+                adapterWanNavigationLeft.setNewData(tempList);
             }
 
             @Override
