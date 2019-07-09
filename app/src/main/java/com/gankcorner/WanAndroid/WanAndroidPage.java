@@ -11,9 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gankcorner.R;
-import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentHome;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentNavigation;
-import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentNavigationTest;
+import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentHome;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentKnowledge;
 
 
@@ -54,7 +53,7 @@ public class WanAndroidPage extends Fragment {
         titleList.add("知识体系");
         fragmentList.add(new FragmentNavigation());
         titleList.add("导航数据");
-//        fragmentList.add(new FragmentNavigationTest());
+//        fragmentList.add(new FragmentHome());
 //        titleList.add("测试");
 
         //在Fragment当中

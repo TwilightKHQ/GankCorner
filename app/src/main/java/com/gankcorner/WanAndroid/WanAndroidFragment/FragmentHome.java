@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.ActivityWeb;
 import com.gankcorner.Adapter.AdapterWanArticle;
 import com.gankcorner.Bean.BannerBean;
@@ -24,6 +26,7 @@ import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BannerImageLoader;
 import com.gankcorner.Utils.CommonUtils;
+import com.gankcorner.Utils.ContextUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -40,6 +43,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.gankcorner.Utils.CommonUtils.getHeightPix;
 
 public class FragmentHome extends Fragment {
+
+    private String TAG = "========zzq";
 
     private Banner mBannerView;
     private List<BannerList> mBannerListList;
@@ -61,6 +66,7 @@ public class FragmentHome extends Fragment {
         View view = inflater.inflate(R.layout.wanandroid_home, container, false);
 
         initViews(view);
+        initClickEvents();
         initData();
 
         return view;
@@ -75,14 +81,11 @@ public class FragmentHome extends Fragment {
         // 设置线性布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // 设置adapter
-        adapterWanArticle = new AdapterWanArticle(getContext(), mWanArticleList);
-        //设置HeaderView
-        View header = LayoutInflater.from(getContext()).inflate(R.layout.item_banner, null);
-        mBannerView = header.findViewById(R.id.banner);
-        //设置banner的高度为手机屏幕的四分之一
-        mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));
-        adapterWanArticle.setHeaderView(mBannerView);
+        adapterWanArticle = new AdapterWanArticle(R.layout.item_wanandroid, mWanArticleList);
+//        //设置HeaderView
+        View headerView = getHeaderView(0);
         mRecyclerView.setAdapter(adapterWanArticle);
+        adapterWanArticle.addHeaderView(headerView);
         // 快要滑动到底部时自动加载更多
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -102,6 +105,47 @@ public class FragmentHome extends Fragment {
                 getWanAndroidArticle(0);
             }
         });
+    }
+
+    private void initClickEvents() {
+        adapterWanArticle.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(getContext(), "123456", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        adapterWanArticle.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()) {
+                    case R.id.chapterName:
+                        Toast.makeText(ContextUtil.getContext(),
+                                mWanArticleList.get(position).getChapterName(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.card_view:
+                        Intent intent = new Intent(getContext(), ActivityWeb.class);
+                        intent.putExtra("page_desc",
+                                mWanArticleList.get(position).getTitle());
+                        intent.putExtra("page_url",
+                                mWanArticleList.get(position).getLink());
+                        getContext().startActivity(intent);
+                        break;
+                    case R.id.home_share:
+                        Toast.makeText(ContextUtil.getContext(),
+                                "分享：" + mWanArticleList.get(position).getTitle(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.more_item:
+                        Toast.makeText(ContextUtil.getContext(),
+                                "更多：" + mWanArticleList.get(position).getAuthor(),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+
     }
 
     private void initData() {
@@ -150,7 +194,7 @@ public class FragmentHome extends Fragment {
 
     //添加WanAndroid的文章数据
     private void addArticleData(WanArticleBean wanArticleBean) {
-        mWanArticleList = new ArrayList<>();
+//        mWanArticleList = new ArrayList<>();
         for (int i = 0; i < numPerPage; i++) {
             WanArticleBean.DataBean.DatasBean dateBean = wanArticleBean.getData().getDatas().get(i);
             WanArticle wanArticle = new WanArticle(dateBean.getAuthor(), dateBean.getChapterName(),
@@ -159,9 +203,9 @@ public class FragmentHome extends Fragment {
             mWanArticleList.add(wanArticle);
         }
         if (mSwipeRefreshLayout.isRefreshing()) {
-            adapterWanArticle.refreshList(mWanArticleList);
+            adapterWanArticle.setNewData(mWanArticleList);
         } else {
-            adapterWanArticle.updateList(mWanArticleList);
+            adapterWanArticle.addData(mWanArticleList);
         }
     }
 
@@ -219,7 +263,6 @@ public class FragmentHome extends Fragment {
     //设置Banner的数据
     private void initBannerData(BannerBean bannerBean) {
         mBannerListList = new ArrayList<>();
-        Log.i("========zzq", "initBannerData: " + bannerBean.getData().size());
         for (int i = 0; i < bannerBean.getData().size(); i++) {
             BannerBean.DataBean dataBean = bannerBean.getData().get(i);
             BannerList bannerList = new BannerList(dataBean.getTitle(), dataBean.getImagePath(),
@@ -267,6 +310,16 @@ public class FragmentHome extends Fragment {
                 getContext().startActivity(intent);
             }
         });
+    }
+
+    private View getHeaderView(int type) {
+        View view = getLayoutInflater().inflate(R.layout.item_banner_test, (ViewGroup) mRecyclerView.getParent(), false);
+        if (type == 0) {
+            mBannerView = view.findViewById(R.id.banner);
+            //设置banner的高度为手机屏幕的四分之一, banner需要设置为最外层布局
+            mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));
+        }
+        return view;
     }
 
 }

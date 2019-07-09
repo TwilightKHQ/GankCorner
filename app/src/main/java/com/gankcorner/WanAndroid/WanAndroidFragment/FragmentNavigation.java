@@ -34,7 +34,7 @@ public class FragmentNavigation extends Fragment {
     private RecyclerView leftRecyclerView;
     private RecyclerView rightRecyclerView;
     private List<WanNavigation> mWanNavigationList = new ArrayList<>();
-    private List<WanNavigation> tempList = new ArrayList<>();
+    private List<WanNavigation> tempList;
 
 
     @Override
@@ -96,6 +96,7 @@ public class FragmentNavigation extends Fragment {
 //                    Desc = wanKnowledgeBean.getData().get(0).getName();
 //                }
 //                Log.d("WanKnowledgeBean", "UpdateInfo: " + Desc);
+                tempList = new ArrayList<>();
                 for (WanNavigationBean.DataBean dataBean : wanNavigationBean.getData()) {
                     List<String> tagList = new ArrayList<>();
                     List<String> urlList = new ArrayList<>();
