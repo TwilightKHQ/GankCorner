@@ -31,6 +31,9 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
     public AdapterWanKnowledge(Context context, List<WanKnowledge> wanKnowledgeList) {
         this.mContext = context;
         this.mWanKnowledgeList = wanKnowledgeList;
+        for (WanKnowledge wanKnowledge : wanKnowledgeList) {
+            this.mTags.add(wanKnowledge.getTagList());
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,13 +60,13 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
         wanKnowledge = mWanKnowledgeList.get(position);
         holder.tagTitle.setText(wanKnowledge.getName());
         List<String> tagList = wanKnowledge.getTagList();
-        if (mTags.size() > position) {
-            mTags.add(position, tagList);
-        }
-//        Log.d("mTags", "Size: " + mTags.size());
-        if (mTags.size() > (position + 1)) {
-            mTags.remove(position + 1);
-        }
+//        if (mTags.size() >= position) {
+//            mTags.add(position, tagList);
+//        }
+        Log.d("mTags", "Size: " + mTags.size());
+//        if (mTags.size() > (position + 1)) {
+//            mTags.remove(position + 1);
+//        }
 //        Log.d("mTags", "mTags: " + mTags.get(mTags.size() - 1));
         holder.tagFlowLayout.setAdapter(new TagAdapter<String>(tagList) {
             @Override
@@ -77,6 +80,7 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
         holder.tagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int pos, FlowLayout parent) {
+                Log.i(TAG, "pos: " + pos);
                 Toast.makeText(mContext, mTags.get(position).get(pos), Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -92,6 +96,10 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
         if (Data != null) {
             mWanKnowledgeList.clear();
             mWanKnowledgeList.addAll(Data);
+            mTags.clear();
+            for (WanKnowledge wanKnowledge : Data) {
+                mTags.add(wanKnowledge.getTagList());
+            }
         }
         notifyDataSetChanged();
     }

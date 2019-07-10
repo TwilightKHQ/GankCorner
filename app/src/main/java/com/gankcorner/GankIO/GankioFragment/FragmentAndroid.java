@@ -42,6 +42,8 @@ public class FragmentAndroid extends Fragment {
 
     private boolean gettingData = false; //当前是否正在请求数据
 
+    private boolean firstEnter = true;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,9 +94,12 @@ public class FragmentAndroid extends Fragment {
             }
         });
         mSwipeRefreshLayout.setColorSchemeResources(R.color.bilibili);
-        mSwipeRefreshLayout.measure(0, 0);
-        mSwipeRefreshLayout.setRefreshing(true);
-        getGank("Android", numPerPage, 1);
+        if (firstEnter) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            getGank("Android", numPerPage, 1);
+            firstEnter = false;
+        }
+
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

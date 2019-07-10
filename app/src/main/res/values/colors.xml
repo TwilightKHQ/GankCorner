@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F87298</color>
+    <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#EAEAEA</color>
-    <color name="colorAccent">#F87298</color>
+    <color name="colorAccent">#F0F0F0</color>
 
     <color name="bilibili">#F87298</color>
 

@@ -79,9 +79,24 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <WebView
-        android:id="@+id/web_page"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <!--利用FrameLayout的特性，后添加的ProgressBar会覆盖WebView，在ProgressBar加载完之后设置为Gone-->
+
+        <WebView
+            android:id="@+id/web_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:id="@+id/web_progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:foregroundGravity="top" />
+
+    </FrameLayout>
 
 </LinearLayout>

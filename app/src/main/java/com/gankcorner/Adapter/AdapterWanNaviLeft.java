@@ -14,7 +14,7 @@ import com.gankcorner.R;
 
 import java.util.List;
 
-public class AdapterWanNaviLeft extends RecyclerView.Adapter<AdapterWanNaviLeft.ViewHolder> {//包名也需要自动生成,同时注意List传参为泛型
+public class AdapterWanNaviLeft extends RecyclerView.Adapter<AdapterWanNaviLeft.ViewHolder> {
     private Context mContext;
     private List<WanNavigation> leftRecyclerData;//数据集合
     private OnItemClickListener mOnItemClickListener;

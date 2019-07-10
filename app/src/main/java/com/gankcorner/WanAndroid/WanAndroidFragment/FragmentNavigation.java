@@ -143,18 +143,39 @@ public class FragmentNavigation extends Fragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
+                final LinearLayoutManager leftLinearManager =
+                        (LinearLayoutManager) leftRecyclerView.getLayoutManager();
+
+                //用于将左边RecyclerView的内容调整至屏幕中间
+                int containHalfItem = (leftLinearManager.findLastVisibleItemPosition() -
+                        leftLinearManager.findFirstVisibleItemPosition()) / 2;
+
+//                Log.i(TAG, "containItem: " + containHalfItem);
+
                 LinearLayoutManager linearManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 //获取第一个可见view的位置
                 int firstItemPosition = linearManager.findFirstVisibleItemPosition();
-                int lastItemPosition = linearManager.findLastVisibleItemPosition();
-                Log.i(TAG, "onScrolled: " + firstItemPosition);
+
+//                Log.i(TAG, "onScrolled: " + firstItemPosition);
 
                 if (isScroll) {
                     adapterWanNaviLeft.setSelectedPosition(firstItemPosition);//滚动到悬浮view
+                    adapterWanNaviLeft.getItemCount();
+                    // 右边RecyclerView向下滑动
                     if (dy > 0) {
-                        leftRecyclerView.smoothScrollToPosition(lastItemPosition);
-                    } else {
-                        leftRecyclerView.smoothScrollToPosition(firstItemPosition);
+                        if (firstItemPosition + containHalfItem < adapterWanNaviLeft.getItemCount()) {
+                            leftRecyclerView.smoothScrollToPosition(firstItemPosition + containHalfItem);
+                        } else {
+                            leftRecyclerView.smoothScrollToPosition(firstItemPosition);
+                        }
+
+                    } else {    // 右边RecyclerView向上滑动
+                        if (firstItemPosition - containHalfItem > 0) {
+                            leftRecyclerView.smoothScrollToPosition(firstItemPosition - containHalfItem);
+                        } else {
+                            leftRecyclerView.smoothScrollToPosition(0);
+                        }
+
                     }
 
                 }

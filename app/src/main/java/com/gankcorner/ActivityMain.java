@@ -34,7 +34,7 @@ public class ActivityMain extends AppCompatActivity {
     private CustomViewPager mViewPager;
     private List<Fragment> fragmentList = new ArrayList<>();
 
-    String[] titles = new String[]{"首页", "流量", "社区", "关于"};
+    String[] titles = new String[]{"首页", "流量", "社区", "干货"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

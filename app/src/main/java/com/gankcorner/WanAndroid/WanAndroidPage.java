@@ -43,7 +43,7 @@ public class WanAndroidPage extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("玩安卓"));
         tabLayout.addTab(tabLayout.newTab().setText("知识体系"));
         tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
-        tabLayout.addTab(tabLayout.newTab().setText("测试"));
+//        tabLayout.addTab(tabLayout.newTab().setText("测试"));
 
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
@@ -53,8 +53,8 @@ public class WanAndroidPage extends Fragment {
         titleList.add("知识体系");
         fragmentList.add(new FragmentNavigation());
         titleList.add("导航数据");
-        fragmentList.add(new FragmentNavigation());
-        titleList.add("测试");
+//        fragmentList.add(new FragmentNavigation());
+//        titleList.add("测试");
 
         //在Fragment当中
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
@@ -73,6 +73,7 @@ public class WanAndroidPage extends Fragment {
                 return titleList.get(position);
             }
         });
+
         //将TabLayout与ViewPager联系起来
         tabLayout.setupWithViewPager(mViewPager);
     }

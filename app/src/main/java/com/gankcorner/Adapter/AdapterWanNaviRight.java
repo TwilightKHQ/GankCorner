@@ -22,6 +22,8 @@ import java.util.List;
 
 public class AdapterWanNaviRight extends RecyclerView.Adapter<AdapterWanNaviRight.ViewHolder> {
 
+    private String TAG = "=======zzq";
+
     private Context mContext;
     private WanNavigation wanNavigation;
     private List<WanNavigation> mWanNavigationList;
@@ -31,6 +33,10 @@ public class AdapterWanNaviRight extends RecyclerView.Adapter<AdapterWanNaviRigh
     public AdapterWanNaviRight(Context context, List<WanNavigation> mWanNavigationList) {
         this.mContext = context;
         this.mWanNavigationList = mWanNavigationList;
+        for (WanNavigation wanNavigation : mWanNavigationList) {
+            this.mTags.add(wanNavigation.getTagList());
+            this.mUrls.add(wanNavigation.getUrlList());
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -54,18 +60,12 @@ public class AdapterWanNaviRight extends RecyclerView.Adapter<AdapterWanNaviRigh
 
     @Override
     public void onBindViewHolder(@NonNull AdapterWanNaviRight.ViewHolder holder, final int position) {
+        Log.i(TAG, "wanNavigation_Size: " + mWanNavigationList.size());
+        Log.i(TAG, "position: " + position);
+        Log.i(TAG, "mTags_Size: " + mTags.size());
         wanNavigation = mWanNavigationList.get(position);
         holder.tagTitle.setText(wanNavigation.getName());
         List<String> tagList = wanNavigation.getTagList();
-        List<String> urlList = wanNavigation.getUrlList();
-        mTags.add(position, tagList);
-        mUrls.add(position, urlList);
-        Log.d("mTags", "Size: " + mTags.size());
-        if (mTags.size() > (position + 1)) {
-            mTags.remove(position + 1);
-            mUrls.remove(position + 1);
-        }
-        Log.d("mTags", "mTags: " + mTags.get(mTags.size() - 1));
         holder.tagFlowLayout.setAdapter(new TagAdapter<String>(tagList) {
             @Override
             public View getView(FlowLayout parent, int position, String s) {
@@ -95,15 +95,15 @@ public class AdapterWanNaviRight extends RecyclerView.Adapter<AdapterWanNaviRigh
     public void refreshList(List<WanNavigation> Data) {
         if (Data != null) {
             mWanNavigationList.clear();
+            mTags.clear();
+            mUrls.clear();
             mWanNavigationList.addAll(Data);
+            for (WanNavigation wanNavigation : mWanNavigationList) {
+                mTags.add(wanNavigation.getTagList());
+                mUrls.add(wanNavigation.getUrlList());
+            }
         }
         notifyDataSetChanged();
     }
 
-    public void updateList(List<WanNavigation> Data) {
-        if (Data != null) {
-            mWanNavigationList.addAll(Data);
-        }
-        notifyDataSetChanged();
-    }
 }

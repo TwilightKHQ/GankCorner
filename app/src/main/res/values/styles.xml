@@ -33,7 +33,7 @@
         <item name="tabPaddingStart">12dp</item>
         <item name="tabTextColor">#aaa</item>
         <item name="tabPaddingEnd">12dp</item>
-        <item name="tabSelectedTextColor">#f00</item>
+        <item name="tabSelectedTextColor">@color/bilibili</item>
     </style>
 
 </resources>
