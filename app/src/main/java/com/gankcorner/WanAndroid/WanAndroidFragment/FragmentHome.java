@@ -244,8 +244,9 @@ public class FragmentHome extends Fragment {
     //配置Banner
     private void SetBanner(BannerBean bannerBean) {
         initBanner();//设置Banner配置，必须在设置Banner数据之前执行
+        initBannerEvent();//设置Banner监听事件, 点击事件的监听需要设置在start之前
         initBannerData(bannerBean);//设置Banner的数据
-        initBannerEvent();//设置Banner监听事件
+
     }
 
     //设置Banner配置，必须在设置Banner数据之前执行

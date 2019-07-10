@@ -33,10 +33,7 @@ public class FragmentKnowledge extends Fragment {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<WanKnowledge> mWanKnowledgeList = new ArrayList<>();
-    private List<WanKnowledge> tempList = new ArrayList<>();
-
-    private boolean requestWeChat = false;
-    private boolean requestKnowledge = false;
+    private List<WanKnowledge> tempList;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -67,8 +64,6 @@ public class FragmentKnowledge extends Fragment {
             @Override
             public void onRefresh() {
                 getWanKnowledge();
-//                requestWeChat = true;
-                requestKnowledge = true;
                 tempList.clear();
             }
         });
@@ -100,6 +95,7 @@ public class FragmentKnowledge extends Fragment {
 //                    Desc = wanKnowledgeBean.getData().get(0).getName();
 //                }
 //                Log.d("WanKnowledgeBean", "UpdateInfo: " + Desc);
+                tempList = new ArrayList<>();
                 for (WanKnowledgeBean.DataBean dataBean : wanKnowledgeBean.getData()) {
                     List<String> tagList = new ArrayList<>();
                     for (WanKnowledgeBean.DataBean.ChildrenBean childrenBean : dataBean.getChildren()) {
@@ -111,11 +107,8 @@ public class FragmentKnowledge extends Fragment {
                     tempList.add(wanKnowledge);
                 }
                 //更新请求状态以及列表信息
-                requestKnowledge = false;
-                if (!requestWeChat) {
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    adapterWanKnowledge.refreshList(tempList);
-                }
+                mSwipeRefreshLayout.setRefreshing(false);
+                adapterWanKnowledge.refreshList(tempList);
             }
 
             @Override

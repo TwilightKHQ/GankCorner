@@ -3,6 +3,7 @@ package com.gankcorner.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledge.ViewHolder> {
+
+    private String TAG = "=======zzq";
 
     private Context mContext;
     private WanKnowledge wanKnowledge;
@@ -54,7 +57,9 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
         wanKnowledge = mWanKnowledgeList.get(position);
         holder.tagTitle.setText(wanKnowledge.getName());
         List<String> tagList = wanKnowledge.getTagList();
-        mTags.add(position, tagList);
+        if (mTags.size() > position) {
+            mTags.add(position, tagList);
+        }
 //        Log.d("mTags", "Size: " + mTags.size());
         if (mTags.size() > (position + 1)) {
             mTags.remove(position + 1);
@@ -86,13 +91,6 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
     public void refreshList(List<WanKnowledge> Data) {
         if (Data != null) {
             mWanKnowledgeList.clear();
-            mWanKnowledgeList.addAll(Data);
-        }
-        notifyDataSetChanged();
-    }
-
-    public void updateList(List<WanKnowledge> Data) {
-        if (Data != null) {
             mWanKnowledgeList.addAll(Data);
         }
         notifyDataSetChanged();

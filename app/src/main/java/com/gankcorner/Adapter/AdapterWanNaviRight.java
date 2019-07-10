@@ -20,7 +20,7 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterWanNavigationRight extends RecyclerView.Adapter<AdapterWanNavigationRight.ViewHolder> {
+public class AdapterWanNaviRight extends RecyclerView.Adapter<AdapterWanNaviRight.ViewHolder> {
 
     private Context mContext;
     private WanNavigation wanNavigation;
@@ -28,7 +28,7 @@ public class AdapterWanNavigationRight extends RecyclerView.Adapter<AdapterWanNa
     private List<List<String>> mTags = new ArrayList<>();
     private List<List<String>> mUrls = new ArrayList<>();
 
-    public AdapterWanNavigationRight(Context context, List<WanNavigation> mWanNavigationList) {
+    public AdapterWanNaviRight(Context context, List<WanNavigation> mWanNavigationList) {
         this.mContext = context;
         this.mWanNavigationList = mWanNavigationList;
     }
@@ -53,7 +53,7 @@ public class AdapterWanNavigationRight extends RecyclerView.Adapter<AdapterWanNa
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterWanNavigationRight.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull AdapterWanNaviRight.ViewHolder holder, final int position) {
         wanNavigation = mWanNavigationList.get(position);
         holder.tagTitle.setText(wanNavigation.getName());
         List<String> tagList = wanNavigation.getTagList();
