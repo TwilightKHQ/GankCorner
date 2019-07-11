@@ -6,4 +6,15 @@
     <string name="bottom_three">页面3</string>
     <string name="wan_android">WanAndroid</string>
 
+    <string name="my_name">我一定会有猫的。</string>
+
+    <string name="setting">设置</string>
+    <string name="shutdown">退出</string>
+
+    <string name="home">首页</string>
+    <string name="question">问题反馈</string>
+    <string name="information">关于我</string>
+    <string name="star">我的收藏</string>
+    <string name="location">定位</string>
+    <string name="scan_code">扫码</string>
 </resources>

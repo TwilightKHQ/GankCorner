@@ -28,6 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentKnowledge extends Fragment {
 
+    private String TAG = "========zzq";
+
     AdapterWanKnowledge adapterWanKnowledge;
 
     private RecyclerView mRecyclerView;
@@ -64,7 +66,6 @@ public class FragmentKnowledge extends Fragment {
             @Override
             public void onRefresh() {
                 getWanKnowledge();
-                tempList.clear();
             }
         });
     }
@@ -87,23 +88,23 @@ public class FragmentKnowledge extends Fragment {
         call.enqueue(new Callback<WanKnowledgeBean>() {
             @Override
             public void onResponse(@NonNull Call<WanKnowledgeBean> call, @NonNull Response<WanKnowledgeBean> response) {
-                Log.d("Test", "response: " + response.toString());
+                Log.d(TAG, "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 WanKnowledgeBean wanKnowledgeBean = response.body();
 //                String Desc = null;
 //                if (wanKnowledgeBean != null) {
 //                    Desc = wanKnowledgeBean.getData().get(0).getName();
 //                }
-//                Log.d("WanKnowledgeBean", "UpdateInfo: " + Desc);
+//                Log.d(TAG, "UpdateInfo: " + Desc);
                 tempList = new ArrayList<>();
                 for (WanKnowledgeBean.DataBean dataBean : wanKnowledgeBean.getData()) {
                     List<String> tagList = new ArrayList<>();
                     for (WanKnowledgeBean.DataBean.ChildrenBean childrenBean : dataBean.getChildren()) {
                         tagList.add(childrenBean.getName());
-//                        Log.d("tagList", "addKnowledgeData: " + childrenBean.getName());
+//                        Log.d(TAG, "addKnowledgeData: " + childrenBean.getName());
                     }
                     WanKnowledge wanKnowledge = new WanKnowledge(dataBean.getName(), tagList);
-//                    Log.d("tagTitle", "addKnowledgeData: " + dataBean.getName());
+//                    Log.d(TAG, "addKnowledgeData: " + dataBean.getName());
                     tempList.add(wanKnowledge);
                 }
                 //更新请求状态以及列表信息

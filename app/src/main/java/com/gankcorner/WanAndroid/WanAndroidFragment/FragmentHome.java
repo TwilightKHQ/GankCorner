@@ -83,7 +83,7 @@ public class FragmentHome extends Fragment {
         // 设置adapter
         adapterWanArticle = new AdapterWanArticle(R.layout.item_wanandroid, mWanArticleList);
 //        //设置HeaderView
-        View headerView = getHeaderView(0);
+        View headerView = getHeaderView();
         mRecyclerView.setAdapter(adapterWanArticle);
         adapterWanArticle.addHeaderView(headerView);
         // 快要滑动到底部时自动加载更多
@@ -93,7 +93,7 @@ public class FragmentHome extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (CommonUtils.isWillBottom(recyclerView) && !gettingData) {
                     getWanAndroidArticle(currentPage);
-                    Log.d("currentPage", "onScrollStateChanged: " + currentPage);
+                    Log.d(TAG, "onScrollStateChanged: " + currentPage);
                 }
             }
         });
@@ -108,13 +108,6 @@ public class FragmentHome extends Fragment {
     }
 
     private void initClickEvents() {
-        adapterWanArticle.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(getContext(), "123456", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         adapterWanArticle.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -177,9 +170,9 @@ public class FragmentHome extends Fragment {
                     Desc = wanArticleBean.getData().getDatas().get(0).getTitle();
                     size = wanArticleBean.getData().getDatas().size();
                 }
-                Log.d("Test", "String: " + Desc + " Size:" + size);
+                Log.d(TAG, "String: " + Desc + " Size:" + size);
                 currentPage = wanArticleBean.getData().getCurPage();
-                Log.d("currentPage", "onResponse: " + currentPage);
+                Log.d(TAG, "onResponse: " + currentPage);
                 addArticleData(wanArticleBean);
                 mSwipeRefreshLayout.setRefreshing(false);
                 gettingData = false;
@@ -194,12 +187,12 @@ public class FragmentHome extends Fragment {
 
     //添加WanAndroid的文章数据
     private void addArticleData(WanArticleBean wanArticleBean) {
-//        mWanArticleList = new ArrayList<>();
+        mWanArticleList = new ArrayList<>();
         for (int i = 0; i < numPerPage; i++) {
             WanArticleBean.DataBean.DatasBean dateBean = wanArticleBean.getData().getDatas().get(i);
             WanArticle wanArticle = new WanArticle(dateBean.getAuthor(), dateBean.getChapterName(),
                     dateBean.getLink(), dateBean.getNiceDate(), dateBean.getSuperChapterName(), dateBean.getTitle());
-//            Log.d("GankArticle", "addData: " + wanArticle.getAuthor());
+//            Log.d(TAG, "addData: " + wanArticle.getAuthor());
             mWanArticleList.add(wanArticle);
         }
         if (mSwipeRefreshLayout.isRefreshing()) {
@@ -222,20 +215,20 @@ public class FragmentHome extends Fragment {
 
         call.enqueue(new Callback<BannerBean>() {
             @Override
-            public void onResponse(Call<BannerBean> call, Response<BannerBean> response) {
-                Log.d("Test", "response: " + response.toString());
+            public void onResponse(@NonNull Call<BannerBean> call, @NonNull Response<BannerBean> response) {
+                Log.d(TAG, "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 BannerBean bannerBean = response.body();
                 String Desc = null;
                 if (bannerBean != null) {
                     Desc = bannerBean.getData().get(0).getDesc();
                 }
-                Log.d("Test", "UpdateInfo: " + Desc);
+                Log.d(TAG, "UpdateInfo: " + Desc);
                 SetBanner(bannerBean);
             }
 
             @Override
-            public void onFailure(Call<BannerBean> call, Throwable t) {
+            public void onFailure(@NonNull Call<BannerBean> call, @NonNull Throwable t) {
 
             }
         });
@@ -313,13 +306,11 @@ public class FragmentHome extends Fragment {
         });
     }
 
-    private View getHeaderView(int type) {
+    private View getHeaderView() {
         View view = getLayoutInflater().inflate(R.layout.item_banner_test, (ViewGroup) mRecyclerView.getParent(), false);
-        if (type == 0) {
-            mBannerView = view.findViewById(R.id.banner);
-            //设置banner的高度为手机屏幕的四分之一, banner需要设置为最外层布局
-            mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));
-        }
+        mBannerView = view.findViewById(R.id.banner);
+        //设置banner的高度为手机屏幕的四分之一, banner需要设置为最外层布局
+        mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));
         return view;
     }
 

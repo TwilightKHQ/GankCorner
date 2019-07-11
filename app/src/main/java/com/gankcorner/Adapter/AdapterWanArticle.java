@@ -36,7 +36,7 @@ public class AdapterWanArticle extends BaseQuickAdapter<WanArticle, BaseViewHold
         helper.setText(R.id.niceDate, item.getNiceDate());
         helper.setText(R.id.title, item.getTitle());
 
-        helper.addOnClickListener(R.id.root_view, R.id.card_view, R.id.home_share,
+        helper.addOnClickListener(R.id.card_view, R.id.home_share,
                 R.id.more_item, R.id.chapterName);
     }
 

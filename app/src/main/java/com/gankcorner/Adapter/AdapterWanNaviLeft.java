@@ -3,10 +3,12 @@ package com.gankcorner.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gankcorner.Bean.WanNavigation;
@@ -20,36 +22,43 @@ public class AdapterWanNaviLeft extends RecyclerView.Adapter<AdapterWanNaviLeft.
     private OnItemClickListener mOnItemClickListener;
     private int selectedPosition = 0;//初始第一个为选中状态
 
-    public void setSelectedPosition(int selectedPosition) {
-        this.selectedPosition = selectedPosition;//动态设置选中状态
-        notifyDataSetChanged();
-    }
-
     public AdapterWanNaviLeft(Context context, List<WanNavigation> data) {
         this.mContext = context;
         this.leftRecyclerData = data;
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout item_navi_left;
+        TextView item_left_recycler_tv;
+
+        ViewHolder(View view) {
+            super(view);
+            item_navi_left = view.findViewById(R.id.item_navi_left);
+            item_left_recycler_tv = view.findViewById(R.id.item_left_recycler_tv);
+        }
     }
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
 
         void onItemLongClick(View view, int position);
+
     }
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         int itemViewId = R.layout.item_navigation_left;
-        ViewHolder holder = new ViewHolder(LayoutInflater.from(mContext).inflate(itemViewId, parent, false));
-        return holder;
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(itemViewId, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         holder.item_left_recycler_tv.setText(leftRecyclerData.get(position).getName());
 
@@ -60,7 +69,7 @@ public class AdapterWanNaviLeft extends RecyclerView.Adapter<AdapterWanNaviLeft.
             holder.item_left_recycler_tv.setBackgroundColor(Color.WHITE);
         }
 
-        // 如果设置了回调,则设置点击事件 
+        // 如果设置了回调,则设置点击事件
         if (mOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,16 +91,7 @@ public class AdapterWanNaviLeft extends RecyclerView.Adapter<AdapterWanNaviLeft.
 
     @Override
     public int getItemCount() {
-        return null != leftRecyclerData && leftRecyclerData.size() > 0 ? leftRecyclerData.size() : 0;
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView item_left_recycler_tv;
-
-        public ViewHolder(View view) {
-            super(view);
-            item_left_recycler_tv = view.findViewById(R.id.item_left_recycler_tv);
-        }
+        return (null != leftRecyclerData && leftRecyclerData.size() > 0) ? leftRecyclerData.size() : 0;
     }
 
     public void refreshList(List<WanNavigation> Data) {
@@ -99,6 +99,11 @@ public class AdapterWanNaviLeft extends RecyclerView.Adapter<AdapterWanNaviLeft.
             leftRecyclerData.clear();
             leftRecyclerData.addAll(Data);
         }
+        notifyDataSetChanged();
+    }
+
+    public void setSelectedPosition(int selectedPosition) {
+        this.selectedPosition = selectedPosition;//动态设置选中状态
         notifyDataSetChanged();
     }
 
