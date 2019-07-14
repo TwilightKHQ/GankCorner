@@ -9,7 +9,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.View;
 
-/*
+/**
  * 为ImageView添加圆角效果
  * 图片尺寸为宽度铺满高度自适应
  */

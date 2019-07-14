@@ -11,25 +11,35 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gankcorner.Adapter.AdapterBottomFragment;
 import com.gankcorner.Fragment.Fragment_Four;
 import com.gankcorner.GankIO.GankIOPage;
 import com.gankcorner.Fragment.Fragment_Two;
 import com.gankcorner.Utils.CustomViewPager;
+import com.gankcorner.Utils.DrawableTextView;
 import com.gankcorner.WanAndroid.WanAndroidPage;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ActivityMain extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity implements View.OnClickListener {
+
+    private TextView mHome;
+    private TextView mQuestion;
+    private TextView mAboutMe;
+    private TextView mStar;
+    private TextView mLocation;
+    private TextView mScanCode;
+    private DrawableTextView mExit;
+    private DrawableTextView mSetting;
 
     private DrawerLayout mDrawerLayout;
     private TabLayout mBottomTab;
@@ -52,18 +62,39 @@ public class ActivityMain extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
             //状态栏字体设置为黑色
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
         initView();
 
+        initOnClickEvents();
+    }
+
+    private void initOnClickEvents() {
+        mHeadPic = (CircleImageView) findViewById(R.id.head_pic);
+        mHeadPic.setOnClickListener(this);
+        mHome = (TextView) findViewById(R.id.home_page);
+        mHome.setOnClickListener(this);
+        mQuestion = (TextView) findViewById(R.id.question);
+        mQuestion.setOnClickListener(this);
+        mAboutMe = (TextView) findViewById(R.id.about_me);
+        mAboutMe.setOnClickListener(this);
+        mStar = (TextView) findViewById(R.id.star);
+        mStar.setOnClickListener(this);
+        mLocation = (TextView) findViewById(R.id.location);
+        mLocation.setOnClickListener(this);
+        mScanCode = (TextView) findViewById(R.id.scan);
+        mScanCode.setOnClickListener(this);
+        mSetting = (DrawableTextView) findViewById(R.id.settings);
+        mSetting.setOnClickListener(this);
+        mExit = (DrawableTextView) findViewById(R.id.exit);
+        mExit.setOnClickListener(this);
     }
 
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mViewPager = (CustomViewPager) findViewById(R.id.view_pager);
         mBottomTab = (TabLayout) findViewById(R.id.bottom_tab);
-        mHeadPic = (CircleImageView) findViewById(R.id.head_pic);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -83,12 +114,12 @@ public class ActivityMain extends AppCompatActivity {
         mBottomTab.setupWithViewPager(mViewPager);
         setFragmentLabel();
 
-        mHeadPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
-            }
-        });
+//        mHeadPic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mDrawerLayout.openDrawer(Gravity.LEFT);
+//            }
+//        });
     }
 
     private void setFragmentLabel() {
@@ -110,6 +141,40 @@ public class ActivityMain extends AppCompatActivity {
                     break;
             }
             tab.setIcon(d);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.head_pic:
+                mDrawerLayout.openDrawer(Gravity.LEFT);
+                break;
+            case R.id.home_page:
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
+                break;
+            case R.id.question:
+                Toast.makeText(this, "问题反馈", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.about_me:
+                Toast.makeText(this, "关于我", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.star:
+                Toast.makeText(this, "我的收藏", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.location:
+                Toast.makeText(this, "定位", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.scan:
+                Toast.makeText(this, "扫码", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.settings:
+                Toast.makeText(this, "设置", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.exit:
+                Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
+                break;
+
         }
     }
 

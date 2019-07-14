@@ -6,6 +6,10 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
+/**
+ * 自定义的TextView 可以将TextView与图片放置在控件中间位置
+ */
+
 public class DrawableTextView extends AppCompatTextView {
 
     public DrawableTextView(Context context) {
