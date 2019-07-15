@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
+import com.gankcorner.Utils.BaseFragment;
+
 import java.util.List;
 
 public class AdapterBottomFragment extends FragmentPagerAdapter {

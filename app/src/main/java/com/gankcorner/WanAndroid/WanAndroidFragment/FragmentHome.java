@@ -27,6 +27,7 @@ import com.gankcorner.Utils.BannerImageLoader;
 import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CommonUtils;
 import com.gankcorner.Utils.AppUtil;
+import com.gankcorner.Utils.FragmentChanged;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -42,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.gankcorner.Utils.CommonUtils.getHeightPix;
 
-public class FragmentHome extends BaseFragment {
+public class FragmentHome extends FragmentChanged {
 
     private String TAG = "========zzq";
 
@@ -59,6 +60,8 @@ public class FragmentHome extends BaseFragment {
 
     private boolean gettingData = false; //当前是否正在请求数据
 
+    private boolean firstLoad = true;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,22 +71,28 @@ public class FragmentHome extends BaseFragment {
         initViews(view);
         initClickEvents();
 
+        Log.i("========zzq", "FragmentHome_setUserVisibleHint: " + isVisibleToUser());
+
 
         return view;
     }
 
     @Override
     protected void onFragmentVisibleChange(boolean isVisible) {
-        if (isVisible) {
-            Log.i(TAG, "Banner_size: " + mBannerListList.size());
+        Log.i(TAG, "Fragment_Home_isVisible: " + isVisible());
+        Log.i(TAG, "Fragment_Home_isVisibleToUser: " + isVisibleToUser());
+
+        if (firstLoad & isVisible()) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            initData();
+            firstLoad = false;
         }
     }
 
     @Override
     protected void onFragmentFirstVisible() {
         //去服务器下载数据
-        mSwipeRefreshLayout.setRefreshing(true);
-        initData();
+        Log.i(TAG, "Fragment_Home_onFragmentFirstVisible: ");
     }
 
     private void initViews(View view) {
@@ -178,7 +187,7 @@ public class FragmentHome extends BaseFragment {
         call.enqueue(new Callback<WanArticleBean>() {
             @Override
             public void onResponse(@NonNull Call<WanArticleBean> call, @NonNull Response<WanArticleBean> response) {
-                Log.d("Test", "response: " + response.toString());
+                Log.d(TAG, "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 WanArticleBean wanArticleBean = response.body();
                 String Desc = null;
@@ -322,7 +331,7 @@ public class FragmentHome extends BaseFragment {
     }
 
     private View getHeaderView() {
-        View view = getLayoutInflater().inflate(R.layout.item_banner_test,
+        View view = getLayoutInflater().inflate(R.layout.item_banner,
                 (ViewGroup) mRecyclerView.getParent(), false);
         mBannerView = view.findViewById(R.id.banner);
         //设置banner的高度为手机屏幕的四分之一, banner需要设置为最外层布局

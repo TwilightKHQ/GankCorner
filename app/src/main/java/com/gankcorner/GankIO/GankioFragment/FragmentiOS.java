@@ -43,7 +43,6 @@ public class FragmentiOS extends BaseFragment {
 
     private boolean gettingData = false; //当前是否正在请求数据
 
-    private boolean firstEnter = true;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

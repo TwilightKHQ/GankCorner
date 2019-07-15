@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,7 @@ import com.gankcorner.Fragment.Fragment_Four;
 import com.gankcorner.GankIO.GankIOPage;
 import com.gankcorner.Fragment.Fragment_Two;
 import com.gankcorner.Utils.AppUtil;
+import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CustomViewPager;
 import com.gankcorner.Utils.DrawableTextView;
 import com.gankcorner.WanAndroid.WanAndroidPage;
@@ -35,9 +37,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ActivityMain extends AppCompatActivity implements View.OnClickListener {
 
+    private String TAG = "=======zzq";
+
     private DrawerLayout mDrawerLayout;
     private TabLayout mBottomTab;
-    private CustomViewPager mViewPager;
+//    private CustomViewPager mViewPager;
+    private ViewPager mViewPager;
     private List<Fragment> fragmentList = new ArrayList<>();
 
     String[] titles = new String[]{"首页", "流量", "社区", "干货"};
@@ -52,6 +57,8 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
         initOnClickEvents();
     }
+
+
 
     private void changeStatusBar() {
         // 状态栏透明， 使得沉浸式状态栏有效
@@ -90,7 +97,7 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mViewPager = (CustomViewPager) findViewById(R.id.view_pager);
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mBottomTab = (TabLayout) findViewById(R.id.bottom_tab);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -105,7 +112,8 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
                 AdapterBottomFragment(getSupportFragmentManager(),
                 this, fragmentList, titles);
         mViewPager.setAdapter(adapterBottomFragment);
-        mViewPager.setCanScroll(false);
+        mViewPager.setCurrentItem(0);
+//        mViewPager.setCanScroll(false);
 
         //绑定
         mBottomTab.setupWithViewPager(mViewPager);

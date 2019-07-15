@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import java.util.List;
 
 public class WanAndroidPage extends BaseFragment {
 
+    private String TAG = "=======zzq";
+
     private TabLayout tabLayout;
     private ViewPager mViewPager;
     private List<String> titleList ;
@@ -35,6 +38,8 @@ public class WanAndroidPage extends BaseFragment {
         View view = inflater.inflate(R.layout.layout_gank, container, false);
 
         initView(view);
+        Boolean isVisibleToUser=WanAndroidPage.this.isResumed()&&WanAndroidPage.this.getUserVisibleHint();
+        Log.i(TAG, "WanAndroidPage_isVisibleToUser: " + isVisibleToUser);
 
         return view;
     }

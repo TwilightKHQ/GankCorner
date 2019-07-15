@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/left_recycle_view"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <View
-        android:layout_width="1dp"
-        android:background="@color/grayWhite"
-        android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/right_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/left_recycle_view"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/center_view"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/grayWhite"
+                android:visibility="invisible"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/right_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

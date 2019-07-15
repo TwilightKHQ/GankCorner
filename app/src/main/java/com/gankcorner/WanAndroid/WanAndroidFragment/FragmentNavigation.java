@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
@@ -37,7 +38,11 @@ public class FragmentNavigation extends BaseFragment {
     private String TAG = "========zzq";
 
     private AdapterWanNaviLeft adapterWanNaviLeft;
-    AdapterWanNaviRight adapterWanNaviRight;
+    private AdapterWanNaviRight adapterWanNaviRight;
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    private View mCenterView;
 
     private RecyclerView leftRecyclerView;
     private RecyclerView rightRecyclerView;
@@ -67,22 +72,18 @@ public class FragmentNavigation extends BaseFragment {
 
     @Override
     protected void onFragmentVisibleChange(boolean isVisible) {
-//        if (isVisible) {
-//            //更新界面数据，如果数据还在下载中，就显示加载框
-//            if (firstEnter) {
-//
-//            }
-//        }
-        initData();
     }
 
     @Override
     protected void onFragmentFirstVisible() {
-        //去服务器下载数据
-
+        Log.i(TAG, "onFragmentFirstVisible: first_load");
+        mSwipeRefreshLayout.setRefreshing(true);
+        initData();
     }
 
     private void initViews(View view) {
+
+        mCenterView = (View) view.findViewById(R.id.center_view);
 
         // 初始化控件
         leftRecyclerView = view.findViewById(R.id.left_recycle_view);
@@ -101,6 +102,16 @@ public class FragmentNavigation extends BaseFragment {
         // 设置adapter
         adapterWanNaviRight = new AdapterWanNaviRight(getContext(), mWanNavigationList);
         rightRecyclerView.setAdapter(adapterWanNaviRight);
+
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.bilibili);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
     }
 
     private void initData() {
@@ -146,6 +157,8 @@ public class FragmentNavigation extends BaseFragment {
                 //更新请求状态以及列表信息
                 adapterWanNaviRight.refreshList(tempList);
                 adapterWanNaviLeft.refreshList(tempList);
+                mCenterView.setVisibility(View.VISIBLE);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -243,7 +256,7 @@ public class FragmentNavigation extends BaseFragment {
 //                final TopSmoothScroller mScroller = new TopSmoothScroller(getActivity());
 //                mScroller.setTargetPosition(position);
 //                rightRecyclerManager.startSmoothScroll(mScroller);
-                ((LinearLayoutManager)rightRecyclerView.getLayoutManager()).scrollToPositionWithOffset(position,0);
+                ((LinearLayoutManager) rightRecyclerView.getLayoutManager()).scrollToPositionWithOffset(position, 0);
             }
 
             @Override

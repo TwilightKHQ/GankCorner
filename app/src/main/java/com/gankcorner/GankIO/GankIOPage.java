@@ -37,8 +37,6 @@ public class GankIOPage extends BaseFragment {
         return view;
     }
 
-
-
     private void initView(View view) {
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);

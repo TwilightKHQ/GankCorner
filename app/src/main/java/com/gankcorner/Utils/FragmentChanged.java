@@ -3,61 +3,25 @@ package com.gankcorner.Utils;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
-/**
- * Created by dasu on 2016/9/27.
- * <p>
- * Fragment基类，封装了懒加载的实现
- * <p>
- * 1、Viewpager + Fragment情况下，fragment的生命周期因Viewpager的缓存机制而失去了具体意义
- * 该抽象类自定义新的回调方法，当fragment可见状态改变时会触发的回调方法，和 Fragment 第一次可见时会回调的方法
- *
- * @see #onFragmentVisibleChange(boolean)
- * @see #onFragmentFirstVisible()
- */
-public abstract class BaseFragment extends FragmentChanged {
+public class FragmentChanged extends Fragment implements FragmentUserVisibleController.UserVisibleCallback{
 
-    private static final String TAG = BaseFragment.class.getSimpleName();
+    private FragmentUserVisibleController userVisibleController;
 
     private boolean isFragmentVisible;
     private boolean isReuseView;
     private boolean isFirstVisible;
     private View rootView;
 
-
-    //setUserVisibleHint()在Fragment创建时会先被调用一次，传入isVisibleToUser = false
-    //如果当前Fragment可见，那么setUserVisibleHint()会再次被调用一次，传入isVisibleToUser = true
-    //如果Fragment从可见->不可见，那么setUserVisibleHint()也会被调用，传入isVisibleToUser = false
-    //总结：setUserVisibleHint()除了Fragment的可见状态发生变化时会被回调外，在new Fragment()时也会被回调
-    //如果我们需要在 Fragment 可见与不可见时干点事，用这个的话就会有多余的回调了，那么就需要重新封装一个
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        //setUserVisibleHint()有可能在fragment的生命周期外被调用
-        if (rootView == null) {
-            return;
-        }
-        if (isFirstVisible && isVisibleToUser()) {
-            onFragmentFirstVisible();
-            isFirstVisible = false;
-        }
-        if (isVisibleToUser()) {
-            onFragmentVisibleChange(true);
-            isFragmentVisible = true;
-            return;
-        }
-        if (isFragmentVisible) {
-            isFragmentVisible = false;
-            onFragmentVisibleChange(false);
-        }
+    public FragmentChanged() {
+        userVisibleController = new FragmentUserVisibleController(this, this);
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initVariable();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        userVisibleController.activityCreated();
     }
 
     @Override
@@ -95,6 +59,65 @@ public abstract class BaseFragment extends FragmentChanged {
         isFragmentVisible = false;
         rootView = null;
         isReuseView = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        userVisibleController.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        userVisibleController.pause();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        userVisibleController.setUserVisibleHint(isVisibleToUser);
+        if (rootView == null) {
+            return;
+        }
+        if (isFirstVisible && isVisibleToUser()) {
+            onFragmentFirstVisible();
+            isFirstVisible = false;
+        }
+        if (isVisibleToUser()) {
+            onFragmentVisibleChange(true);
+            isFragmentVisible = true;
+            return;
+        }
+        if (isFragmentVisible) {
+            isFragmentVisible = false;
+            onFragmentVisibleChange(false);
+        }
+    }
+
+    @Override
+    public void setWaitingShowToUser(boolean waitingShowToUser) {
+        userVisibleController.setWaitingShowToUser(waitingShowToUser);
+    }
+
+    @Override
+    public boolean isWaitingShowToUser() {
+        return userVisibleController.isWaitingShowToUser();
+    }
+
+    @Override
+    public boolean isVisibleToUser() {
+        return userVisibleController.isVisibleToUser();
+    }
+
+    @Override
+    public void callSuperSetUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
+    public void onVisibleToUserChanged(boolean isVisibleToUser, boolean invokeInResumeOrPause) {
+
     }
 
     /**

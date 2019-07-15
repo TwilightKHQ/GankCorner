@@ -33,6 +33,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentAndroid extends BaseFragment {
 
+    private String TAG = "=======zzq";
+
     private AdapterGank adapterGank;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -41,8 +43,6 @@ public class FragmentAndroid extends BaseFragment {
     private int numPerPage = 10; //每页的个数
 
     private boolean gettingData = false; //当前是否正在请求数据
-
-    private boolean firstEnter = true;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -57,13 +57,13 @@ public class FragmentAndroid extends BaseFragment {
 
     @Override
     protected void onFragmentVisibleChange(boolean isVisible) {
-//        if (isVisible) {
-//
-//        }
+        Log.i(TAG, "Fragment_Android_isVisible: " + isVisible);
+        Log.i(TAG, "Fragment_Android_isVisibleToUser: " + isVisibleToUser());
     }
 
     @Override
     protected void onFragmentFirstVisible() {
+        Log.i(TAG, "Fragment_Android_onFragmentFirstVisible: ");
         mSwipeRefreshLayout.setRefreshing(true);
         getGank("Android", numPerPage, 1);
     }

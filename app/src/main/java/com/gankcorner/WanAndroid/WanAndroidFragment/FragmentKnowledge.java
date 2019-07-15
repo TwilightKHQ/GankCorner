@@ -125,8 +125,8 @@ public class FragmentKnowledge extends BaseFragment {
                     tempList.add(wanKnowledge);
                 }
                 //更新请求状态以及列表信息
-                mSwipeRefreshLayout.setRefreshing(false);
                 adapterWanKnowledge.refreshList(tempList);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
