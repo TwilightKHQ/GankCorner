@@ -4,7 +4,6 @@ package com.gankcorner.WanAndroid.WanAndroidFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,8 +24,9 @@ import com.gankcorner.Bean.WanArticleBean;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BannerImageLoader;
+import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CommonUtils;
-import com.gankcorner.Utils.ContextUtil;
+import com.gankcorner.Utils.AppUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -42,12 +42,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.gankcorner.Utils.CommonUtils.getHeightPix;
 
-public class FragmentHome extends Fragment {
+public class FragmentHome extends BaseFragment {
 
     private String TAG = "========zzq";
 
     private Banner mBannerView;
-    private List<BannerList> mBannerListList;
+    private List<BannerList> mBannerListList = new ArrayList<>();
 
     private AdapterWanArticle adapterWanArticle;
     private RecyclerView mRecyclerView;
@@ -67,9 +67,23 @@ public class FragmentHome extends Fragment {
 
         initViews(view);
         initClickEvents();
-        initData();
+
 
         return view;
+    }
+
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        if (isVisible) {
+            Log.i(TAG, "Banner_size: " + mBannerListList.size());
+        }
+    }
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        //去服务器下载数据
+        mSwipeRefreshLayout.setRefreshing(true);
+        initData();
     }
 
     private void initViews(View view) {
@@ -113,7 +127,7 @@ public class FragmentHome extends Fragment {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.chapterName:
-                        Toast.makeText(ContextUtil.getContext(),
+                        Toast.makeText(AppUtil.getContext(),
                                 mWanArticleList.get(position).getChapterName(),
                                 Toast.LENGTH_SHORT).show();
                         break;
@@ -126,13 +140,16 @@ public class FragmentHome extends Fragment {
                         getContext().startActivity(intent);
                         break;
                     case R.id.home_share:
-                        Toast.makeText(ContextUtil.getContext(),
+                        Toast.makeText(AppUtil.getContext(),
                                 "分享：" + mWanArticleList.get(position).getTitle(),
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.more_item:
-                        Toast.makeText(ContextUtil.getContext(),
+                        Toast.makeText(AppUtil.getContext(),
                                 "更多：" + mWanArticleList.get(position).getAuthor(),
+                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                adapterWanArticle.getData().get(position).getAuthor(),
                                 Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -187,19 +204,19 @@ public class FragmentHome extends Fragment {
 
     //添加WanAndroid的文章数据
     private void addArticleData(WanArticleBean wanArticleBean) {
-        mWanArticleList = new ArrayList<>();
+        List<WanArticle> tempList = new ArrayList<>();
         for (int i = 0; i < numPerPage; i++) {
             WanArticleBean.DataBean.DatasBean dateBean = wanArticleBean.getData().getDatas().get(i);
             WanArticle wanArticle = new WanArticle(dateBean.getAuthor(), dateBean.getChapterName(),
                     dateBean.getLink(), dateBean.getNiceDate(), dateBean.getSuperChapterName(), dateBean.getTitle());
 //            Log.d(TAG, "addData: " + wanArticle.getAuthor());
-            mWanArticleList.add(wanArticle);
+            tempList.add(wanArticle);
         }
         if (mSwipeRefreshLayout.isRefreshing()) {
-            adapterWanArticle.setNewData(mWanArticleList);
-        } else {
-            adapterWanArticle.addData(mWanArticleList);
+            mWanArticleList = new ArrayList<>();
         }
+        mWanArticleList.addAll(tempList);
+        adapterWanArticle.setNewData(mWanArticleList);
     }
 
     //获取Banner的网络数据
@@ -239,13 +256,12 @@ public class FragmentHome extends Fragment {
         initBanner();//设置Banner配置，必须在设置Banner数据之前执行
         initBannerEvent();//设置Banner监听事件, 点击事件的监听需要设置在start之前
         initBannerData(bannerBean);//设置Banner的数据
-
     }
 
     //设置Banner配置，必须在设置Banner数据之前执行
     private void initBanner() {
         //轮播图的常规设置
-        mBannerView.setIndicatorGravity(BannerConfig.CENTER);//设置指示器局右显示
+        mBannerView.setIndicatorGravity(BannerConfig.CENTER);//设置指示器居中显示
         //====加载Banner数据====
         mBannerView.setImageLoader(new BannerImageLoader());//设置图片加载器
         //设置Banner的切换时间
@@ -256,7 +272,6 @@ public class FragmentHome extends Fragment {
 
     //设置Banner的数据
     private void initBannerData(BannerBean bannerBean) {
-        mBannerListList = new ArrayList<>();
         for (int i = 0; i < bannerBean.getData().size(); i++) {
             BannerBean.DataBean dataBean = bannerBean.getData().get(i);
             BannerList bannerList = new BannerList(dataBean.getTitle(), dataBean.getImagePath(),
@@ -307,7 +322,8 @@ public class FragmentHome extends Fragment {
     }
 
     private View getHeaderView() {
-        View view = getLayoutInflater().inflate(R.layout.item_banner_test, (ViewGroup) mRecyclerView.getParent(), false);
+        View view = getLayoutInflater().inflate(R.layout.item_banner_test,
+                (ViewGroup) mRecyclerView.getParent(), false);
         mBannerView = view.findViewById(R.id.banner);
         //设置banner的高度为手机屏幕的四分之一, banner需要设置为最外层布局
         mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));

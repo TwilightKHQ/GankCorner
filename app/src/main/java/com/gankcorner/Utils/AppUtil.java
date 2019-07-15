@@ -8,7 +8,7 @@ import android.content.Context;
  * Created by zhongzhiqiang on 19-4-10.
  */
 
-public class ContextUtil extends Application {
+public class AppUtil extends Application {
 
     @SuppressLint("StaticFieldLeak")
     private static Context context;

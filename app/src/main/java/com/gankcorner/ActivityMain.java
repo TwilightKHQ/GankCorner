@@ -1,5 +1,6 @@
 package com.gankcorner;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +23,7 @@ import com.gankcorner.Adapter.AdapterBottomFragment;
 import com.gankcorner.Fragment.Fragment_Four;
 import com.gankcorner.GankIO.GankIOPage;
 import com.gankcorner.Fragment.Fragment_Two;
+import com.gankcorner.Utils.AppUtil;
 import com.gankcorner.Utils.CustomViewPager;
 import com.gankcorner.Utils.DrawableTextView;
 import com.gankcorner.WanAndroid.WanAndroidPage;
@@ -32,19 +35,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ActivityMain extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView mHome;
-    private TextView mQuestion;
-    private TextView mAboutMe;
-    private TextView mStar;
-    private TextView mLocation;
-    private TextView mScanCode;
-    private DrawableTextView mExit;
-    private DrawableTextView mSetting;
-
     private DrawerLayout mDrawerLayout;
     private TabLayout mBottomTab;
     private CustomViewPager mViewPager;
-    private CircleImageView mHeadPic;
     private List<Fragment> fragmentList = new ArrayList<>();
 
     String[] titles = new String[]{"首页", "流量", "社区", "干货"};
@@ -53,6 +46,14 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        changeStatusBar();
+
+        initView();
+
+        initOnClickEvents();
+    }
+
+    private void changeStatusBar() {
         // 状态栏透明， 使得沉浸式状态栏有效
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             Window window = getWindow();
@@ -64,30 +65,26 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
             //状态栏字体设置为黑色
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-
-        initView();
-
-        initOnClickEvents();
     }
 
     private void initOnClickEvents() {
-        mHeadPic = (CircleImageView) findViewById(R.id.head_pic);
+        CircleImageView mHeadPic = (CircleImageView) findViewById(R.id.head_pic);
         mHeadPic.setOnClickListener(this);
-        mHome = (TextView) findViewById(R.id.home_page);
+        TextView mHome = (TextView) findViewById(R.id.home_page);
         mHome.setOnClickListener(this);
-        mQuestion = (TextView) findViewById(R.id.question);
+        TextView mQuestion = (TextView) findViewById(R.id.question);
         mQuestion.setOnClickListener(this);
-        mAboutMe = (TextView) findViewById(R.id.about_me);
+        TextView mAboutMe = (TextView) findViewById(R.id.about_me);
         mAboutMe.setOnClickListener(this);
-        mStar = (TextView) findViewById(R.id.star);
+        TextView mStar = (TextView) findViewById(R.id.star);
         mStar.setOnClickListener(this);
-        mLocation = (TextView) findViewById(R.id.location);
+        TextView mLocation = (TextView) findViewById(R.id.location);
         mLocation.setOnClickListener(this);
-        mScanCode = (TextView) findViewById(R.id.scan);
+        TextView mScanCode = (TextView) findViewById(R.id.scan);
         mScanCode.setOnClickListener(this);
-        mSetting = (DrawableTextView) findViewById(R.id.settings);
+        DrawableTextView mSetting = (DrawableTextView) findViewById(R.id.settings);
         mSetting.setOnClickListener(this);
-        mExit = (DrawableTextView) findViewById(R.id.exit);
+        DrawableTextView mExit = (DrawableTextView) findViewById(R.id.exit);
         mExit.setOnClickListener(this);
     }
 
@@ -113,13 +110,6 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         //绑定
         mBottomTab.setupWithViewPager(mViewPager);
         setFragmentLabel();
-
-//        mHeadPic.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mDrawerLayout.openDrawer(Gravity.LEFT);
-//            }
-//        });
     }
 
     private void setFragmentLabel() {
@@ -148,10 +138,10 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.head_pic:
-                mDrawerLayout.openDrawer(Gravity.LEFT);
+                mDrawerLayout.openDrawer(Gravity.START);
                 break;
             case R.id.home_page:
-                mDrawerLayout.closeDrawer(Gravity.LEFT);
+                mDrawerLayout.closeDrawer(Gravity.START);
                 break;
             case R.id.question:
                 Toast.makeText(this, "问题反馈", Toast.LENGTH_SHORT).show();
@@ -172,9 +162,25 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "设置", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.exit:
-                Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
+                //退出应用
+                Intent intent = new Intent(AppUtil.getContext(), ActivityMain.class);
+                intent.putExtra("Exit_TAG", "SingleTASK");
+                startActivity(intent);
                 break;
 
+        }
+    }
+
+    //退出App
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        String tag = intent.getStringExtra("Exit_TAG");
+        if (tag != null && !TextUtils.isEmpty(tag)) {
+            if ("SingleTASK".equals(tag)) {
+                //退出程序
+                finish();
+            }
         }
     }
 

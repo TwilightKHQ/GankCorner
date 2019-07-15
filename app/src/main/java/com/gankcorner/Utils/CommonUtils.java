@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
-import static com.gankcorner.Utils.ContextUtil.getContext;
+import static com.gankcorner.Utils.AppUtil.getContext;
 
 public class CommonUtils {
 

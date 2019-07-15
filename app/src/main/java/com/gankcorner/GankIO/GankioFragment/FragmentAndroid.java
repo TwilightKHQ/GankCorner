@@ -4,7 +4,6 @@ package com.gankcorner.GankIO.GankioFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +19,7 @@ import com.gankcorner.Bean.GankArticle;
 import com.gankcorner.Bean.GankArticleBean;
 import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
+import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CommonUtils;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragmentAndroid extends Fragment {
+public class FragmentAndroid extends BaseFragment {
 
     private AdapterGank adapterGank;
     private RecyclerView mRecyclerView;
@@ -53,6 +53,19 @@ public class FragmentAndroid extends Fragment {
         initView(view);
 
         return view;
+    }
+
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+//        if (isVisible) {
+//
+//        }
+    }
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        getGank("Android", numPerPage, 1);
     }
 
     /**
@@ -94,12 +107,6 @@ public class FragmentAndroid extends Fragment {
             }
         });
         mSwipeRefreshLayout.setColorSchemeResources(R.color.bilibili);
-        if (firstEnter) {
-            mSwipeRefreshLayout.setRefreshing(true);
-            getGank("Android", numPerPage, 1);
-            firstEnter = false;
-        }
-
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -121,8 +128,8 @@ public class FragmentAndroid extends Fragment {
 
         call.enqueue(new Callback<GankArticleBean>() {
             @Override
-            public void onResponse(Call<GankArticleBean> call, Response<GankArticleBean> response) {
-                Log.d("Test", "response: " + response.toString());
+            public void onResponse(@NonNull Call<GankArticleBean> call, @NonNull Response<GankArticleBean> response) {
+                Log.d("Android", "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 GankArticleBean gankArticleBean = response.body();
 //                String  Desc = null;
@@ -136,7 +143,7 @@ public class FragmentAndroid extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<GankArticleBean> call, Throwable t) {
+            public void onFailure(@NonNull Call<GankArticleBean> call, @NonNull Throwable t) {
 
             }
         });

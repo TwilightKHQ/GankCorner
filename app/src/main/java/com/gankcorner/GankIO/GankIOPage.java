@@ -14,11 +14,12 @@ import android.view.ViewGroup;
 import com.gankcorner.GankIO.GankioFragment.FragmentAndroid;
 import com.gankcorner.GankIO.GankioFragment.FragmentiOS;
 import com.gankcorner.R;
+import com.gankcorner.Utils.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GankIOPage extends Fragment {
+public class GankIOPage extends BaseFragment {
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
@@ -35,6 +36,8 @@ public class GankIOPage extends Fragment {
 
         return view;
     }
+
+
 
     private void initView(View view) {
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);

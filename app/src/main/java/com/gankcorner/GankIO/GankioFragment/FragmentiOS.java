@@ -20,6 +20,7 @@ import com.gankcorner.Bean.GankArticle;
 import com.gankcorner.Bean.GankArticleBean;
 import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
+import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CommonUtils;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragmentiOS extends Fragment {
+public class FragmentiOS extends BaseFragment {
 
     private AdapterGank adapterGank;
     private RecyclerView mRecyclerView;
@@ -42,6 +43,8 @@ public class FragmentiOS extends Fragment {
 
     private boolean gettingData = false; //当前是否正在请求数据
 
+    private boolean firstEnter = true;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,9 +52,21 @@ public class FragmentiOS extends Fragment {
         View view = inflater.inflate(R.layout.gank_ios, container, false);
 
         initView(view);
-        getGank("iOS", numPerPage, 1);
 
         return view;
+    }
+
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+//        if (isVisible) {
+//
+//        }
+    }
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        getGank("iOS", numPerPage, 1);
     }
 
     /**
@@ -115,7 +130,7 @@ public class FragmentiOS extends Fragment {
         call.enqueue(new Callback<GankArticleBean>() {
             @Override
             public void onResponse(Call<GankArticleBean> call, Response<GankArticleBean> response) {
-                Log.d("Test", "response: " + response.toString());
+                Log.d("iOS", "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 GankArticleBean gankArticleBean = response.body();
 //                String  Desc = null;

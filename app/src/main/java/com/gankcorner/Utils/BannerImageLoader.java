@@ -12,7 +12,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 import static com.gankcorner.Utils.CommonUtils.dip2px;
-import static com.gankcorner.Utils.ContextUtil.getContext;
+import static com.gankcorner.Utils.AppUtil.getContext;
 
 /**
  * 自定义的Banner图片加载器

@@ -10,9 +10,10 @@ import android.widget.Button;
 
 
 import com.gankcorner.R;
+import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.BottomDialogFragment;
 
-public class Fragment_Two extends Fragment {
+public class Fragment_Two extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

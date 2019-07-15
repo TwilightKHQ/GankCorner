@@ -2,6 +2,7 @@ package com.gankcorner.WanAndroid;
 
 import android.os.Bundle;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gankcorner.R;
+import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentHome;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentKnowledge;
 import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentNavigation;
@@ -19,7 +21,7 @@ import com.gankcorner.WanAndroid.WanAndroidFragment.FragmentNavigation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WanAndroidPage extends Fragment {
+public class WanAndroidPage extends BaseFragment {
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
@@ -72,10 +74,16 @@ public class WanAndroidPage extends Fragment {
             public CharSequence getPageTitle(int position) {
                 return titleList.get(position);
             }
+
+            @Override
+            public void  destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+
+            }
         });
 
         //将TabLayout与ViewPager联系起来
         tabLayout.setupWithViewPager(mViewPager);
+
     }
 
 }

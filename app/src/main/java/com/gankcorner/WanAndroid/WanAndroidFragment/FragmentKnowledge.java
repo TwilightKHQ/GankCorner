@@ -16,6 +16,7 @@ import com.gankcorner.Bean.WanKnowledgeBean;
 import com.gankcorner.Bean.WanKnowledge;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
+import com.gankcorner.Utils.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragmentKnowledge extends Fragment {
+public class FragmentKnowledge extends BaseFragment {
 
     private String TAG = "========zzq";
 
@@ -44,9 +45,25 @@ public class FragmentKnowledge extends Fragment {
         View view = inflater.inflate(R.layout.wanandroid_knowledge, container, false);
 
         initViews(view);
-        initData();
 
         return view;
+    }
+
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+//        if (isVisible) {
+//            //更新界面数据，如果数据还在下载中，就显示加载框
+//            if (firstEnter) {
+//
+//            }
+//        }
+    }
+
+    @Override
+    protected void onFragmentFirstVisible() {
+        //去服务器下载数据
+        mSwipeRefreshLayout.setRefreshing(true);
+        initData();
     }
 
     private void initViews(View view) {

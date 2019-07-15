@@ -124,12 +124,10 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
 
 
     private void initView() {
-        //加载顶部的ToolBar
+        //加载顶部的ToolBar//动态设置ToolBar标题
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //动态设置ToolBar标题
         getSupportActionBar().setTitle("");
-        ActionBar actionBar = getSupportActionBar();
 
         ImageButton backButton = (ImageButton) findViewById(R.id.web_back);
         backButton.setOnClickListener(this);

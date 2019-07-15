@@ -2,6 +2,7 @@ package com.gankcorner.Utils;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,9 +29,9 @@ public class BottomDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // 使用不带Theme的构造器, 获得的dialog边框距离屏幕仍有几毫米的缝隙
@@ -66,7 +67,7 @@ public class BottomDialogFragment extends DialogFragment {
     private void initView(Dialog dialog) {
 
         RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.left_recycle_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(ContextUtil.getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(AppUtil.getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         AdapterMenuItem adapterMenuItem = new AdapterMenuItem(menuItemList);

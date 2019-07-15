@@ -1,10 +1,12 @@
 package com.gankcorner.Adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -58,5 +60,10 @@ public class AdapterBottomFragment extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return listFragment == null ? 0 : listFragment.size();
+    }
+
+    @Override
+    public void  destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+
     }
 }
