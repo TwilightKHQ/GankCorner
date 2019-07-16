@@ -34,6 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentiOS extends BaseFragment {
 
+    private String TAG = "=======zzq";
+
     private AdapterGank adapterGank;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -129,7 +131,7 @@ public class FragmentiOS extends BaseFragment {
         call.enqueue(new Callback<GankArticleBean>() {
             @Override
             public void onResponse(Call<GankArticleBean> call, Response<GankArticleBean> response) {
-                Log.d("iOS", "response: " + response.toString());
+                Log.d(TAG, "iOS_response: " + response.toString());
                 //完成解析后可以直接获取数据
                 GankArticleBean gankArticleBean = response.body();
 //                String  Desc = null;

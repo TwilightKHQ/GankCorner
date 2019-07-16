@@ -44,6 +44,8 @@ public class FragmentAndroid extends BaseFragment {
 
     private boolean gettingData = false; //当前是否正在请求数据
 
+    private boolean firstLoad = true;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class FragmentAndroid extends BaseFragment {
 
     @Override
     protected void onFragmentFirstVisible() {
-        Log.i(TAG, "Fragment_Android_onFragmentFirstVisible: ");
+        Log.i(TAG, "Fragment_Android_FirstVisible: ");
         mSwipeRefreshLayout.setRefreshing(true);
         getGank("Android", numPerPage, 1);
     }
@@ -129,7 +131,7 @@ public class FragmentAndroid extends BaseFragment {
         call.enqueue(new Callback<GankArticleBean>() {
             @Override
             public void onResponse(@NonNull Call<GankArticleBean> call, @NonNull Response<GankArticleBean> response) {
-                Log.d("Android", "response: " + response.toString());
+                Log.d(TAG, "Android_response: " + response.toString());
                 //完成解析后可以直接获取数据
                 GankArticleBean gankArticleBean = response.body();
 //                String  Desc = null;

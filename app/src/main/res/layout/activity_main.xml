@@ -19,21 +19,81 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40">
+                android:layout_height="48sp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/head_pic"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@mipmap/pic_1" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/head_pic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/pic_1" />
+                </FrameLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/text_pressed"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="@string/page_first"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/text_pressed"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="@string/page_second"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/text_pressed"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="@string/page_third"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/text_pressed"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:text="@string/page_fourth"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+
 
             </android.support.v7.widget.Toolbar>
 
-            <!--<com.gankcorner.Utils.CustomViewPager-->
-                <!--android:id="@+id/view_pager"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_weight="1" />-->
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
@@ -93,9 +153,11 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:clickable="true"
                         android:drawableStart="@mipmap/home"
                         android:drawableLeft="@mipmap/home"
                         android:drawablePadding="20dp"
+                        android:focusable="true"
                         android:text="@string/home"
                         android:textSize="18sp" />
 
@@ -106,9 +168,11 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:clickable="true"
                         android:drawableStart="@mipmap/question"
                         android:drawableLeft="@mipmap/question"
                         android:drawablePadding="20dp"
+                        android:focusable="true"
                         android:text="@string/question"
                         android:textSize="18sp" />
 
@@ -119,9 +183,11 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:clickable="true"
                         android:drawableStart="@mipmap/information"
                         android:drawableLeft="@mipmap/information"
                         android:drawablePadding="20dp"
+                        android:focusable="true"
                         android:text="@string/information"
                         android:textSize="18sp" />
 
@@ -132,9 +198,11 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:clickable="true"
                         android:drawableStart="@mipmap/star"
                         android:drawableLeft="@mipmap/star"
                         android:drawablePadding="20dp"
+                        android:focusable="true"
                         android:text="@string/star"
                         android:textSize="18sp" />
 
@@ -145,9 +213,11 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:clickable="true"
                         android:drawableStart="@mipmap/location"
                         android:drawableLeft="@mipmap/location"
                         android:drawablePadding="20dp"
+                        android:focusable="true"
                         android:text="@string/location"
                         android:textSize="18sp" />
 
@@ -158,9 +228,11 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:clickable="true"
                         android:drawableStart="@mipmap/scan"
                         android:drawableLeft="@mipmap/scan"
                         android:drawablePadding="20dp"
+                        android:focusable="true"
                         android:text="@string/scan_code"
                         android:textSize="18sp" />
 

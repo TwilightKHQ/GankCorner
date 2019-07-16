@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="#CFCFCF"
+    android:radius="24sp"
+    tools:targetApi="lollipop" /><!--ripple就是点击后产生的波纹效果，color是为波纹指定一个背景颜色-->

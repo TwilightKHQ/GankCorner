@@ -24,10 +24,9 @@ import com.gankcorner.Bean.WanArticleBean;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BannerImageLoader;
-import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CommonUtils;
 import com.gankcorner.Utils.AppUtil;
-import com.gankcorner.Utils.FragmentChanged;
+import com.gankcorner.Utils.BaseFragment;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -43,7 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.gankcorner.Utils.CommonUtils.getHeightPix;
 
-public class FragmentHome extends FragmentChanged {
+public class FragmentHome extends BaseFragment {
 
     private String TAG = "========zzq";
 
@@ -71,7 +70,9 @@ public class FragmentHome extends FragmentChanged {
         initViews(view);
         initClickEvents();
 
-        Log.i("========zzq", "FragmentHome_setUserVisibleHint: " + isVisibleToUser());
+        Log.i("========zzq", "FragmentHome_isVisibleToUser: " + isVisibleToUser());
+
+        Log.i(TAG, "FragmentHome_getUserVisibleHint: " + getUserVisibleHint());
 
 
         return view;
@@ -82,17 +83,14 @@ public class FragmentHome extends FragmentChanged {
         Log.i(TAG, "Fragment_Home_isVisible: " + isVisible());
         Log.i(TAG, "Fragment_Home_isVisibleToUser: " + isVisibleToUser());
 
-        if (firstLoad & isVisible()) {
-            mSwipeRefreshLayout.setRefreshing(true);
-            initData();
-            firstLoad = false;
-        }
     }
 
     @Override
     protected void onFragmentFirstVisible() {
         //去服务器下载数据
-        Log.i(TAG, "Fragment_Home_onFragmentFirstVisible: ");
+        Log.i(TAG, "Fragment_Home_FirstVisible: ");
+        mSwipeRefreshLayout.setRefreshing(true);
+        initData();
     }
 
     private void initViews(View view) {

@@ -28,7 +28,7 @@ public class WanAndroidPage extends BaseFragment {
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
-    private List<String> titleList ;
+    private List<String> titleList;
     private List<Fragment> fragmentList;
 
     @Override
@@ -38,8 +38,10 @@ public class WanAndroidPage extends BaseFragment {
         View view = inflater.inflate(R.layout.layout_gank, container, false);
 
         initView(view);
-        Boolean isVisibleToUser=WanAndroidPage.this.isResumed()&&WanAndroidPage.this.getUserVisibleHint();
+        boolean isVisibleToUser = WanAndroidPage.this.isResumed() && WanAndroidPage.this.getUserVisibleHint();
         Log.i(TAG, "WanAndroidPage_isVisibleToUser: " + isVisibleToUser);
+        Log.i(TAG, "WanAndroidPage_isVisible: " + isVisible());
+        Log.i(TAG, "WanAndroidPage_getUserVisibleHint: " + getUserVisibleHint());
 
         return view;
     }
@@ -81,7 +83,7 @@ public class WanAndroidPage extends BaseFragment {
             }
 
             @Override
-            public void  destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
 
             }
         });

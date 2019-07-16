@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">GankCorner</string>
 
-    <string name="bottom_one">页面1</string>
-    <string name="bottom_two">页面2</string>
-    <string name="bottom_three">页面3</string>
-    <string name="wan_android">页面4</string>
+    <string name="page_first">我的</string>
+    <string name="page_second">干货</string>
+    <string name="page_third">福利</string>
+    <string name="page_fourth">娱乐</string>
+
+    <string name="search">搜索</string>
 
     <string name="my_name">我一定会有猫的。</string>
 

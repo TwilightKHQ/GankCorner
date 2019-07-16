@@ -2,7 +2,6 @@ package com.gankcorner.Fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.BottomDialogFragment;
-import com.gankcorner.Utils.FragmentChanged;
 
 public class Fragment_Two extends BaseFragment {
 
@@ -33,7 +31,7 @@ public class Fragment_Two extends BaseFragment {
             }
         });
 
-        Log.i("========zzq", "onCreateView: " + isVisibleToUser());
+        Log.i("========zzq", "Fragment_Two_isVisibleToUser: " + isVisibleToUser());
 
         return view;
     }

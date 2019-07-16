@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,8 +27,6 @@ import com.gankcorner.Fragment.Fragment_Four;
 import com.gankcorner.GankIO.GankIOPage;
 import com.gankcorner.Fragment.Fragment_Two;
 import com.gankcorner.Utils.AppUtil;
-import com.gankcorner.Utils.BaseFragment;
-import com.gankcorner.Utils.CustomViewPager;
 import com.gankcorner.Utils.DrawableTextView;
 import com.gankcorner.WanAndroid.WanAndroidPage;
 
@@ -41,11 +41,11 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
     private DrawerLayout mDrawerLayout;
     private TabLayout mBottomTab;
-//    private CustomViewPager mViewPager;
+    //    private CustomViewPager mViewPager;
     private ViewPager mViewPager;
     private List<Fragment> fragmentList = new ArrayList<>();
 
-    String[] titles = new String[]{"首页", "流量", "社区", "干货"};
+    String[] titles = new String[]{"页面1", "页面2", "页面3", "页面4"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,6 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
         initOnClickEvents();
     }
-
 
 
     private void changeStatusBar() {
@@ -104,8 +103,8 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
-        fragmentList.add(new WanAndroidPage());
         fragmentList.add(new Fragment_Two());
+        fragmentList.add(new WanAndroidPage());
         fragmentList.add(new Fragment_Four());
         fragmentList.add(new GankIOPage());
         AdapterBottomFragment adapterBottomFragment = new
@@ -177,6 +176,20 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.search) {
+            Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 
     //退出App
