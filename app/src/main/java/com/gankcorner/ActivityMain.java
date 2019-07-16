@@ -13,12 +13,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +44,11 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
     private DrawerLayout mDrawerLayout;
     private TabLayout mBottomTab;
-    //    private CustomViewPager mViewPager;
     private ViewPager mViewPager;
     private List<Fragment> fragmentList = new ArrayList<>();
+    private List<TextView> textViewList = new ArrayList<>();
 
-    String[] titles = new String[]{"页面1", "页面2", "页面3", "页面4"};
+    String[] titles = new String[]{"我的", "干货", "美图", "娱乐"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,18 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     private void initOnClickEvents() {
         CircleImageView mHeadPic = (CircleImageView) findViewById(R.id.head_pic);
         mHeadPic.setOnClickListener(this);
+        TextView mMine = (TextView) findViewById(R.id.mine);
+        mMine.setOnClickListener(this);
+        textViewList.add(mMine);
+        TextView mGank = (TextView) findViewById(R.id.gank);
+        mGank.setOnClickListener(this);
+        textViewList.add(mGank);
+        TextView mWelfare = (TextView) findViewById(R.id.welfare);
+        mWelfare.setOnClickListener(this);
+        textViewList.add(mWelfare);
+        TextView mFun = (TextView) findViewById(R.id.fun);
+        mFun.setOnClickListener(this);
+        textViewList.add(mFun);
         TextView mHome = (TextView) findViewById(R.id.home_page);
         mHome.setOnClickListener(this);
         TextView mQuestion = (TextView) findViewById(R.id.question);
@@ -97,7 +112,7 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        mBottomTab = (TabLayout) findViewById(R.id.bottom_tab);
+//        mBottomTab = (TabLayout) findViewById(R.id.bottom_tab);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -112,33 +127,26 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
                 this, fragmentList, titles);
         mViewPager.setAdapter(adapterBottomFragment);
         mViewPager.setCurrentItem(0);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                changeTitle(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
 //        mViewPager.setCanScroll(false);
 
         //绑定
-        mBottomTab.setupWithViewPager(mViewPager);
-        setFragmentLabel();
-    }
-
-    private void setFragmentLabel() {
-        for (int i = 0; i < mBottomTab.getTabCount(); i++) {
-            TabLayout.Tab tab = mBottomTab.getTabAt(i);
-            Drawable d = null;
-            switch (i) {
-                case 0:
-                    d = getResources().getDrawable(R.mipmap.home);
-                    break;
-                case 1:
-                    d = getResources().getDrawable(R.mipmap.navigation);
-                    break;
-                case 2:
-                    d = getResources().getDrawable(R.mipmap.know);
-                    break;
-                case 3:
-                    d = getResources().getDrawable(R.mipmap.project);
-                    break;
-            }
-            tab.setIcon(d);
-        }
+//        mBottomTab.setupWithViewPager(mViewPager);
     }
 
     @Override
@@ -146,6 +154,22 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.head_pic:
                 mDrawerLayout.openDrawer(Gravity.START);
+                break;
+            case R.id.mine:
+                mViewPager.setCurrentItem(0);
+                changeTitle(0);
+                break;
+            case R.id.gank:
+                mViewPager.setCurrentItem(1);
+                changeTitle(1);
+                break;
+            case R.id.welfare:
+                mViewPager.setCurrentItem(2);
+                changeTitle(2);
+                break;
+            case R.id.fun:
+                mViewPager.setCurrentItem(3);
+                changeTitle(3);
                 break;
             case R.id.home_page:
                 mDrawerLayout.closeDrawer(Gravity.START);
@@ -201,6 +225,18 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
             if ("SingleTASK".equals(tag)) {
                 //退出程序
                 finish();
+            }
+        }
+    }
+
+    private void changeTitle(int position) {
+        for (int i = 0; i < textViewList.size(); i++) {
+            if (i == position) {
+                textViewList.get(i).setTextColor(getResources().getColor(R.color.black));
+                textViewList.get(i).setTextSize(18);
+            } else {
+                textViewList.get(i).setTextColor(getResources().getColor(R.color.text_color));
+                textViewList.get(i).setTextSize(15);
             }
         }
     }

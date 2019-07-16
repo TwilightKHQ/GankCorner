@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">GankCorner</string>
+    <string name="app_name">MineFun</string>
 
     <string name="page_first">我的</string>
     <string name="page_second">干货</string>
-    <string name="page_third">福利</string>
+    <string name="page_third">美图</string>
     <string name="page_fourth">娱乐</string>
 
     <string name="search">搜索</string>

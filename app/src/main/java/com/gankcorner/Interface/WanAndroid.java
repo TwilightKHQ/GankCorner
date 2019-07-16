@@ -7,7 +7,9 @@ import com.gankcorner.Bean.WanNavigationBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface WanAndroid {
 
@@ -22,5 +24,9 @@ public interface WanAndroid {
 
     @GET("article/list/{page}/json")
     Call<WanArticleBean> getArticleList(@Path("page") int page);
+
+    @POST("article/query/{page}/json")
+    Call<WanArticleBean> getSearchList(@Path("page") int page,
+                                       @Query("k") String key);
 
 }

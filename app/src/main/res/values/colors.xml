@@ -11,6 +11,7 @@
     <color name="grayWhite">#F1F3F4</color>
     <color name="snow">#FAFAFA</color>
 
-    <color name="txt_color">#48495F</color>
+    <color name="text_color">#707070</color>
+
 
 </resources>

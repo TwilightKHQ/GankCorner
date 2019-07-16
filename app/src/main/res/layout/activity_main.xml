@@ -46,6 +46,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/mine"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -54,9 +55,11 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:text="@string/page_first"
-                            android:textSize="15sp" />
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/gank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -65,9 +68,11 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:text="@string/page_second"
+                            android:textColor="@color/text_color"
                             android:textSize="15sp" />
 
                         <TextView
+                            android:id="@+id/welfare"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -76,9 +81,11 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:text="@string/page_third"
+                            android:textColor="@color/text_color"
                             android:textSize="15sp" />
 
                         <TextView
+                            android:id="@+id/fun"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -87,6 +94,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:text="@string/page_fourth"
+                            android:textColor="@color/text_color"
                             android:textSize="15sp" />
                     </LinearLayout>
                 </HorizontalScrollView>
@@ -100,11 +108,11 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/bottom_tab"
-                style="@style/BottomTabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--<android.support.design.widget.TabLayout-->
+                <!--android:id="@+id/bottom_tab"-->
+                <!--style="@style/BottomTabLayout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
 
         </LinearLayout>
 
