@@ -19,7 +19,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="48sp">
+                android:layout_height="?attr/actionBarSize">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -48,8 +48,9 @@
                         <TextView
                             android:id="@+id/mine"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_margin="10dp"
                             android:background="@drawable/text_pressed"
                             android:clickable="true"
@@ -61,10 +62,11 @@
                         <TextView
                             android:id="@+id/gank"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="10dp"
                             android:background="@drawable/text_pressed"
+                            android:gravity="center"
                             android:clickable="true"
                             android:focusable="true"
                             android:text="@string/page_second"
@@ -74,9 +76,10 @@
                         <TextView
                             android:id="@+id/welfare"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="10dp"
+                            android:gravity="center"
                             android:background="@drawable/text_pressed"
                             android:clickable="true"
                             android:focusable="true"
@@ -87,8 +90,9 @@
                         <TextView
                             android:id="@+id/fun"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_margin="10dp"
                             android:background="@drawable/text_pressed"
                             android:clickable="true"

@@ -3,7 +3,9 @@ package com.gankcorner;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -47,7 +51,13 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         url = intent.getStringExtra("page_url");
 
         initView();
+        changeStatusBar();
 
+        setWebView();
+
+    }
+
+    private void setWebView() {
         WebSettings mWebSettings = webView.getSettings();
         /* 设置支持Js,必须设置的,不然网页基本上不能看 */
         mWebSettings.setJavaScriptEnabled(true);
@@ -121,6 +131,21 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         webView.loadUrl(url);
 
     }
+
+    private void changeStatusBar() {
+        // 状态栏透明， 使得沉浸式状态栏有效
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            //状态栏字体设置为黑色
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
+
 
 
     private void initView() {

@@ -43,12 +43,9 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     private String TAG = "=======zzq";
 
     private DrawerLayout mDrawerLayout;
-    private TabLayout mBottomTab;
     private ViewPager mViewPager;
     private List<Fragment> fragmentList = new ArrayList<>();
     private List<TextView> textViewList = new ArrayList<>();
-
-    String[] titles = new String[]{"我的", "干货", "美图", "娱乐"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +119,7 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         fragmentList.add(new WanAndroidPage());
         fragmentList.add(new Fragment_Four());
         fragmentList.add(new GankIOPage());
+        String[] titles = getResources().getStringArray(R.array.title);
         AdapterBottomFragment adapterBottomFragment = new
                 AdapterBottomFragment(getSupportFragmentManager(),
                 this, fragmentList, titles);

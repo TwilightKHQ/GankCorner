@@ -11,28 +11,30 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="15dp"
         android:background="@color/white"
+        android:gravity="center"
         app:contentInsetStartWithNavigation="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/web_back"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="13dp"
-                android:layout_marginRight="13dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
                 android:background="@color/white"
                 app:srcCompat="@mipmap/back" />
 
             <ImageButton
                 android:id="@+id/web_exit"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_toEndOf="@id/web_back"
                 android:layout_toRightOf="@id/web_back"
                 android:background="@color/white"
@@ -42,7 +44,7 @@
             <TextView
                 android:id="@+id/web_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignBaseline="@id/web_exit"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -54,17 +56,16 @@
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:gravity="center"
                 android:singleLine="true"
                 android:textSize="18sp" />
 
             <ImageButton
                 android:id="@+id/web_share"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_toStartOf="@id/more_item"
                 android:layout_toLeftOf="@id/more_item"
                 android:background="@color/white"
@@ -73,12 +74,12 @@
             <ImageButton
                 android:id="@+id/more_item"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="end"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/white"
                 app:srcCompat="@mipmap/more" />
 
