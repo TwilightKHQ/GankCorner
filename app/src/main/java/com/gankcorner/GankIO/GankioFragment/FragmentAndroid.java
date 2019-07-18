@@ -70,9 +70,6 @@ public class FragmentAndroid extends BaseFragment {
         getGank("Android", numPerPage, 1);
     }
 
-    /**
-     * 初始化RecyclerView
-     */
     private void initView(View view) {
         // 初始化控件
         mRecyclerView = view.findViewById(R.id.left_recycle_view);

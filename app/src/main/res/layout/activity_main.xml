@@ -50,11 +50,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:gravity="center"
                             android:layout_margin="10dp"
-                            android:background="@drawable/text_pressed"
+                            android:background="@drawable/title_pressed"
                             android:clickable="true"
                             android:focusable="true"
+                            android:gravity="center"
                             android:text="@string/page_first"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
@@ -65,10 +65,10 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="10dp"
-                            android:background="@drawable/text_pressed"
-                            android:gravity="center"
+                            android:background="@drawable/title_pressed"
                             android:clickable="true"
                             android:focusable="true"
+                            android:gravity="center"
                             android:text="@string/page_second"
                             android:textColor="@color/text_color"
                             android:textSize="15sp" />
@@ -79,10 +79,10 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:background="@drawable/text_pressed"
+                            android:background="@drawable/title_pressed"
                             android:clickable="true"
                             android:focusable="true"
+                            android:gravity="center"
                             android:text="@string/page_third"
                             android:textColor="@color/text_color"
                             android:textSize="15sp" />
@@ -92,11 +92,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:gravity="center"
                             android:layout_margin="10dp"
-                            android:background="@drawable/text_pressed"
+                            android:background="@drawable/title_pressed"
                             android:clickable="true"
                             android:focusable="true"
+                            android:gravity="center"
                             android:text="@string/page_fourth"
                             android:textColor="@color/text_color"
                             android:textSize="15sp" />
@@ -111,12 +111,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
-
-            <!--<android.support.design.widget.TabLayout-->
-                <!--android:id="@+id/bottom_tab"-->
-                <!--style="@style/BottomTabLayout"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
 
         </LinearLayout>
 

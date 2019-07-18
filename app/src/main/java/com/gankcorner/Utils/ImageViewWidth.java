@@ -13,22 +13,23 @@ import android.view.View;
  * 为ImageView添加圆角效果
  * 图片尺寸为宽度铺满高度自适应
  */
-public class CustomImageView extends AppCompatImageView {
+public class ImageViewWidth extends AppCompatImageView {
 
     float width, height;
+    float x, y;
     int radian = 20; //圆角大小
 
-    public CustomImageView(Context context) {
+    public ImageViewWidth(Context context) {
         this(context, null);
         init(context, null);
     }
 
-    public CustomImageView(Context context, AttributeSet attrs) {
+    public ImageViewWidth(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
         init(context, attrs);
     }
 
-    public CustomImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ImageViewWidth(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -37,6 +38,11 @@ public class CustomImageView extends AppCompatImageView {
         if (Build.VERSION.SDK_INT < 18) {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
+    }
+
+    public void setImageSize(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 
     @Override

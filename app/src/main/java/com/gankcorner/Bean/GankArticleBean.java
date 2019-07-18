@@ -15,7 +15,7 @@ public class GankArticleBean {
 //        return who;
 //    }
 //
-//    public String getUrl() {
+//    public String getName() {
 //        return url;
 //    }
 

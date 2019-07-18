@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GankIO.GankIOPage">
+
+    <RelativeLayout
+        android:background="@color/LightSkyBlue"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"/>
+
+    <com.gankcorner.Utils.ImageViewHeight
+        android:id="@+id/mine_pic"
+        android:layout_margin="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"/>
+
+</LinearLayout>

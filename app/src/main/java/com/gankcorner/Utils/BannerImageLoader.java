@@ -33,14 +33,14 @@ public class BannerImageLoader extends ImageLoader {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 //设置图片加载的优先级
                 .priority(Priority.HIGH)
-                .transform(new RoundedCornersTransformation(dip2px(getContext(), 30), 0))
+                .transform(new RoundedCornersTransformation(dip2px(getContext(), 8), 0))
                 .into(imageView);
     }
 
-    //提供createImageView()方法，如果不用可以不重写这个方法，主要是方便自定义ImageView的创建
+////    提供createImageView()方法，如果不用可以不重写这个方法，主要是方便自定义ImageView的创建
 //	@Override
 //    public ImageView createImageView(Context context) {
 //         //使用fresco，需要创建它提供的ImageView，当然你也可以用自己自定义的具有图片加载功能的ImageView
-//		return new CustomImageView(context);
+//		return new ImageViewHeight(context);
 //    }
 }

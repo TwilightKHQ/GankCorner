@@ -26,4 +26,7 @@
     <string name="star">我的收藏</string>
     <string name="location">定位</string>
     <string name="scan_code">扫码</string>
+    
+    <string name="recommended_song_list">推荐歌单</string>
+    <string name="song_list_square">歌单广场</string>
 </resources>
