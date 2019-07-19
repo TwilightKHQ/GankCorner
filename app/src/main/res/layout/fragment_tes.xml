@@ -5,17 +5,12 @@
     android:orientation="vertical"
     tools:context=".GankIO.GankIOPage">
 
-    <RelativeLayout
-        android:background="@color/LightSkyBlue"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"/>
-
     <com.gankcorner.Utils.ImageViewHeight
         android:id="@+id/mine_pic"
-        android:layout_margin="20dp"
-        android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:scaleType="fitCenter" />
 
 </LinearLayout>

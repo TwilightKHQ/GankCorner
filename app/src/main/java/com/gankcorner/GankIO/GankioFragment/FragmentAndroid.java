@@ -44,8 +44,6 @@ public class FragmentAndroid extends BaseFragment {
 
     private boolean gettingData = false; //当前是否正在请求数据
 
-    private boolean firstLoad = true;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,14 +56,7 @@ public class FragmentAndroid extends BaseFragment {
     }
 
     @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-        Log.i(TAG, "Fragment_Android_isVisible: " + isVisible);
-        Log.i(TAG, "Fragment_Android_isVisibleToUser: " + isVisibleToUser());
-    }
-
-    @Override
-    protected void onFragmentFirstVisible() {
-        Log.i(TAG, "Fragment_Android_FirstVisible: ");
+    public void onFirstVisibleToUser() {
         mSwipeRefreshLayout.setRefreshing(true);
         getGank("Android", numPerPage, 1);
     }

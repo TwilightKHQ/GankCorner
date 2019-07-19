@@ -79,18 +79,9 @@ public class FragmentHome extends BaseFragment {
     }
 
     @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-        Log.i(TAG, "Fragment_Home_isVisible: " + isVisible());
-        Log.i(TAG, "Fragment_Home_isVisibleToUser: " + isVisibleToUser());
-
-    }
-
-    @Override
-    protected void onFragmentFirstVisible() {
-        //去服务器下载数据
-        Log.i(TAG, "Fragment_Home_FirstVisible: ");
+    public void onFirstVisibleToUser() {
         mSwipeRefreshLayout.setRefreshing(true);
-        initData();
+        refresh();
     }
 
     private void initViews(View view) {
@@ -165,7 +156,7 @@ public class FragmentHome extends BaseFragment {
 
     }
 
-    private void initData() {
+    private void refresh() {
         getBannerList();
         getWanAndroidArticle(0);
     }

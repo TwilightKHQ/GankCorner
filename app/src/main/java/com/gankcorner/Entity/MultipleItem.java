@@ -8,14 +8,14 @@ import java.util.List;
 
 public class MultipleItem implements MultiItemEntity {
 
-    public static final int TYPE_ONE = 1;
-    public static final int TYPE_TWO = 2;
-    public static final int TYPE_THREE = 3;
-    public static final int TYPE_FOUR = 4;
-    public static final int TYPE_ONE_SIZE = 3;
-    public static final int TYPE_TWO_SIZE = 3;
-    public static final int TYPE_THREE_SIZE = 3;
-    public static final int TYPE_FOUR_SIZE = 1;
+    public static final int TYPE_BANNER = 1;
+    public static final int TYPE_TEXT = 2;
+    public static final int TYPE_TITLE = 3;
+    public static final int TYPE_PIC = 4;
+    public static final int TYPE_BANNER_SIZE = 3;
+    public static final int TYPE_TEXT_SIZE = 3;
+    public static final int TYPE_TITLE_SIZE = 3;
+    public static final int TYPE_PIC_SIZE = 1;
 
     private int itemType;
     private int spanSize;
@@ -27,33 +27,32 @@ public class MultipleItem implements MultiItemEntity {
     private String text;
     private String number;
     //歌单
-    private List<NetEaseSongList> netEaseSongListList;
     private String name;
     private String coverImgUrl;
 
     public MultipleItem(List<NetEaseBanner> netEaseBannerList) {
-        this.itemType = MultipleItem.TYPE_ONE;
+        this.itemType = MultipleItem.TYPE_BANNER;
         this.netEaseBannerList = netEaseBannerList;
-        this.spanSize = TYPE_ONE_SIZE;
+        this.spanSize = TYPE_BANNER_SIZE;
     }
 
     public MultipleItem(int icon, String text) {
-        this.itemType = MultipleItem.TYPE_TWO;
+        this.itemType = MultipleItem.TYPE_TEXT;
         this.text = text;
         this.icon = icon;
-        this.spanSize = TYPE_TWO_SIZE;
+        this.spanSize = TYPE_TEXT_SIZE;
     }
 
     public MultipleItem() {
-        this.itemType = MultipleItem.TYPE_THREE;
-        this.spanSize = TYPE_THREE_SIZE;
+        this.itemType = MultipleItem.TYPE_TITLE;
+        this.spanSize = TYPE_TITLE_SIZE;
     }
 
     public MultipleItem(String name, String coverImgUrl) {
-        this.itemType = MultipleItem.TYPE_FOUR;
+        this.itemType = MultipleItem.TYPE_PIC;
         this.name = name;
         this.coverImgUrl = coverImgUrl;
-        this.spanSize = TYPE_FOUR_SIZE;
+        this.spanSize = TYPE_PIC_SIZE;
     }
 
     public List<NetEaseBanner> getNetEaseBannerList() {
@@ -82,10 +81,6 @@ public class MultipleItem implements MultiItemEntity {
 
     public int getSpanSize() {
         return spanSize;
-    }
-
-    public void setSpanSize(int spanSize) {
-        this.spanSize = spanSize;
     }
 
     @Override

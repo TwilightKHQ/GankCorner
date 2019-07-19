@@ -7,14 +7,14 @@
 
     <com.gankcorner.Utils.ImageViewHeight
         android:id="@+id/coverImgUrl"
-        android:scaleType="fitCenter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/name"
-        android:textSize="12sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
 
 </LinearLayout>

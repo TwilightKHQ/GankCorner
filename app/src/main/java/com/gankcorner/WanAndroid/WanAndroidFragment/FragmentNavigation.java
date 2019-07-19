@@ -71,14 +71,9 @@ public class FragmentNavigation extends BaseFragment {
     }
 
     @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-    }
-
-    @Override
-    protected void onFragmentFirstVisible() {
-        Log.i(TAG, "onFragmentFirstVisible: first_load");
+    public void onFirstVisibleToUser() {
         mSwipeRefreshLayout.setRefreshing(true);
-        initData();
+        refresh();
     }
 
     private void initViews(View view) {
@@ -114,7 +109,7 @@ public class FragmentNavigation extends BaseFragment {
 
     }
 
-    private void initData() {
+    private void refresh() {
         getWanNavigation();
     }
 

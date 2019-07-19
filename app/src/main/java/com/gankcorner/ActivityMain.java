@@ -57,7 +57,6 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-//        mBottomTab = (TabLayout) findViewById(R.id.bottom_tab);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,10 +88,6 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-//        mViewPager.setCanScroll(false);
-
-        //绑定
-//        mBottomTab.setupWithViewPager(mViewPager);
     }
 
     private void initOnClickEvents() {
@@ -209,6 +204,7 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //改变Toolbar内容
     private void changeTitle(int position) {
         for (int i = 0; i < textViewList.size(); i++) {
             if (i == position) {
@@ -221,6 +217,7 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //改变状态栏
     private void changeStatusBar() {
         // 状态栏透明， 使得沉浸式状态栏有效
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {

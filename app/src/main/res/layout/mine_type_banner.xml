@@ -11,6 +11,8 @@
         android:layout_height="150dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="2dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:image_scale_type="fit_center"
         app:indicator_height="8dp"
         app:indicator_margin="4dp"

@@ -58,14 +58,7 @@ public class FragmentiOS extends BaseFragment {
     }
 
     @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-//        if (isVisible) {
-//
-//        }
-    }
-
-    @Override
-    protected void onFragmentFirstVisible() {
+    public void onFirstVisibleToUser() {
         mSwipeRefreshLayout.setRefreshing(true);
         getGank("iOS", numPerPage, 1);
     }

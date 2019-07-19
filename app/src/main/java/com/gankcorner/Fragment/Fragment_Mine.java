@@ -1,12 +1,14 @@
 package com.gankcorner.Fragment;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.Adapter.AdapterMine;
@@ -17,6 +19,7 @@ import com.gankcorner.Entity.MultipleItem;
 import com.gankcorner.Interface.NetEase;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
+import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +36,15 @@ public class Fragment_Mine extends BaseFragment {
 
     private AdapterMine adapterMine;
 
-    private List<MultipleItem> data = new ArrayList<>();
+    private List<MultipleItem> data;
+
+    private Banner mBanner;
 
     private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private GridLayoutManager mLayoutManager;
+
+    private int gettingDataNumber = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,12 +54,24 @@ public class Fragment_Mine extends BaseFragment {
 
         initView(view);
 
-        initData();
-
         return view;
     }
 
+    @Override
+    public void onFirstVisibleToUser() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        refresh();
+    }
+
     private void initView(View view) {
+        mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.bilibili);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mLayoutManager = new GridLayoutManager(getContext(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -63,20 +83,18 @@ public class Fragment_Mine extends BaseFragment {
             }
         });
         mRecyclerView.setAdapter(adapterMine);
-
-        //设置banner的高度为手机屏幕的四分之一, banner需要设置为最外层布局
-//        mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));
+        mBanner = (Banner) adapterMine.getViewByPosition(mRecyclerView,0, R.id.banner);
     }
 
-    private void initData() {
+    private void refresh() {
+        gettingDataNumber = 2;
+        data = new ArrayList<>();
         getNetEaseBanner();
         data.add(new MultipleItem(R.mipmap.music, "本地音乐"));
         data.add(new MultipleItem(R.mipmap.recent_play, "最近播放"));
         data.add(new MultipleItem(R.mipmap.my_star, "我的收藏"));
-        data.add(new MultipleItem());
+        data.add(new MultipleItem()); //推荐歌单 title
         getNetEaseSongList();
-
-        Log.i(TAG, "getItemCount: " + adapterMine.getItemCount());
     }
 
     private void getNetEaseBanner() {
@@ -109,11 +127,15 @@ public class Fragment_Mine extends BaseFragment {
                 }
                 data.add(0, new MultipleItem(netEaseBannerList));
                 adapterMine.setNewData(data);
+                if ( --gettingDataNumber == 0) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
             public void onFailure(Call<NetEaseBannerBean> call, Throwable t) {
-
+                Toast.makeText(getContext(), "网络错误", Toast.LENGTH_SHORT).show();
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -147,25 +169,34 @@ public class Fragment_Mine extends BaseFragment {
                 }
                 data.addAll(data.size(), multipleItemList);
                 adapterMine.setNewData(data);
+                if ( --gettingDataNumber == 0) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
             public void onFailure(Call<NetEaseSongListBean> call, Throwable t) {
-
+                Toast.makeText(getContext(), "网络错误", Toast.LENGTH_SHORT).show();
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
-    
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.i(TAG, "onStop: ");
-    }
-    
+
     @Override
     public void onStart() {
         super.onStart();
-        Log.i(TAG, "onStart: ");
+        if (mBanner != null) {
+            Log.i(TAG, "onStart: ");
+            mBanner.startAutoPlay();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mBanner != null) {
+            mBanner.stopAutoPlay();
+        }
     }
 
 }

@@ -27,27 +27,27 @@ public class AdapterMine extends BaseMultiItemQuickAdapter<MultipleItem, BaseVie
      */
     public AdapterMine(List<MultipleItem> data) {
         super(data);
-        addItemType(MultipleItem.TYPE_ONE, R.layout.mine_type_one);
-        addItemType(MultipleItem.TYPE_TWO, R.layout.mine_type_two);
-        addItemType(MultipleItem.TYPE_THREE, R.layout.mine_type_three);
-        addItemType(MultipleItem.TYPE_FOUR, R.layout.mine_type_four);
+        addItemType(MultipleItem.TYPE_BANNER, R.layout.mine_type_banner);
+        addItemType(MultipleItem.TYPE_TEXT, R.layout.mine_type_text);
+        addItemType(MultipleItem.TYPE_TITLE, R.layout.mine_type_title);
+        addItemType(MultipleItem.TYPE_PIC, R.layout.mine_type_pic);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, MultipleItem item) {
         switch (helper.getItemViewType()) {
-            case MultipleItem.TYPE_ONE:
+            case MultipleItem.TYPE_BANNER:
                 banner = helper.getView(R.id.banner);
                 initBanner();//设置Banner配置，必须在设置Banner数据之前执行
                 initBannerData(item.getNetEaseBannerList());//设置Banner的数据
                 break;
-            case MultipleItem.TYPE_TWO:
+            case MultipleItem.TYPE_TEXT:
                 helper.setImageResource(R.id.icon, item.getIcon());
                 helper.setText(R.id.text, item.getText());
                 break;
-            case MultipleItem.TYPE_THREE:
+            case MultipleItem.TYPE_TITLE:
                 break;
-            case MultipleItem.TYPE_FOUR:
+            case MultipleItem.TYPE_PIC:
                 helper.setText(R.id.name, item.getName());
                 Glide.with(mContext)
                         .load(item.getCoverImgUrl())
@@ -63,7 +63,7 @@ public class AdapterMine extends BaseMultiItemQuickAdapter<MultipleItem, BaseVie
         //====加载Banner数据====
         banner.setImageLoader(new BannerImageLoader());//设置图片加载器
         //设置Banner的切换时间
-        banner.setDelayTime(5000);
+        banner.setDelayTime(6000);
         //设置显示圆形指示器和标题（水平显示）
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
     }
@@ -71,7 +71,7 @@ public class AdapterMine extends BaseMultiItemQuickAdapter<MultipleItem, BaseVie
     //设置Banner的数据
     private void initBannerData(List<NetEaseBanner> netEaseBannerList) {
         List<String> images = new ArrayList<String>();
-        for (NetEaseBanner netEaseBanner:netEaseBannerList) {
+        for (NetEaseBanner netEaseBanner : netEaseBannerList) {
             images.add(netEaseBanner.getPicUrl());
         }
         banner.setImages(images);

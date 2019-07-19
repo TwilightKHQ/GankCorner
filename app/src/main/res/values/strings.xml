@@ -2,15 +2,15 @@
     <string name="app_name">MineFun</string>
 
     <string name="page_first">我的</string>
-    <string name="page_second">干货</string>
+    <string name="page_second">乐呵</string>
     <string name="page_third">美图</string>
-    <string name="page_fourth">乐呵</string>
+    <string name="page_fourth">干货</string>
 
     <array name="title">
         <item>我的</item>
-        <item>干货</item>
-        <item>美图</item>
         <item>乐呵</item>
+        <item>美图</item>
+        <item>干货</item>
     </array>
 
     <string name="search">搜索</string>

@@ -8,17 +8,17 @@
         android:id="@+id/recommended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
         android:layout_gravity="start"
-        android:text="@string/recommended_song_list" />
+        android:text="@string/recommended_song_list"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/square"
-        android:textSize="12sp"
-        android:background="@drawable/text_bg_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="@string/song_list_square" />
+        android:background="@drawable/text_bg_normal"
+        android:text="@string/song_list_square"
+        android:textSize="12sp" />
 
 </FrameLayout>

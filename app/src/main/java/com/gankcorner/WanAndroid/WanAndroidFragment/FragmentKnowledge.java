@@ -50,20 +50,9 @@ public class FragmentKnowledge extends BaseFragment {
     }
 
     @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-//        if (isVisible) {
-//            //更新界面数据，如果数据还在下载中，就显示加载框
-//            if (firstEnter) {
-//
-//            }
-//        }
-    }
-
-    @Override
-    protected void onFragmentFirstVisible() {
-        //去服务器下载数据
+    public void onFirstVisibleToUser() {
         mSwipeRefreshLayout.setRefreshing(true);
-        initData();
+        refresh();
     }
 
     private void initViews(View view) {
@@ -87,7 +76,7 @@ public class FragmentKnowledge extends BaseFragment {
         });
     }
 
-    private void initData() {
+    private void refresh() {
         getWanKnowledge();
     }
 
