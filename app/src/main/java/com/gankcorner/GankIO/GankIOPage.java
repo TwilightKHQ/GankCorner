@@ -15,6 +15,9 @@ import com.gankcorner.GankIO.GankioFragment.FragmentAndroid;
 import com.gankcorner.GankIO.GankioFragment.FragmentiOS;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
+import com.gankcorner.GankIO.WanAndroidFragment.FragmentArticle;
+import com.gankcorner.GankIO.WanAndroidFragment.FragmentKnowledge;
+import com.gankcorner.GankIO.WanAndroidFragment.FragmentNavigation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +44,23 @@ public class GankIOPage extends BaseFragment {
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Android"));
+        tabLayout.addTab(tabLayout.newTab().setText("玩安卓"));
+        tabLayout.addTab(tabLayout.newTab().setText("知识体系"));
+        tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
+
+        tabLayout.addTab(tabLayout.newTab().setText("A"));
         tabLayout.addTab(tabLayout.newTab().setText("iOS"));
 
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
+        fragmentList.add(new FragmentArticle());
+        titleList.add("玩安卓");
+        fragmentList.add(new FragmentKnowledge());
+        titleList.add("知识体系");
+        fragmentList.add(new FragmentNavigation());
+        titleList.add("导航数据");
         fragmentList.add(new FragmentAndroid());
-        titleList.add("Android");
+        titleList.add("A");
         fragmentList.add(new FragmentiOS());
         titleList.add("iOS");
 

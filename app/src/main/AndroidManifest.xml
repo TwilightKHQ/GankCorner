@@ -17,6 +17,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name=".Utils.BaseActivity"></activity>
+        <activity android:name=".ActivityRead.ActivityRead" />
         <activity android:name=".ActivityWeb" />
         <activity
             android:name=".ActivityMain"

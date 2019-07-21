@@ -25,11 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.gankcorner.Utils.BaseActivity;
 import com.gankcorner.Utils.BottomDialogFragment;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
-public class ActivityWeb extends AppCompatActivity implements View.OnClickListener {
+public class ActivityWeb extends BaseActivity implements View.OnClickListener {
 
     private String TAG = "========zzq";
 
@@ -51,7 +52,6 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         url = intent.getStringExtra("page_url");
 
         initView();
-        changeStatusBar();
 
         setWebView();
 
@@ -131,22 +131,6 @@ public class ActivityWeb extends AppCompatActivity implements View.OnClickListen
         webView.loadUrl(url);
 
     }
-
-    private void changeStatusBar() {
-        // 状态栏透明， 使得沉浸式状态栏有效
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-            //状态栏字体设置为黑色
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-    }
-
-
 
     private void initView() {
         //加载顶部的ToolBar//动态设置ToolBar标题

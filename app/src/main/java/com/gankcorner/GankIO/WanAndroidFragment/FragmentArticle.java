@@ -1,4 +1,4 @@
-package com.gankcorner.WanAndroid.WanAndroidFragment;
+package com.gankcorner.GankIO.WanAndroidFragment;
 
 
 import android.content.Intent;
@@ -42,7 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.gankcorner.Utils.CommonUtils.getHeightPix;
 
-public class FragmentHome extends BaseFragment {
+public class FragmentArticle extends BaseFragment {
 
     private String TAG = "========zzq";
 
@@ -58,8 +58,6 @@ public class FragmentHome extends BaseFragment {
     private int currentPage = 0;            //当前页数
 
     private boolean gettingData = false; //当前是否正在请求数据
-
-    private boolean firstLoad = true;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

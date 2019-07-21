@@ -1,39 +1,35 @@
 package com.gankcorner;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gankcorner.Adapter.AdapterBottomFragment;
+import com.gankcorner.Adapter.AdapterFragment;
 import com.gankcorner.Fragment.Fragment_Mine;
+import com.gankcorner.Fragment.Fragment_Read;
 import com.gankcorner.GankIO.GankIOPage;
 import com.gankcorner.Fragment.Fragment_test;
 import com.gankcorner.Utils.AppUtil;
+import com.gankcorner.Utils.BaseActivity;
 import com.gankcorner.Utils.DrawableTextView;
-import com.gankcorner.WanAndroid.WanAndroidPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ActivityMain extends AppCompatActivity implements View.OnClickListener {
+public class ActivityMain extends BaseActivity implements View.OnClickListener {
 
     private String TAG = "=======zzq";
 
@@ -46,7 +42,6 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        changeStatusBar();
 
         initView();
 
@@ -63,14 +58,14 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle("");
 
         fragmentList.add(new Fragment_Mine());
-        fragmentList.add(new WanAndroidPage());
+        fragmentList.add(new Fragment_Read());
         fragmentList.add(new Fragment_test());
         fragmentList.add(new GankIOPage());
         String[] titles = getResources().getStringArray(R.array.title);
-        AdapterBottomFragment adapterBottomFragment = new
-                AdapterBottomFragment(getSupportFragmentManager(),
+        AdapterFragment adapterFragment = new
+                AdapterFragment(getSupportFragmentManager(),
                 this, fragmentList, titles);
-        mViewPager.setAdapter(adapterBottomFragment);
+        mViewPager.setAdapter(adapterFragment);
         mViewPager.setCurrentItem(0);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -216,21 +211,5 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
-    //改变状态栏
-    private void changeStatusBar() {
-        // 状态栏透明， 使得沉浸式状态栏有效
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-            //状态栏字体设置为黑色
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-    }
-
 
 }

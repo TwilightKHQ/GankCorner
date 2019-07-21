@@ -36,7 +36,8 @@ public class Fragment_Mine extends BaseFragment {
 
     private AdapterMine adapterMine;
 
-    private List<MultipleItem> data;
+    private List<MultipleItem> data = new ArrayList<>();
+    private List<MultipleItem> tempData;
 
     private Banner mBanner;
 
@@ -88,12 +89,12 @@ public class Fragment_Mine extends BaseFragment {
 
     private void refresh() {
         gettingDataNumber = 2;
-        data = new ArrayList<>();
+        tempData = new ArrayList<>();
         getNetEaseBanner();
-        data.add(new MultipleItem(R.mipmap.music, "本地音乐"));
-        data.add(new MultipleItem(R.mipmap.recent_play, "最近播放"));
-        data.add(new MultipleItem(R.mipmap.my_star, "我的收藏"));
-        data.add(new MultipleItem()); //推荐歌单 title
+        tempData.add(new MultipleItem(R.mipmap.music, "本地音乐"));
+        tempData.add(new MultipleItem(R.mipmap.recent_play, "最近播放"));
+        tempData.add(new MultipleItem(R.mipmap.my_star, "我的收藏"));
+        tempData.add(new MultipleItem()); //推荐歌单 title
         getNetEaseSongList();
     }
 
@@ -125,9 +126,10 @@ public class Fragment_Mine extends BaseFragment {
                     netEaseBannerList.add(new NetEaseBanner(dataBean.getUrl(),
                             dataBean.getPicUrl()));
                 }
-                data.add(0, new MultipleItem(netEaseBannerList));
-                adapterMine.setNewData(data);
+                tempData.add(0, new MultipleItem(netEaseBannerList));
                 if ( --gettingDataNumber == 0) {
+                    data = tempData;
+                    adapterMine.setNewData(data);
                     mSwipeRefreshLayout.setRefreshing(false);
                 }
             }
@@ -167,9 +169,10 @@ public class Fragment_Mine extends BaseFragment {
                     multipleItemList.add(new MultipleItem(dataBean.getName(),
                             dataBean.getCoverImgUrl()));
                 }
-                data.addAll(data.size(), multipleItemList);
-                adapterMine.setNewData(data);
+                tempData.addAll(tempData.size(), multipleItemList);
                 if ( --gettingDataNumber == 0) {
+                    data = tempData;
+                    adapterMine.setNewData(data);
                     mSwipeRefreshLayout.setRefreshing(false);
                 }
             }
@@ -181,22 +184,4 @@ public class Fragment_Mine extends BaseFragment {
             }
         });
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (mBanner != null) {
-            Log.i(TAG, "onStart: ");
-            mBanner.startAutoPlay();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mBanner != null) {
-            mBanner.stopAutoPlay();
-        }
-    }
-
 }

@@ -2,13 +2,13 @@
     <string name="app_name">MineFun</string>
 
     <string name="page_first">我的</string>
-    <string name="page_second">乐呵</string>
+    <string name="page_second">闲读</string>
     <string name="page_third">美图</string>
     <string name="page_fourth">干货</string>
 
     <array name="title">
         <item>我的</item>
-        <item>乐呵</item>
+        <item>闲读</item>
         <item>美图</item>
         <item>干货</item>
     </array>
@@ -26,7 +26,24 @@
     <string name="star">我的收藏</string>
     <string name="location">定位</string>
     <string name="scan_code">扫码</string>
-    
+
     <string name="recommended_song_list">推荐歌单</string>
     <string name="song_list_square">歌单广场</string>
+
+    <string name="read_title">闲读 —— 读那些值得读的</string>
+
+
+    <string-array name="read_page">
+        <item>科技资讯</item>
+        <item>趣味软件/游戏</item>
+        <item>装备党</item>
+        <item>独立思想</item>
+        <item>Android</item>
+        <item>iOS</item>
+        <item>草根新闻</item>
+        <item>创业新闻</item>
+        <item>团队博客</item>
+    </string-array>
+
+
 </resources>

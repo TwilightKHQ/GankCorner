@@ -5,24 +5,21 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
-
-import com.gankcorner.Utils.BaseFragment;
 
 import java.util.List;
 
-public class AdapterBottomFragment extends FragmentPagerAdapter {
+public class AdapterFragment extends FragmentPagerAdapter {
 
     Context context;
     private String[] titles;
-    List<Fragment> listFragment;
+    List<Fragment> fragmentList;
 
-    public AdapterBottomFragment(FragmentManager fragmentManager, Context context,
-                                 List<Fragment> listFragment, String[] titles) {
+    public AdapterFragment(FragmentManager fragmentManager, Context context,
+                           List<Fragment> fragmentList, String[] titles) {
         super(fragmentManager);
         this.context = context;
-        this.listFragment = listFragment;
+        this.fragmentList = fragmentList;
         this.titles = titles;
     }
 
@@ -35,11 +32,11 @@ public class AdapterBottomFragment extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment;
-        if (position < listFragment.size()) {
-            fragment = listFragment.get(position);
+        if (position < fragmentList.size()) {
+            fragment = fragmentList.get(position);
 
         } else {
-            fragment = listFragment.get(0);
+            fragment = fragmentList.get(0);
 
         }
         return fragment;
@@ -61,11 +58,11 @@ public class AdapterBottomFragment extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return listFragment == null ? 0 : listFragment.size();
+        return fragmentList == null ? 0 : fragmentList.size();
     }
 
     @Override
-    public void  destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
 
     }
 }
