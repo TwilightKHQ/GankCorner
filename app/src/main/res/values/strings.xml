@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">MineFun</string>
 
+    <!--App主页-->
     <string name="page_first">我的</string>
     <string name="page_second">闲读</string>
     <string name="page_third">美图</string>
     <string name="page_fourth">干货</string>
-
+    <string name="search">搜索</string>
     <array name="title">
         <item>我的</item>
         <item>闲读</item>
@@ -13,26 +14,26 @@
         <item>干货</item>
     </array>
 
-    <string name="search">搜索</string>
-
+    <!--侧滑菜单-->
     <string name="my_name">我一定会有猫的。</string>
-
-    <string name="setting">设置</string>
-    <string name="shutdown">退出</string>
-
     <string name="home">首页</string>
     <string name="question">问题反馈</string>
     <string name="information">关于我</string>
     <string name="star">我的收藏</string>
     <string name="location">定位</string>
     <string name="scan_code">扫码</string>
+    <string name="setting">设置</string>
+    <string name="shutdown">退出</string>
 
+    <!--Fragment ‘我的’ 部分-->
     <string name="recommended_song_list">推荐歌单</string>
     <string name="song_list_square">歌单广场</string>
 
+    <!--Fragment ‘闲读’ 部分-->
+    <string name="gank_read">干货闲读</string>
+    <string name="have_fun">娱乐一下</string>
+    <!--ActivityRead 部分-->
     <string name="read_title">闲读 —— 读那些值得读的</string>
-
-
     <string-array name="read_page">
         <item>科技资讯</item>
         <item>趣味软件/游戏</item>
@@ -44,6 +45,5 @@
         <item>创业新闻</item>
         <item>团队博客</item>
     </string-array>
-
 
 </resources>

@@ -51,11 +51,12 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
 
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
         fragmentList.add(new Fragment_Mine());
         fragmentList.add(new Fragment_Read());
