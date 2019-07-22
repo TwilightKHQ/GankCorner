@@ -41,7 +41,7 @@ public class ActivityRead extends BaseActivity implements View.OnClickListener {
         TextView toolbarTitle = (TextView) findViewById(R.id.read_title);
         SpannableString spanStr = new SpannableString(getResources().getString(R.string.read_title));
         spanStr.setSpan(new ForegroundColorSpan(
-                getResources().getColor(R.color.black)),
+                        getResources().getColor(R.color.black)),
                 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         spanStr.setSpan(new RelativeSizeSpan(0.75f),
                 2, spanStr.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);

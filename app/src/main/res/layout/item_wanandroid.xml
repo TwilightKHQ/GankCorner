@@ -49,11 +49,16 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/circle_image_view"-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:src="@mipmap/pic_2" />-->
+
+        <com.gankcorner.Utils.CharAvatarView
             android:id="@+id/circle_image_view"
             android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@mipmap/pic_2" />
+            android:layout_height="36dp" />
 
         <TextView
             android:id="@+id/author"

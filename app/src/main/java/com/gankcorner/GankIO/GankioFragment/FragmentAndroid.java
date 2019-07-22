@@ -73,12 +73,11 @@ public class FragmentAndroid extends BaseFragment {
         adapterGank = new AdapterGank(R.layout.item_gank, mGankArticle);
         adapterGank.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         adapterGank.isFirstOnly(false);
+        adapterGank.addHeaderView(getHeaderView());
         adapterGank.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(getContext(), ActivityWeb.class);
-                //在滑动gankArticle会的值会变化，导致传递的字符串不对
-//                Log.d("Url", "Position"+ position + " Desc: " + adapterGank.getData().get(position).getDesc());
                 intent.putExtra("page_desc", adapterGank.getData().get(position).getDesc());
                 intent.putExtra("page_url", adapterGank.getData().get(position).getUrl());
                 getContext().startActivity(intent);
@@ -122,11 +121,6 @@ public class FragmentAndroid extends BaseFragment {
                 Log.d(TAG, "Android_response: " + response.toString());
                 //完成解析后可以直接获取数据
                 GankArticleBean gankArticleBean = response.body();
-//                String  Desc = null;
-//                if (gankArticleBean != null) {
-//                    Desc = gankArticleBean.getResults().get(0).getDesc();
-//                }
-//                Log.d("Test", "UpdateInfo: " + Desc);
                 addData(gankArticleBean);
                 gettingData = false;
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -153,5 +147,11 @@ public class FragmentAndroid extends BaseFragment {
         } else {
             adapterGank.addData(mGankArticle);
         }
+    }
+
+    private View getHeaderView() {
+        View view = getLayoutInflater().inflate(R.layout.item_select,
+                (ViewGroup) mRecyclerView.getParent(), false);
+        return view;
     }
 }

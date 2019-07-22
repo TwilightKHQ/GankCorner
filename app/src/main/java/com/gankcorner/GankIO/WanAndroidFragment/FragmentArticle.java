@@ -112,7 +112,7 @@ public class FragmentArticle extends BaseFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getWanAndroidArticle(0);
+                refresh();
             }
         });
     }
