@@ -3,18 +3,11 @@ package com.gankcorner;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -26,7 +19,7 @@ import android.widget.Toast;
 
 
 import com.gankcorner.Utils.BaseActivity;
-import com.gankcorner.Utils.BottomDialogFragment;
+import com.gankcorner.View.BottomDialogFragment;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 

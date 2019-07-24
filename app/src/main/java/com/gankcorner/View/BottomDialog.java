@@ -1,4 +1,4 @@
-package com.gankcorner.Utils;
+package com.gankcorner.View;
 
 import android.app.Dialog;
 import android.content.Context;

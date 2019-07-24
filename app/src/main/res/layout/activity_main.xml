@@ -258,7 +258,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.gankcorner.Utils.DrawableTextView
+                <com.gankcorner.View.DrawableTextView
                     android:id="@+id/settings"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -270,7 +270,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/setting" />
 
-                <com.gankcorner.Utils.DrawableTextView
+                <com.gankcorner.View.DrawableTextView
                     android:id="@+id/exit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

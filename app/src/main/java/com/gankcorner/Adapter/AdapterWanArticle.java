@@ -1,13 +1,12 @@
 package com.gankcorner.Adapter;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.gankcorner.Bean.WanArticle;
 import com.gankcorner.R;
-import com.gankcorner.Utils.CharAvatarView;
+import com.gankcorner.View.CharAvatarView;
 
 import java.util.List;
 

@@ -21,7 +21,7 @@ import com.gankcorner.Bean.GankArticleBean;
 import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
-import com.gankcorner.Utils.BottomDialogFragment;
+import com.gankcorner.View.BottomDialogFragment;
 import com.gankcorner.Utils.CommonUtils;
 
 import java.util.ArrayList;

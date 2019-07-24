@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.gankcorner.Utils.ImageViewWidth
+    <com.gankcorner.View.ImageViewWidth
         android:id="@+id/images"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

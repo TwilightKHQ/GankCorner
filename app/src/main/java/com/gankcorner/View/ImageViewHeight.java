@@ -1,4 +1,4 @@
-package com.gankcorner.Utils;
+package com.gankcorner.View;
 
 import android.content.Context;
 import android.graphics.Canvas;

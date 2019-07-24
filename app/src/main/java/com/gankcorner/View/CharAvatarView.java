@@ -1,4 +1,4 @@
-package com.gankcorner.Utils;
+package com.gankcorner.View;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -13,7 +13,7 @@ import android.util.AttributeSet;
  * <p>
  * Email: Hugo3641@gmail.com
  * GitHub: https://github.com/xcc3641
- * Info: 根据用户名随机生成头像
+ * Info: 根据用户名生成头像
  */
 public class CharAvatarView extends AppCompatImageView {
     private static final String TAG = CharAvatarView.class.getSimpleName();

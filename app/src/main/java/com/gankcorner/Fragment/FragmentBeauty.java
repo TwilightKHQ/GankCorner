@@ -14,7 +14,7 @@ import com.gankcorner.Bean.OneBean;
 import com.gankcorner.Interface.One;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
-import com.gankcorner.Utils.ImageViewHeight;
+import com.gankcorner.View.ImageViewHeight;
 
 import retrofit2.Call;
 import retrofit2.Callback;

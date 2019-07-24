@@ -1,4 +1,4 @@
-package com.gankcorner.Utils;
+package com.gankcorner.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.gankcorner.Adapter.AdapterMenuItem;
 import com.gankcorner.Bean.MenuItem;
 import com.gankcorner.R;
+import com.gankcorner.Utils.AppUtil;
 
 import java.util.ArrayList;
 import java.util.List;

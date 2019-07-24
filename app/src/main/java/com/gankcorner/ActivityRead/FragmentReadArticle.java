@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
-import com.gankcorner.Utils.ImageViewHeight;
+import com.gankcorner.View.ImageViewHeight;
 
 public class FragmentReadArticle extends BaseFragment {
 

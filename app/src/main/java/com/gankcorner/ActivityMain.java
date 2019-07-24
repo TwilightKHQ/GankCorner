@@ -22,7 +22,7 @@ import com.gankcorner.GankIO.GankIOPage;
 import com.gankcorner.Fragment.FragmentBeauty;
 import com.gankcorner.Utils.AppUtil;
 import com.gankcorner.Utils.BaseActivity;
-import com.gankcorner.Utils.DrawableTextView;
+import com.gankcorner.View.DrawableTextView;
 
 import java.util.ArrayList;
 import java.util.List;

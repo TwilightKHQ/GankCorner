@@ -1,10 +1,8 @@
 package com.gankcorner.Adapter;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -13,7 +11,6 @@ import com.gankcorner.Bean.NetEaseBanner;
 import com.gankcorner.Entity.MultipleItem;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BannerImageLoader;
-import com.gankcorner.Utils.ImageViewHeight;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
