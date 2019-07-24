@@ -1,5 +1,6 @@
 package com.gankcorner.View;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BottomDialogFragment extends DialogFragment {
+public class DialogBottom extends DialogFragment {
 
     private List<MenuItem> menuItemList = new ArrayList<>();
 
@@ -38,7 +39,7 @@ public class BottomDialogFragment extends DialogFragment {
         // 使用不带Theme的构造器, 获得的dialog边框距离屏幕仍有几毫米的缝隙
         Dialog dialog = new Dialog(getActivity(), R.style.BottomDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定
-        dialog.setContentView(R.layout.bottom_dialog_fragment);
+        dialog.setContentView(R.layout.dialog_bottom);
         dialog.setCanceledOnTouchOutside(true); // 外部点击取消
         // 设置宽度为屏宽, 靠近屏幕底部
         final Window window = dialog.getWindow();
@@ -71,7 +72,7 @@ public class BottomDialogFragment extends DialogFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(AppUtil.getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        AdapterMenuItem adapterMenuItem = new AdapterMenuItem(menuItemList);
+        AdapterMenuItem adapterMenuItem = new AdapterMenuItem(R.layout.item_menu, menuItemList);
         recyclerView.setAdapter(adapterMenuItem);
 
         textCancel = (TextView) dialog.findViewById(R.id.cancel);

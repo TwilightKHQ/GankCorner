@@ -26,14 +26,4 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
-    <!--底部导航栏 样式-->
-    <style name="BottomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">?attr/colorAccent</item>
-        <item name="tabIndicatorHeight">0dp</item>
-        <item name="tabPaddingStart">12dp</item>
-        <item name="tabTextColor">#aaa</item>
-        <item name="tabPaddingEnd">12dp</item>
-        <item name="tabSelectedTextColor">@color/bilibili</item>
-    </style>
-
 </resources>

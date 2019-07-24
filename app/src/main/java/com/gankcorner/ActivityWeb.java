@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 
 import com.gankcorner.Utils.BaseActivity;
-import com.gankcorner.View.BottomDialogFragment;
+import com.gankcorner.View.DialogBottom;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
@@ -177,8 +177,8 @@ public class ActivityWeb extends BaseActivity implements View.OnClickListener {
                 Toast.makeText(ActivityWeb.this, "分享", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.more_item:
-                BottomDialogFragment bottomDialogFragment = new BottomDialogFragment();
-                bottomDialogFragment.show(ActivityWeb.this.getSupportFragmentManager(), "bottomDialogFragment");
+                DialogBottom dialogBottom = new DialogBottom();
+                dialogBottom.show(ActivityWeb.this.getSupportFragmentManager(), "dialogBottom");
                 break;
         }
     }

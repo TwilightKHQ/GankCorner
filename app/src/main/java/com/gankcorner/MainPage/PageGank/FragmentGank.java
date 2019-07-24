@@ -1,6 +1,7 @@
 package com.gankcorner.MainPage.PageGank;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,7 +23,7 @@ import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CommonUtils;
-import com.gankcorner.View.BottomDialogFragment;
+import com.gankcorner.View.DialogSelect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,9 @@ public class FragmentGank extends BaseFragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private List<GankArticle> mGankArticle = new ArrayList<>();
 
+    private String type = "all";
+    private int REQUEST_CODE = 21;
+
     private int numPerPage = 10; //每页的个数
 
     private boolean gettingData = false; //当前是否正在请求数据
@@ -59,9 +63,14 @@ public class FragmentGank extends BaseFragment {
 
     @Override
     public void onFirstVisibleToUser() {
-        mSwipeRefreshLayout.setRefreshing(true);
-        getGank("Android", numPerPage, 1);
+        refresh();
     }
+
+    private void refresh() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        getGank(type, numPerPage, 1);
+    }
+
 
     private void initView(View view) {
         // 初始化控件
@@ -92,7 +101,7 @@ public class FragmentGank extends BaseFragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (CommonUtils.isWillBottom(recyclerView) && !gettingData) {
-                    getGank("Android", numPerPage, manager.getItemCount() / numPerPage + 1);
+                    getGank(type, numPerPage, manager.getItemCount() / numPerPage + 1);
                     Log.d("currentPage", "onScrollStateChanged: " + manager.getItemCount() / numPerPage);
                 }
             }
@@ -101,7 +110,7 @@ public class FragmentGank extends BaseFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getGank("Android", numPerPage, 1);
+                getGank(type, numPerPage, 1);
             }
         });
     }
@@ -151,16 +160,30 @@ public class FragmentGank extends BaseFragment {
     }
 
     private View getHeaderView() {
-        View view = getLayoutInflater().inflate(R.layout.item_select,
+        View view = getLayoutInflater().inflate(R.layout.header_gank,
                 (ViewGroup) mRecyclerView.getParent(), false);
         TextView selectOther = (TextView) view.findViewById(R.id.more);
         selectOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomDialogFragment bottomDialogFragment = new BottomDialogFragment();
-                bottomDialogFragment.show(getActivity().getSupportFragmentManager(), "bottomDialogFragment");
+                DialogSelect dialogSelect = new DialogSelect();
+                dialogSelect.setTargetFragment(FragmentGank.this, REQUEST_CODE);
+                dialogSelect.show(getFragmentManager(), "dialogSelect");
             }
         });
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK && data != null) {//获取从DialogFragmentB中传递的mB2A
+                Log.i(TAG, "onActivityResult: ");
+                type = data.getStringExtra("refresh_type");
+                refresh();
+                Log.i(TAG, "onActivityResult: " + type);
+            }
+        }
     }
 }

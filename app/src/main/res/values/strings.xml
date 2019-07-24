@@ -32,6 +32,15 @@
     <!--Fragment ‘闲读’ 部分-->
     <string name="gank_read">干货闲读</string>
     <string name="have_fun">娱乐一下</string>
+
+    <!--Fragment ‘干货’ 部分-->
+    <string-array name="gank_title">
+        <item>干货自选</item>
+        <item>玩安卓</item>
+        <item>知识体系</item>
+        <item>导航数据</item>
+    </string-array>
+
     <!--ActivityRead 部分-->
     <string name="read_title">闲读 —— 读那些值得读的</string>
     <string-array name="read_page">

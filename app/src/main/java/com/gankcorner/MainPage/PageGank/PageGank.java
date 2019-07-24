@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gankcorner.Adapter.AdapterFragment;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
 
@@ -21,7 +22,6 @@ public class PageGank extends BaseFragment {
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
-    private List<String> titleList;
     private List<Fragment> fragmentList;
 
     @Override
@@ -39,40 +39,19 @@ public class PageGank extends BaseFragment {
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("玩安卓"));
-        tabLayout.addTab(tabLayout.newTab().setText("知识体系"));
-        tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
-        tabLayout.addTab(tabLayout.newTab().setText("干货自选"));
-
         fragmentList = new ArrayList<>();
-        titleList = new ArrayList<>();
-        fragmentList.add(new FragmentArticle());
-        titleList.add("玩安卓");
-        fragmentList.add(new FragmentKnowledge());
-        titleList.add("知识体系");
-        fragmentList.add(new FragmentNavigation());
-        titleList.add("导航数据");
         fragmentList.add(new FragmentGank());
-        titleList.add("干货自选");
+        fragmentList.add(new FragmentArticle());
+        fragmentList.add(new FragmentKnowledge());
+        fragmentList.add(new FragmentNavigation());
+        final String[] titles = getResources().getStringArray(R.array.gank_title);
+        AdapterFragment adapterFragment = new AdapterFragment(getChildFragmentManager(),
+                getContext(), fragmentList, titles);
 
         //在Fragment当中
-        mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return fragmentList.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return fragmentList.size();
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return titleList.get(position);
-            }
-        });
+        mViewPager.setAdapter(adapterFragment);
         //将TabLayout与ViewPager联系起来
         tabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(1);
     }
 }

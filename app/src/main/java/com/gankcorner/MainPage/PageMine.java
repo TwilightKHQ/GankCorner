@@ -40,7 +40,6 @@ public class PageMine extends BaseFragment {
 
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private GridLayoutManager mLayoutManager;
 
     private int gettingDataNumber = 2;
 
@@ -71,7 +70,7 @@ public class PageMine extends BaseFragment {
             }
         });
         mRecyclerView = view.findViewById(R.id.recycler_view);
-        mLayoutManager = new GridLayoutManager(getContext(), 3);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
         adapterMine = new AdapterMine(data);
         adapterMine.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {

@@ -63,8 +63,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
         fragmentList.add(new PageBeauty());
         fragmentList.add(new PageGank());
         String[] titles = getResources().getStringArray(R.array.title);
-        AdapterFragment adapterFragment = new
-                AdapterFragment(getSupportFragmentManager(),
+        AdapterFragment adapterFragment = new AdapterFragment(getSupportFragmentManager(),
                 this, fragmentList, titles);
         mViewPager.setAdapter(adapterFragment);
         mViewPager.setCurrentItem(0);

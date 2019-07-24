@@ -11,9 +11,9 @@ import java.util.List;
 
 public class AdapterFragment extends FragmentPagerAdapter {
 
-    Context context;
+    private Context context;
     private String[] titles;
-    List<Fragment> fragmentList;
+    private List<Fragment> fragmentList;
 
     public AdapterFragment(FragmentManager fragmentManager, Context context,
                            List<Fragment> fragmentList, String[] titles) {
@@ -34,10 +34,8 @@ public class AdapterFragment extends FragmentPagerAdapter {
         Fragment fragment;
         if (position < fragmentList.size()) {
             fragment = fragmentList.get(position);
-
         } else {
             fragment = fragmentList.get(0);
-
         }
         return fragment;
     }
