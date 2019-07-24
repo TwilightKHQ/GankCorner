@@ -1,4 +1,4 @@
-package com.gankcorner.GankIO.GankFragment;
+package com.gankcorner.MainPage.PageGank;
 
 
 import android.content.Intent;
@@ -16,13 +16,13 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.ActivityWeb;
 import com.gankcorner.Adapter.AdapterGank;
-import com.gankcorner.Bean.GankArticle;
+import com.gankcorner.Entity.GankArticle;
 import com.gankcorner.Bean.GankArticleBean;
 import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
-import com.gankcorner.View.BottomDialogFragment;
 import com.gankcorner.Utils.CommonUtils;
+import com.gankcorner.View.BottomDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragmentAndroid extends BaseFragment {
+public class FragmentGank extends BaseFragment {
 
     private String TAG = "=======zzq";
 
@@ -141,7 +141,6 @@ public class FragmentAndroid extends BaseFragment {
             GankArticleBean.ResultsBean resultsBean = gankArticleBean.getResults().get(i);
             GankArticle gankArticle = new GankArticle(resultsBean.getWho(), resultsBean.getDesc(),
                     resultsBean.getPublishedAt(), resultsBean.getUrl(), resultsBean.getImages());
-//            Log.d("GankArticle", "addData: " + gankArticle.getDesc());
             mGankArticle.add(gankArticle);
         }
         if (mSwipeRefreshLayout.isRefreshing()) {

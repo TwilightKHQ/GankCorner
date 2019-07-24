@@ -3,21 +3,6 @@ package com.gankcorner.Bean;
 import java.util.List;
 
 public class GankArticleBean {
-//    private String who;
-//    private String url;
-//
-//    public GankArticleBean(String name, String url) {
-//        this.who = name;
-//        this.url = url;
-//    }
-//
-//    public String getWho() {
-//        return who;
-//    }
-//
-//    public String getName() {
-//        return url;
-//    }
 
     /**
      * error : false

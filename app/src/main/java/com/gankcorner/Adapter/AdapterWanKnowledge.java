@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gankcorner.Bean.WanKnowledge;
+import com.gankcorner.Entity.WanKnowledge;
 import com.gankcorner.R;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;

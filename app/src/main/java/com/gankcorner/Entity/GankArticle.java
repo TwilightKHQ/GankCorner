@@ -1,4 +1,4 @@
-package com.gankcorner.Bean;
+package com.gankcorner.Entity;
 
 import java.util.List;
 

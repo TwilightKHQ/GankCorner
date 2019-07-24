@@ -1,12 +1,10 @@
-package com.gankcorner.GankIO.GankFragment;
+package com.gankcorner.MainPage.PageGank;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +12,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gankcorner.Adapter.AdapterWanNaviRight;
 import com.gankcorner.Adapter.AdapterWanNaviLeft;
-import com.gankcorner.Bean.WanNavigation;
+import com.gankcorner.Adapter.AdapterWanNaviRight;
+import com.gankcorner.Entity.WanNavigation;
 import com.gankcorner.Bean.WanNavigationBean;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;

@@ -1,4 +1,4 @@
-package com.gankcorner.Fragment;
+package com.gankcorner.MainPage;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.Adapter.AdapterMine;
-import com.gankcorner.Bean.NetEaseBanner;
+import com.gankcorner.Entity.NetEaseBanner;
 import com.gankcorner.Bean.NetEaseBannerBean;
 import com.gankcorner.Bean.NetEaseSongListBean;
 import com.gankcorner.Entity.MultipleItem;
@@ -29,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragmentMine extends BaseFragment {
+public class PageMine extends BaseFragment {
 
     private String TAG = "========zzq";
 
@@ -48,7 +48,7 @@ public class FragmentMine extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_mine, container, false);
+        View view = inflater.inflate(R.layout.page_mine, container, false);
 
         initView(view);
 
@@ -123,7 +123,7 @@ public class FragmentMine extends BaseFragment {
                             dataBean.getPicUrl()));
                 }
                 tempData.add(0, new MultipleItem(netEaseBannerList));
-                if ( --gettingDataNumber == 0) {
+                if (--gettingDataNumber == 0) {
                     data = tempData;
                     adapterMine.setNewData(data);
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -166,7 +166,7 @@ public class FragmentMine extends BaseFragment {
                             dataBean.getCoverImgUrl()));
                 }
                 tempData.addAll(tempData.size(), multipleItemList);
-                if ( --gettingDataNumber == 0) {
+                if (--gettingDataNumber == 0) {
                     data = tempData;
                     adapterMine.setNewData(data);
                     mSwipeRefreshLayout.setRefreshing(false);

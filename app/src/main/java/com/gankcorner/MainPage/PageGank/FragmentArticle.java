@@ -1,4 +1,4 @@
-package com.gankcorner.GankIO.GankFragment;
+package com.gankcorner.MainPage.PageGank;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,14 +17,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.ActivityWeb;
 import com.gankcorner.Adapter.AdapterWanArticle;
 import com.gankcorner.Bean.BannerBean;
-import com.gankcorner.Bean.WanArticle;
+import com.gankcorner.Entity.WanArticle;
 import com.gankcorner.Bean.WanArticleBean;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
-import com.gankcorner.Utils.BannerImageLoader;
-import com.gankcorner.Utils.CommonUtils;
 import com.gankcorner.Utils.AppUtil;
+import com.gankcorner.Utils.BannerImageLoader;
 import com.gankcorner.Utils.BaseFragment;
+import com.gankcorner.Utils.CommonUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -38,6 +38,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.gankcorner.Utils.CommonUtils.changeSpecialChar;
 import static com.gankcorner.Utils.CommonUtils.getHeightPix;
 
 public class FragmentArticle extends BaseFragment {
@@ -199,8 +200,8 @@ public class FragmentArticle extends BaseFragment {
         for (int i = 0; i < numPerPage; i++) {
             WanArticleBean.DataBean.DatasBean dateBean = wanArticleBean.getData().getDatas().get(i);
             WanArticle wanArticle = new WanArticle(dateBean.getAuthor(), dateBean.getChapterName(),
-                    dateBean.getLink(), dateBean.getNiceDate(), dateBean.getSuperChapterName(), dateBean.getTitle());
-//            Log.d(TAG, "addData: " + wanArticle.getAuthor());
+                    dateBean.getLink(), dateBean.getNiceDate(), dateBean.getSuperChapterName(), changeSpecialChar(dateBean.getTitle()));
+            Log.d(TAG, "addData: " + wanArticle.getTitle());
             tempList.add(wanArticle);
         }
         if (mSwipeRefreshLayout.isRefreshing()) {

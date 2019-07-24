@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.gankcorner.Bean.WanArticle;
+import com.gankcorner.Entity.WanArticle;
 import com.gankcorner.R;
 import com.gankcorner.View.CharAvatarView;
 

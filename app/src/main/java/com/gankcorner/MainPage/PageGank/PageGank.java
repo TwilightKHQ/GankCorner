@@ -1,4 +1,4 @@
-package com.gankcorner.GankIO;
+package com.gankcorner.MainPage.PageGank;
 
 
 import android.os.Bundle;
@@ -11,17 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gankcorner.GankIO.GankFragment.FragmentAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
-import com.gankcorner.GankIO.GankFragment.FragmentArticle;
-import com.gankcorner.GankIO.GankFragment.FragmentKnowledge;
-import com.gankcorner.GankIO.GankFragment.FragmentNavigation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GankIOPage extends BaseFragment {
+public class PageGank extends BaseFragment {
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
@@ -32,7 +28,7 @@ public class GankIOPage extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.layout_gank, container, false);
+        View view = inflater.inflate(R.layout.page_gank, container, false);
 
         initView(view);
 
@@ -56,7 +52,7 @@ public class GankIOPage extends BaseFragment {
         titleList.add("知识体系");
         fragmentList.add(new FragmentNavigation());
         titleList.add("导航数据");
-        fragmentList.add(new FragmentAndroid());
+        fragmentList.add(new FragmentGank());
         titleList.add("干货自选");
 
         //在Fragment当中

@@ -11,7 +11,7 @@ import static com.gankcorner.Utils.AppUtil.getContext;
 public class CommonUtils {
 
     // 判断recycleView是否将要滑到底部
-    public static boolean isWillBottom(RecyclerView recyclerView){
+    public static boolean isWillBottom(RecyclerView recyclerView) {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         //屏幕中最后一个可见子项的position
         int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
@@ -34,6 +34,15 @@ public class CommonUtils {
     public static int getWidthPix() {
         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
         return dm.widthPixels;
+    }
+
+    public static String changeSpecialChar(String string) {
+        String[] specialString = {"&mdash;", "&amp;", "&ldquo;", "&rdquo;"};
+        String[] normalChar = {"—", "&", "“", "”"};
+        for (int i = 0; i < specialString.length; i++) {
+            string = string.replace(specialString[i], normalChar[i]);
+        }
+        return string;
     }
 
     /**

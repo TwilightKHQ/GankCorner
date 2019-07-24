@@ -1,8 +1,6 @@
 package com.gankcorner.Entity;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.gankcorner.Bean.NetEaseBanner;
-import com.gankcorner.Bean.NetEaseSongList;
 
 import java.util.List;
 

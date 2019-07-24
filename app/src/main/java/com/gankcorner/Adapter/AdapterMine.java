@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.gankcorner.Bean.NetEaseBanner;
+import com.gankcorner.Entity.NetEaseBanner;
 import com.gankcorner.Entity.MultipleItem;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BannerImageLoader;

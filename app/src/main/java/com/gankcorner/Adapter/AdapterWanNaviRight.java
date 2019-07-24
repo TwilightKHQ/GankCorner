@@ -4,14 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gankcorner.ActivityWeb;
-import com.gankcorner.Bean.WanNavigation;
+import com.gankcorner.Entity.WanNavigation;
 import com.gankcorner.R;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;

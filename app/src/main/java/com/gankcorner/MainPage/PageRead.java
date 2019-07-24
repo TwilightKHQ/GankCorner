@@ -1,4 +1,4 @@
-package com.gankcorner.Fragment;
+package com.gankcorner.MainPage;
 
 
 import android.content.Intent;
@@ -13,7 +13,7 @@ import com.gankcorner.ActivityRead.ActivityRead;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
 
-public class FragmentRead extends BaseFragment implements View.OnClickListener {
+public class PageRead extends BaseFragment implements View.OnClickListener {
 
     private String TAG = "=======zzq";
 
@@ -24,7 +24,7 @@ public class FragmentRead extends BaseFragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_read, container, false);
+        View view = inflater.inflate(R.layout.page_read, container, false);
 
         initView(view);
 

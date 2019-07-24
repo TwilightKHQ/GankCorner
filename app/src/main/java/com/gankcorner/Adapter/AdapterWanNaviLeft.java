@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gankcorner.Bean.WanNavigation;
+import com.gankcorner.Entity.WanNavigation;
 import com.gankcorner.R;
 
 import java.util.List;

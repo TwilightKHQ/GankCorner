@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.gankcorner.Adapter.AdapterMenuItem;
-import com.gankcorner.Bean.MenuItem;
+import com.gankcorner.Entity.MenuItem;
 import com.gankcorner.R;
 import com.gankcorner.Utils.AppUtil;
 

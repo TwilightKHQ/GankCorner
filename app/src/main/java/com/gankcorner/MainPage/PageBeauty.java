@@ -1,4 +1,4 @@
-package com.gankcorner.Fragment;
+package com.gankcorner.MainPage;
 
 
 import android.os.Bundle;
@@ -22,7 +22,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragmentBeauty extends BaseFragment {
+public class PageBeauty extends BaseFragment {
 
     private String TAG = "=======zzq";
 
@@ -36,7 +36,7 @@ public class FragmentBeauty extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_beauty, container, false);
+        View view = inflater.inflate(R.layout.page_beauty, container, false);
 
         initView(view);
 

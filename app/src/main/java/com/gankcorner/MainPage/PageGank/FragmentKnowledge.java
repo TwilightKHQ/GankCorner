@@ -1,4 +1,4 @@
-package com.gankcorner.GankIO.GankFragment;
+package com.gankcorner.MainPage.PageGank;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gankcorner.Adapter.AdapterWanKnowledge;
+import com.gankcorner.Entity.WanKnowledge;
 import com.gankcorner.Bean.WanKnowledgeBean;
-import com.gankcorner.Bean.WanKnowledge;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
@@ -25,6 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.gankcorner.Utils.CommonUtils.changeSpecialChar;
 
 public class FragmentKnowledge extends BaseFragment {
 
@@ -96,20 +98,14 @@ public class FragmentKnowledge extends BaseFragment {
                 Log.d(TAG, "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 WanKnowledgeBean wanKnowledgeBean = response.body();
-//                String Desc = null;
-//                if (wanKnowledgeBean != null) {
-//                    Desc = wanKnowledgeBean.getData().get(0).getName();
-//                }
-//                Log.d(TAG, "UpdateInfo: " + Desc);
                 tempList = new ArrayList<>();
                 for (WanKnowledgeBean.DataBean dataBean : wanKnowledgeBean.getData()) {
                     List<String> tagList = new ArrayList<>();
                     for (WanKnowledgeBean.DataBean.ChildrenBean childrenBean : dataBean.getChildren()) {
-                        tagList.add(childrenBean.getName());
+                        tagList.add(changeSpecialChar(childrenBean.getName()));
 //                        Log.d(TAG, "addKnowledgeData: " + childrenBean.getName());
                     }
                     WanKnowledge wanKnowledge = new WanKnowledge(dataBean.getName(), tagList);
-//                    Log.d(TAG, "addKnowledgeData: " + dataBean.getName());
                     tempList.add(wanKnowledge);
                 }
                 //更新请求状态以及列表信息
