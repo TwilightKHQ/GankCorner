@@ -60,9 +60,6 @@ public class AdapterWanNaviRight extends RecyclerView.Adapter<AdapterWanNaviRigh
 
     @Override
     public void onBindViewHolder(@NonNull AdapterWanNaviRight.ViewHolder holder, final int position) {
-//        Log.i(TAG, "wanNavigation_Size: " + mWanNavigationList.size());
-//        Log.i(TAG, "position: " + position);
-//        Log.i(TAG, "mTags_Size: " + mTags.size());
         wanNavigation = mWanNavigationList.get(position);
         holder.tagTitle.setText(wanNavigation.getName());
         List<String> tagList = wanNavigation.getTagList();

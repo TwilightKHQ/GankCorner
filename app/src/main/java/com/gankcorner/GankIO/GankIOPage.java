@@ -11,13 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gankcorner.GankIO.GankioFragment.FragmentAndroid;
-import com.gankcorner.GankIO.GankioFragment.FragmentiOS;
+import com.gankcorner.GankIO.GankFragment.FragmentAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
-import com.gankcorner.GankIO.WanAndroidFragment.FragmentArticle;
-import com.gankcorner.GankIO.WanAndroidFragment.FragmentKnowledge;
-import com.gankcorner.GankIO.WanAndroidFragment.FragmentNavigation;
+import com.gankcorner.GankIO.GankFragment.FragmentArticle;
+import com.gankcorner.GankIO.GankFragment.FragmentKnowledge;
+import com.gankcorner.GankIO.GankFragment.FragmentNavigation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ public class GankIOPage extends BaseFragment {
 
     private TabLayout tabLayout;
     private ViewPager mViewPager;
-    private List<String> titleList ;
+    private List<String> titleList;
     private List<Fragment> fragmentList;
 
     @Override
@@ -47,9 +46,7 @@ public class GankIOPage extends BaseFragment {
         tabLayout.addTab(tabLayout.newTab().setText("玩安卓"));
         tabLayout.addTab(tabLayout.newTab().setText("知识体系"));
         tabLayout.addTab(tabLayout.newTab().setText("导航数据"));
-
-        tabLayout.addTab(tabLayout.newTab().setText("A"));
-        tabLayout.addTab(tabLayout.newTab().setText("iOS"));
+        tabLayout.addTab(tabLayout.newTab().setText("干货自选"));
 
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
@@ -60,9 +57,7 @@ public class GankIOPage extends BaseFragment {
         fragmentList.add(new FragmentNavigation());
         titleList.add("导航数据");
         fragmentList.add(new FragmentAndroid());
-        titleList.add("A");
-        fragmentList.add(new FragmentiOS());
-        titleList.add("iOS");
+        titleList.add("干货自选");
 
         //在Fragment当中
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {

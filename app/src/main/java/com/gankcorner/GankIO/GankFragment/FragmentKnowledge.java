@@ -1,4 +1,4 @@
-package com.gankcorner.GankIO.WanAndroidFragment;
+package com.gankcorner.GankIO.GankFragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

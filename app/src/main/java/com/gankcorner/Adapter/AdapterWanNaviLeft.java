@@ -1,4 +1,3 @@
-//自动生成包名 
 package com.gankcorner.Adapter;
 
 import android.content.Context;
@@ -100,6 +99,10 @@ public class AdapterWanNaviLeft extends RecyclerView.Adapter<AdapterWanNaviLeft.
             leftRecyclerData.addAll(Data);
         }
         notifyDataSetChanged();
+    }
+
+    public int getSelectedPosition(){
+        return selectedPosition;
     }
 
     public void setSelectedPosition(int selectedPosition) {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".ActivityWeb">
 
@@ -25,7 +26,8 @@
             <ImageButton
                 android:id="@+id/web_back"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@color/white"
@@ -35,7 +37,7 @@
                 android:id="@+id/web_exit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_toEndOf="@id/web_back"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/web_back"
                 android:background="@color/white"
                 app:srcCompat="@mipmap/exit" />
@@ -49,16 +51,15 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_toStartOf="@id/web_share"
                 android:layout_toLeftOf="@id/web_share"
-                android:layout_toEndOf="@id/web_exit"
                 android:layout_toRightOf="@id/web_exit"
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:layout_scrollFlags="enterAlways|scroll" />
 
             <ImageButton
                 android:id="@+id/web_share"
@@ -102,7 +103,7 @@
             android:id="@+id/web_progress"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="3dp"
             android:foregroundGravity="top" />
 
     </FrameLayout>

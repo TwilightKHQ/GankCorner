@@ -19,7 +19,6 @@ import com.gankcorner.Entity.MultipleItem;
 import com.gankcorner.Interface.NetEase;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
-import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Fragment_Mine extends BaseFragment {
+public class FragmentMine extends BaseFragment {
 
     private String TAG = "========zzq";
 
@@ -38,8 +37,6 @@ public class Fragment_Mine extends BaseFragment {
 
     private List<MultipleItem> data = new ArrayList<>();
     private List<MultipleItem> tempData;
-
-    private Banner mBanner;
 
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -84,7 +81,6 @@ public class Fragment_Mine extends BaseFragment {
             }
         });
         mRecyclerView.setAdapter(adapterMine);
-        mBanner = (Banner) adapterMine.getViewByPosition(mRecyclerView,0, R.id.banner);
     }
 
     private void refresh() {

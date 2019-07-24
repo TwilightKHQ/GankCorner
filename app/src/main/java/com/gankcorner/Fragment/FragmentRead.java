@@ -13,7 +13,7 @@ import com.gankcorner.ActivityRead.ActivityRead;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
 
-public class Fragment_Read extends BaseFragment implements View.OnClickListener {
+public class FragmentRead extends BaseFragment implements View.OnClickListener {
 
     private String TAG = "=======zzq";
 

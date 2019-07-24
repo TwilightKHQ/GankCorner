@@ -46,4 +46,7 @@
         <item>团队博客</item>
     </string-array>
 
+    <string name="all">全部</string>
+    <string name="select_other">换一个？</string>
+
 </resources>

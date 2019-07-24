@@ -1,4 +1,4 @@
-package com.gankcorner.GankIO.WanAndroidFragment;
+package com.gankcorner.GankIO.GankFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -51,10 +51,6 @@ public class FragmentNavigation extends BaseFragment {
     private List<WanNavigation> tempList;
 
     private boolean isScroll = true;//点击左边recycler，右边不监听设置左边的Recycler的选中
-
-    private boolean move = false;
-
-    private int mIndex = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -128,11 +124,6 @@ public class FragmentNavigation extends BaseFragment {
                 Log.d("Test", "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 WanNavigationBean wanNavigationBean = response.body();
-//                String Desc = null;
-//                if (wanKnowledgeBean != null) {
-//                    Desc = wanKnowledgeBean.getData().get(0).getName();
-//                }
-//                Log.d("WanKnowledgeBean", "UpdateInfo: " + Desc);
                 tempList = new ArrayList<>();
                 for (WanNavigationBean.DataBean dataBean : wanNavigationBean.getData()) {
                     List<String> tagList = new ArrayList<>();
@@ -140,11 +131,8 @@ public class FragmentNavigation extends BaseFragment {
                     for (WanNavigationBean.DataBean.ArticlesBean articlesBean : dataBean.getArticles()) {
                         tagList.add(articlesBean.getTitle());
                         urlList.add(articlesBean.getLink());
-//                        Log.d("tagList", "addKnowledgeData: " + articlesBean.getTitle());
-//                        Log.d("tagList", "addKnowledgeData: " + articlesBean.getLink());
                     }
                     WanNavigation wanNavigation = new WanNavigation(dataBean.getName(), tagList, urlList);
-//                    Log.d("tagTitle", "addKnowledgeData: " + dataBean.getName());
                     tempList.add(wanNavigation);
                 }
                 //更新请求状态以及列表信息
@@ -170,53 +158,43 @@ public class FragmentNavigation extends BaseFragment {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 Log.i(TAG, "onScrollStateChanged: " + newState);
-//                if (move && newState == RecyclerView.SCROLL_STATE_IDLE) { //二次滑动
-//                    move = false;
-//                    int n = mIndex - rightRecyclerManager.findFirstVisibleItemPosition();
-//                    if (0 <= n && n < rightRecyclerView.getChildCount()) {
-//                        int top = rightRecyclerView.getChildAt(n).getTop();
-//                        rightRecyclerView.smoothScrollBy(0, top);
-//                    }
-//                }
             }
 
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-
-                //用于将左边RecyclerView的内容调整至屏幕中间
-                int containHalfItem = (leftRecyclerManager.findLastVisibleItemPosition() -
-                        leftRecyclerManager.findFirstVisibleItemPosition()) / 2;
-
-//                Log.i(TAG, "containItem: " + containHalfItem);
-
                 //获取第一个可见view的位置
                 int firstItemPosition = rightRecyclerManager.findFirstVisibleItemPosition();
 
-//                Log.i(TAG, "onScrolled: " + firstItemPosition);
-
-//                if (move) { //二次滑动
-//                    move = false;
-//                    int n = mIndex - rightRecyclerManager.findFirstVisibleItemPosition();
-//                    if (0 <= n && n < rightRecyclerView.getChildCount()) {
-//                        int top = rightRecyclerView.getChildAt(n).getTop();
-//                        rightRecyclerView.scrollBy(0, top);
-//                    }
-//                }
-
                 if (isScroll) {
+                    //用于将左边RecyclerView的内容调整至屏幕中间
+                    int firstVisibleItem = leftRecyclerManager.findFirstVisibleItemPosition();
+                    int lastVisibleItem = leftRecyclerManager.findLastVisibleItemPosition();
+                    int containHalfItem = (lastVisibleItem - firstVisibleItem) / 2;
+                    int nowSelectedPosition = adapterWanNaviLeft.getSelectedPosition();
+
                     if (dy > 0) { // 右边RecyclerView向下滑动
-                        if (firstItemPosition + containHalfItem < adapterWanNaviLeft.getItemCount()) {
-                            leftRecyclerView.smoothScrollToPosition(firstItemPosition + containHalfItem);
+                        if (nowSelectedPosition < firstVisibleItem) { //将左侧不可见的Item移动至可见
+                            leftRecyclerView.smoothScrollToPosition(nowSelectedPosition);
                         } else {
-                            leftRecyclerView.smoothScrollToPosition(firstItemPosition);
+                            // 将左侧可见的已选中Item移动到屏幕中间
+                            if (firstItemPosition + containHalfItem < adapterWanNaviLeft.getItemCount()) {
+                                leftRecyclerView.smoothScrollToPosition(firstItemPosition + containHalfItem);
+                            } else { // 即将到达顶部，尽可能使已选中的Item保持在屏幕中间
+                                leftRecyclerView.smoothScrollToPosition(firstItemPosition);
+                            }
                         }
+
                     } else {    // 右边RecyclerView向上滑动
-                        if (firstItemPosition - containHalfItem > 0) {
-                            leftRecyclerView.smoothScrollToPosition(firstItemPosition - containHalfItem);
+                        if (nowSelectedPosition > lastVisibleItem) { //将左侧不可见的Item移动至可见
+                            leftRecyclerView.smoothScrollToPosition(nowSelectedPosition);
                         } else {
-                            leftRecyclerView.smoothScrollToPosition(0);
+                            if (firstItemPosition - containHalfItem > 0) { // 将左侧可见的已选中Item移动到屏幕中间
+                                leftRecyclerView.smoothScrollToPosition(firstItemPosition - containHalfItem);
+                            } else {// 即将到达顶部，尽可能使已选中的Item保持在屏幕中间
+                                leftRecyclerView.smoothScrollToPosition(0);
+                            }
                         }
                     }
                     adapterWanNaviLeft.setSelectedPosition(firstItemPosition);//左边RecyclerView选定点击的Item
@@ -243,12 +221,6 @@ public class FragmentNavigation extends BaseFragment {
                 isScroll = false;
                 Log.i(TAG, "position: " + position);
                 adapterWanNaviLeft.setSelectedPosition(position);
-                //使用smoothScrollToPosition 首次进入Fragment时 滑动左侧RecyclerView，点击下方Item，右侧自动滑动至最低端
-//                rightRecyclerView.smoothScrollToPosition(position);  //滚动到对应的Item
-//                move(position);
-//                final TopSmoothScroller mScroller = new TopSmoothScroller(getActivity());
-//                mScroller.setTargetPosition(position);
-//                rightRecyclerManager.startSmoothScroll(mScroller);
                 ((LinearLayoutManager) rightRecyclerView.getLayoutManager()).scrollToPositionWithOffset(position, 0);
             }
 
@@ -259,66 +231,6 @@ public class FragmentNavigation extends BaseFragment {
 
 
         });
-    }
-
-    private void move(int position) {
-        mIndex = position;
-        rightRecyclerView.stopScroll();
-        moveToPosition(position); //普通定位
-//        smoothMoveToPosition(position); //滑动定位
-    }
-
-    //直接指定到某位置
-    private void moveToPosition(int n) {
-
-        int firstItem = rightRecyclerManager.findFirstVisibleItemPosition();
-        int lastItem = rightRecyclerManager.findLastVisibleItemPosition();
-        if (n <= firstItem) {
-            rightRecyclerView.scrollToPosition(n);
-        } else if (n <= lastItem) {
-            int top = rightRecyclerView.getChildAt(n - firstItem).getTop();
-            rightRecyclerView.scrollBy(0, top);
-        } else {
-            rightRecyclerView.scrollToPosition(n);
-            move = true;
-        }
-
-    }
-
-    //滑动到某位置
-    private void smoothMoveToPosition(int position) {
-        Log.i(TAG, "smoothMoveToPosition: " + position);
-
-        int firstItem = rightRecyclerManager.findFirstVisibleItemPosition();
-        int lastItem = rightRecyclerManager.findLastVisibleItemPosition();
-        Log.i(TAG, "firstItem: " + firstItem);
-        Log.i(TAG, "lastItem: " + lastItem);
-        if (position <= firstItem) {
-            rightRecyclerView.smoothScrollToPosition(position);
-        } else if (position <= lastItem) {
-            int top = rightRecyclerView.getChildAt(position - firstItem).getTop();
-            rightRecyclerView.smoothScrollBy(0, top);
-        } else {
-            rightRecyclerView.smoothScrollToPosition(position);
-            move = true;
-        }
-
-    }
-
-    public class TopSmoothScroller extends LinearSmoothScroller {
-        TopSmoothScroller(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected int getHorizontalSnapPreference() {
-            return SNAP_TO_START;//具体见源码注释
-        }
-
-        @Override
-        protected int getVerticalSnapPreference() {
-            return SNAP_TO_START;//具体见源码注释
-        }
     }
 
 }

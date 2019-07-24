@@ -1,6 +1,10 @@
 package com.gankcorner.Adapter;
 
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -9,6 +13,7 @@ import com.gankcorner.Bean.NetEaseBanner;
 import com.gankcorner.Entity.MultipleItem;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BannerImageLoader;
+import com.gankcorner.Utils.ImageViewHeight;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -16,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterMine extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> {
+
+    String TAG = "======zzq";
 
     private Banner banner;
 
@@ -48,6 +55,8 @@ public class AdapterMine extends BaseMultiItemQuickAdapter<MultipleItem, BaseVie
             case MultipleItem.TYPE_TITLE:
                 break;
             case MultipleItem.TYPE_PIC:
+                setViewMargins(helper.getView(R.id.name), helper.getLayoutPosition(), 0);
+                setViewMargins(helper.getView(R.id.coverImgUrl), helper.getLayoutPosition(), 1);
                 helper.setText(R.id.name, item.getName());
                 Glide.with(mContext)
                         .load(item.getCoverImgUrl())
@@ -77,5 +86,29 @@ public class AdapterMine extends BaseMultiItemQuickAdapter<MultipleItem, BaseVie
         banner.setImages(images);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+    }
+
+    //根据View的位置和Type来设置Margin
+    private void setViewMargins(View view, int position, int type) {
+        int topMargin = 0;
+        int bottomMargin = 0;
+        int sideMargin = 40;
+
+        if (type == 0) { //文字
+            topMargin = 5;
+            bottomMargin = 10;
+        } else if (type == 1) { //图片
+            topMargin = 20;
+            bottomMargin = 10;
+        }
+        LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(view.getLayoutParams());
+        if ((position - 4) % 3 == 1) {
+            viewParams.setMargins(sideMargin, topMargin, 0, bottomMargin);
+        } else if ((position - 4) % 3 == 0) {
+            viewParams.setMargins(0, topMargin, sideMargin, bottomMargin);
+        } else {
+            viewParams.setMargins(sideMargin / 2, topMargin, sideMargin / 2, bottomMargin);
+        }
+        view.setLayoutParams(viewParams);
     }
 }

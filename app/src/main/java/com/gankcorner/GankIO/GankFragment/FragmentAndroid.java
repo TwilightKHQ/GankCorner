@@ -1,4 +1,4 @@
-package com.gankcorner.GankIO.GankioFragment;
+package com.gankcorner.GankIO.GankFragment;
 
 
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.ActivityWeb;
@@ -20,6 +21,7 @@ import com.gankcorner.Bean.GankArticleBean;
 import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
+import com.gankcorner.Utils.BottomDialogFragment;
 import com.gankcorner.Utils.CommonUtils;
 
 import java.util.ArrayList;
@@ -63,7 +65,7 @@ public class FragmentAndroid extends BaseFragment {
 
     private void initView(View view) {
         // 初始化控件
-        mRecyclerView = view.findViewById(R.id.left_recycle_view);
+        mRecyclerView = view.findViewById(R.id.recycle_view);
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         // 定义一个线性布局管理器
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -152,6 +154,14 @@ public class FragmentAndroid extends BaseFragment {
     private View getHeaderView() {
         View view = getLayoutInflater().inflate(R.layout.item_select,
                 (ViewGroup) mRecyclerView.getParent(), false);
+        TextView selectOther = (TextView) view.findViewById(R.id.more);
+        selectOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomDialogFragment bottomDialogFragment = new BottomDialogFragment();
+                bottomDialogFragment.show(getActivity().getSupportFragmentManager(), "bottomDialogFragment");
+            }
+        });
         return view;
     }
 }

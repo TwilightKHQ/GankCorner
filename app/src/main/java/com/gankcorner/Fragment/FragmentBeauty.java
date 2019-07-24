@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
@@ -21,21 +22,39 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Fragment_test extends BaseFragment {
+public class FragmentBeauty extends BaseFragment {
 
     private String TAG = "=======zzq";
 
     private ImageViewHeight mPic;
 
+    private TextView textVolume;
+    private TextView textPicInfo;
+    private TextView textForward;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tes, container, false);
-        mPic = (ImageViewHeight) view.findViewById(R.id.mine_pic);
-        getOneInfo();
+        View view = inflater.inflate(R.layout.fragment_beauty, container, false);
+
+        initView(view);
+
 
         return view;
+    }
+
+    @Override
+    public void onFirstVisibleToUser() {
+        getOneInfo();
+    }
+
+    private void initView(View view) {
+        mPic = (ImageViewHeight) view.findViewById(R.id.mine_pic);
+
+        textVolume = (TextView) view.findViewById(R.id.volume);
+        textPicInfo = (TextView) view.findViewById(R.id.pic_info);
+        textForward = (TextView) view.findViewById(R.id.forward);
     }
 
     private void getOneInfo() {
@@ -63,6 +82,9 @@ public class Fragment_test extends BaseFragment {
                 Glide.with(getContext())
                         .load(Desc)
                         .into(mPic);
+                textVolume.setText(oneBean.getData().getVolume());
+                textPicInfo.setText( oneBean.getData().getTitle() + " | "  + oneBean.getData().getPic_info());
+                textForward.setText("\t\t" + oneBean.getData().getForward());
             }
 
             @Override

@@ -1,5 +1,4 @@
-package com.gankcorner.GankIO.WanAndroidFragment;
-
+package com.gankcorner.GankIO.GankFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.ActivityWeb;
 import com.gankcorner.Adapter.AdapterWanArticle;
 import com.gankcorner.Bean.BannerBean;
-import com.gankcorner.Bean.BannerList;
 import com.gankcorner.Bean.WanArticle;
 import com.gankcorner.Bean.WanArticleBean;
 import com.gankcorner.Interface.WanAndroid;
@@ -47,7 +45,9 @@ public class FragmentArticle extends BaseFragment {
     private String TAG = "========zzq";
 
     private Banner mBannerView;
-    private List<BannerList> mBannerListList = new ArrayList<>();
+    private List<String> mBannerImageList = new ArrayList<>();
+    private List<String> mBannerTitleList = new ArrayList<>();
+    private List<String> mBannerUrlList = new ArrayList<>();
 
     private AdapterWanArticle adapterWanArticle;
     private RecyclerView mRecyclerView;
@@ -67,11 +67,6 @@ public class FragmentArticle extends BaseFragment {
 
         initViews(view);
         initClickEvents();
-
-        Log.i("========zzq", "FragmentHome_isVisibleToUser: " + isVisibleToUser());
-
-        Log.i(TAG, "FragmentHome_getUserVisibleHint: " + getUserVisibleHint());
-
 
         return view;
     }
@@ -237,7 +232,7 @@ public class FragmentArticle extends BaseFragment {
                     Desc = bannerBean.getData().get(0).getDesc();
                 }
                 Log.d(TAG, "UpdateInfo: " + Desc);
-                SetBanner(bannerBean);
+                initBannerData(bannerBean);
             }
 
             @Override
@@ -248,10 +243,13 @@ public class FragmentArticle extends BaseFragment {
     }
 
     //配置Banner
-    private void SetBanner(BannerBean bannerBean) {
+    private void SetBanner() {
         initBanner();//设置Banner配置，必须在设置Banner数据之前执行
         initBannerEvent();//设置Banner监听事件, 点击事件的监听需要设置在start之前
-        initBannerData(bannerBean);//设置Banner的数据
+        mBannerView.setImages(mBannerImageList);
+        mBannerView.setBannerTitles(mBannerTitleList);
+        //banner设置方法全部调用完毕时最后调用
+        mBannerView.start();
     }
 
     //设置Banner配置，必须在设置Banner数据之前执行
@@ -268,24 +266,14 @@ public class FragmentArticle extends BaseFragment {
 
     //设置Banner的数据
     private void initBannerData(BannerBean bannerBean) {
-        for (int i = 0; i < bannerBean.getData().size(); i++) {
-            BannerBean.DataBean dataBean = bannerBean.getData().get(i);
-            BannerList bannerList = new BannerList(dataBean.getTitle(), dataBean.getImagePath(),
-                    dataBean.getUrl());
-//            Log.d("GankArticle", "SetBanner: " + dataBean.getTitle());
-            mBannerListList.add(bannerList);
+        mBannerTitleList = new ArrayList<>();
+        mBannerImageList = new ArrayList<>();
+        for (BannerBean.DataBean dataBean : bannerBean.getData()) {
+            mBannerTitleList.add(dataBean.getTitle());
+            mBannerImageList.add(dataBean.getImagePath());
+            mBannerUrlList.add(dataBean.getUrl());
         }
-        List<String> images = new ArrayList<String>();
-        List<String> titles = new ArrayList<String>();
-        for (BannerList bannerList : mBannerListList) {
-            images.add(bannerList.getImgUrl());
-            titles.add(bannerList.getTitle());
-//            Log.d("Title", "initBannerData: " + bannerList.getTitle());
-        }
-        mBannerView.setImages(images);
-        mBannerView.setBannerTitles(titles);
-        //banner设置方法全部调用完毕时最后调用
-        mBannerView.start();
+        mBannerView.update(mBannerImageList, mBannerTitleList);
     }
 
     //设置Banner监听事件
@@ -310,8 +298,8 @@ public class FragmentArticle extends BaseFragment {
             @Override
             public void OnBannerClick(int position) {
                 Intent intent = new Intent(getContext(), ActivityWeb.class);
-                intent.putExtra("page_desc", mBannerListList.get(position).getTitle());
-                intent.putExtra("page_url", mBannerListList.get(position).getUrlPath());
+                intent.putExtra("page_desc", mBannerTitleList.get(position));
+                intent.putExtra("page_url", mBannerUrlList.get(position));
                 getContext().startActivity(intent);
             }
         });
@@ -323,6 +311,7 @@ public class FragmentArticle extends BaseFragment {
         mBannerView = view.findViewById(R.id.banner);
         //设置banner的高度为手机屏幕的四分之一, banner需要设置为最外层布局
         mBannerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getHeightPix() / 4));
+        SetBanner();
         return view;
     }
 

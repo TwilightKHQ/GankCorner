@@ -16,10 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gankcorner.Adapter.AdapterFragment;
-import com.gankcorner.Fragment.Fragment_Mine;
-import com.gankcorner.Fragment.Fragment_Read;
+import com.gankcorner.Fragment.FragmentMine;
+import com.gankcorner.Fragment.FragmentRead;
 import com.gankcorner.GankIO.GankIOPage;
-import com.gankcorner.Fragment.Fragment_test;
+import com.gankcorner.Fragment.FragmentBeauty;
 import com.gankcorner.Utils.AppUtil;
 import com.gankcorner.Utils.BaseActivity;
 import com.gankcorner.Utils.DrawableTextView;
@@ -58,9 +58,9 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
-        fragmentList.add(new Fragment_Mine());
-        fragmentList.add(new Fragment_Read());
-        fragmentList.add(new Fragment_test());
+        fragmentList.add(new FragmentMine());
+        fragmentList.add(new FragmentRead());
+        fragmentList.add(new FragmentBeauty());
         fragmentList.add(new GankIOPage());
         String[] titles = getResources().getStringArray(R.array.title);
         AdapterFragment adapterFragment = new
