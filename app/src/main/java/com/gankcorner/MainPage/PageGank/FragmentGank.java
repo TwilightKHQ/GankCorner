@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gankcorner.ActivityWeb;
@@ -38,6 +39,7 @@ public class FragmentGank extends BaseFragment {
 
     private String TAG = "=======zzq";
 
+    private TextView headerText;
     private AdapterGank adapterGank;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -163,6 +165,7 @@ public class FragmentGank extends BaseFragment {
         View view = getLayoutInflater().inflate(R.layout.header_gank,
                 (ViewGroup) mRecyclerView.getParent(), false);
         TextView selectOther = (TextView) view.findViewById(R.id.more);
+        headerText = (TextView) view.findViewById(R.id.header);
         selectOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,9 +182,16 @@ public class FragmentGank extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK && data != null) {//获取从DialogFragmentB中传递的mB2A
-                Log.i(TAG, "onActivityResult: ");
-                type = data.getStringExtra("refresh_type");
-                refresh();
+                if (!type.equals(data.getStringExtra("refresh_type"))) {
+                    type = data.getStringExtra("refresh_type");
+                    if (type.equals("all")) {
+                        type = getResources().getString(R.string.all);
+                    }
+                    refresh();
+                    headerText.setText(type);
+                } else {
+                    Toast.makeText(getContext(), "呲！", Toast.LENGTH_SHORT).show();
+                }
                 Log.i(TAG, "onActivityResult: " + type);
             }
         }
