@@ -200,7 +200,7 @@ public class FragmentArticle extends BaseFragment {
         for (int i = 0; i < numPerPage; i++) {
             WanArticleBean.DataBean.DatasBean dateBean = wanArticleBean.getData().getDatas().get(i);
             WanArticle wanArticle = new WanArticle(dateBean.getAuthor(), dateBean.getChapterName(),
-                    dateBean.getLink(), dateBean.getNiceDate(), dateBean.getSuperChapterName(), changeSpecialChar(dateBean.getTitle()));
+                    dateBean.getLink(), dateBean.getNiceDate(), dateBean.getSuperChapterName(), dateBean.getTitle());
 //            Log.d(TAG, "addData: " + wanArticle.getTitle());
             tempList.add(wanArticle);
         }

@@ -6,9 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.gankcorner.Utils.AppUtil.getContext;
 
 public class CommonUtils {
+
+    private static final HashMap<String, String> MapSpecialChar = new HashMap<>();
 
     // 判断recycleView是否将要滑到底部
     public static boolean isWillBottom(RecyclerView recyclerView) {
@@ -34,15 +39,6 @@ public class CommonUtils {
     public static int getWidthPix() {
         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
         return dm.widthPixels;
-    }
-
-    public static String changeSpecialChar(String string) {
-        String[] specialString = {"&mdash;", "&amp;", "&ldquo;", "&rdquo;"};
-        String[] normalChar = {"—", "&", "“", "”"};
-        for (int i = 0; i < specialString.length; i++) {
-            string = string.replace(specialString[i], normalChar[i]);
-        }
-        return string;
     }
 
     /**

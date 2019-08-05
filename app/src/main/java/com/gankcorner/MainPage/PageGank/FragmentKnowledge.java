@@ -102,7 +102,7 @@ public class FragmentKnowledge extends BaseFragment {
                 for (WanKnowledgeBean.DataBean dataBean : wanKnowledgeBean.getData()) {
                     List<String> tagList = new ArrayList<>();
                     for (WanKnowledgeBean.DataBean.ChildrenBean childrenBean : dataBean.getChildren()) {
-                        tagList.add(changeSpecialChar(childrenBean.getName()));
+                        tagList.add(childrenBean.getName());
 //                        Log.d(TAG, "addKnowledgeData: " + childrenBean.getName());
                     }
                     WanKnowledge wanKnowledge = new WanKnowledge(dataBean.getName(), tagList);

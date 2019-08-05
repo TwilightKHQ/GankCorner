@@ -3,6 +3,7 @@ package com.gankcorner.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,7 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
             public View getView(FlowLayout parent, int position, String s) {
                 View mInflater = LayoutInflater.from(mContext).inflate(R.layout.item_tag, parent, false);
                 final TextView textView = (TextView) mInflater.findViewById(R.id.tag_text);
-                textView.setText(s);
+                textView.setText(Html.fromHtml(s));
                 return textView;
             }
         });

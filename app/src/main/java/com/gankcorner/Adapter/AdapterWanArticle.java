@@ -1,6 +1,7 @@
 package com.gankcorner.Adapter;
 
 import android.support.annotation.Nullable;
+import android.text.Html;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -22,7 +23,7 @@ public class AdapterWanArticle extends BaseQuickAdapter<WanArticle, BaseViewHold
         helper.setText(R.id.author, item.getAuthor());
         helper.setText(R.id.chapterName, item.getChapterName());
         helper.setText(R.id.niceDate, item.getNiceDate());
-        helper.setText(R.id.title, item.getTitle());
+        helper.setText(R.id.title, Html.fromHtml(item.getTitle()));
         CharAvatarView headView = (CharAvatarView) helper.getView(R.id.circle_image_view);
         headView.setText(item.getAuthor());
 
