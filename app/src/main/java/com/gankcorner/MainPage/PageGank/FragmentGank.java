@@ -24,6 +24,7 @@ import com.gankcorner.Interface.Gank;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CommonUtils;
+import com.gankcorner.Utils.LogUtil;
 import com.gankcorner.View.DialogSelect;
 
 import java.util.ArrayList;
@@ -104,7 +105,7 @@ public class FragmentGank extends BaseFragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (CommonUtils.isWillBottom(recyclerView) && !gettingData) {
                     getGank(type, numPerPage, manager.getItemCount() / numPerPage + 1);
-                    Log.d("currentPage", "onScrollStateChanged: " + manager.getItemCount() / numPerPage);
+                    LogUtil.d("currentPage", "onScrollStateChanged: " + manager.getItemCount() / numPerPage);
                 }
             }
         });
@@ -131,7 +132,7 @@ public class FragmentGank extends BaseFragment {
         call.enqueue(new Callback<GankArticleBean>() {
             @Override
             public void onResponse(@NonNull Call<GankArticleBean> call, @NonNull Response<GankArticleBean> response) {
-                Log.d(TAG, "Android_response: " + response.toString());
+                LogUtil.d(TAG, "Android_response: " + response.toString());
                 //完成解析后可以直接获取数据
                 GankArticleBean gankArticleBean = response.body();
                 addData(gankArticleBean);
@@ -192,7 +193,7 @@ public class FragmentGank extends BaseFragment {
                 } else {
                     Toast.makeText(getContext(), "呲！", Toast.LENGTH_SHORT).show();
                 }
-                Log.i(TAG, "onActivityResult: " + type);
+                LogUtil.i(TAG, "onActivityResult: " + type);
             }
         }
     }

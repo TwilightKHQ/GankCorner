@@ -19,6 +19,7 @@ import com.gankcorner.Entity.MultipleItem;
 import com.gankcorner.Interface.NetEase;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
+import com.gankcorner.Utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +107,7 @@ public class PageMine extends BaseFragment {
         call.enqueue(new Callback<NetEaseBannerBean>() {
             @Override
             public void onResponse(Call<NetEaseBannerBean> call, Response<NetEaseBannerBean> response) {
-                Log.d(TAG, "One_response: " + response.toString());
+                LogUtil.d(TAG, "One_response: " + response.toString());
                 NetEaseBannerBean netEaseBannerBean = response.body();
                 String Desc = null;
                 String size = null;
@@ -114,8 +115,8 @@ public class PageMine extends BaseFragment {
                     Desc = netEaseBannerBean.getData().get(0).getUrl();
                     size = netEaseBannerBean.getData().get(0).getPicUrl();
                 }
-                Log.d(TAG, "Desc: " + Desc + " Size:" + size);
-                Log.i(TAG, "Data Size: " + data.size());
+                LogUtil.d(TAG, "Desc: " + Desc + " Size:" + size);
+                LogUtil.i(TAG, "Data Size: " + data.size());
                 List<NetEaseBanner> netEaseBannerList = new ArrayList<>();
                 for (NetEaseBannerBean.DataBean dataBean : netEaseBannerBean.getData()) {
                     netEaseBannerList.add(new NetEaseBanner(dataBean.getUrl(),
@@ -150,7 +151,7 @@ public class PageMine extends BaseFragment {
         call.enqueue(new Callback<NetEaseSongListBean>() {
             @Override
             public void onResponse(Call<NetEaseSongListBean> call, Response<NetEaseSongListBean> response) {
-                Log.d(TAG, "One_response: " + response.toString());
+                LogUtil.d(TAG, "One_response: " + response.toString());
                 NetEaseSongListBean netEaseSongListBean = response.body();
                 String Desc = null;
                 String size = null;
@@ -158,7 +159,7 @@ public class PageMine extends BaseFragment {
                     Desc = netEaseSongListBean.getData().get(0).getName();
                     size = netEaseSongListBean.getData().get(0).getCoverImgUrl();
                 }
-                Log.d(TAG, "Desc: " + Desc + " Size:" + size);
+                LogUtil.d(TAG, "Desc: " + Desc + " Size:" + size);
                 List<MultipleItem> multipleItemList = new ArrayList<>();
                 for (NetEaseSongListBean.DataBean dataBean : netEaseSongListBean.getData()) {
                     multipleItemList.add(new MultipleItem(dataBean.getName(),

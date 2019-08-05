@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import com.gankcorner.Bean.WanKnowledgeBean;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
+import com.gankcorner.Utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.gankcorner.Utils.CommonUtils.changeSpecialChar;
 
 public class FragmentKnowledge extends BaseFragment {
 
@@ -95,7 +93,7 @@ public class FragmentKnowledge extends BaseFragment {
         call.enqueue(new Callback<WanKnowledgeBean>() {
             @Override
             public void onResponse(@NonNull Call<WanKnowledgeBean> call, @NonNull Response<WanKnowledgeBean> response) {
-                Log.d(TAG, "response: " + response.toString());
+                LogUtil.d(TAG, "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 WanKnowledgeBean wanKnowledgeBean = response.body();
                 tempList = new ArrayList<>();

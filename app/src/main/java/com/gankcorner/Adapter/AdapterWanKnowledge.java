@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.gankcorner.Entity.WanKnowledge;
 import com.gankcorner.R;
+import com.gankcorner.Utils.LogUtil;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -61,7 +62,7 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
         wanKnowledge = mWanKnowledgeList.get(position);
         holder.tagTitle.setText(wanKnowledge.getName());
         List<String> tagList = wanKnowledge.getTagList();
-        Log.d("mTags", "Size: " + mTags.size());
+        LogUtil.d("mTags", "Size: " + mTags.size());
         holder.tagFlowLayout.setAdapter(new TagAdapter<String>(tagList) {
             @Override
             public View getView(FlowLayout parent, int position, String s) {
@@ -74,7 +75,7 @@ public class AdapterWanKnowledge extends RecyclerView.Adapter<AdapterWanKnowledg
         holder.tagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int pos, FlowLayout parent) {
-                Log.i(TAG, "pos: " + pos);
+                LogUtil.i(TAG, "pos: " + pos);
                 Toast.makeText(mContext, mTags.get(position).get(pos), Toast.LENGTH_SHORT).show();
                 return true;
             }

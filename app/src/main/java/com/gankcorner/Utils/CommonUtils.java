@@ -13,8 +13,6 @@ import static com.gankcorner.Utils.AppUtil.getContext;
 
 public class CommonUtils {
 
-    private static final HashMap<String, String> MapSpecialChar = new HashMap<>();
-
     // 判断recycleView是否将要滑到底部
     public static boolean isWillBottom(RecyclerView recyclerView) {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();

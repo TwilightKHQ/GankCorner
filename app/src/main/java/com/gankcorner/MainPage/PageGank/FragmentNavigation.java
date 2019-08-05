@@ -19,6 +19,7 @@ import com.gankcorner.Bean.WanNavigationBean;
 import com.gankcorner.Interface.WanAndroid;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
+import com.gankcorner.Utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +120,7 @@ public class FragmentNavigation extends BaseFragment {
         call.enqueue(new Callback<WanNavigationBean>() {
             @Override
             public void onResponse(@NonNull Call<WanNavigationBean> call, @NonNull Response<WanNavigationBean> response) {
-                Log.d("Test", "response: " + response.toString());
+                LogUtil.d("Test", "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 WanNavigationBean wanNavigationBean = response.body();
                 tempList = new ArrayList<>();
@@ -155,7 +156,7 @@ public class FragmentNavigation extends BaseFragment {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                Log.i(TAG, "onScrollStateChanged: " + newState);
+                LogUtil.i(TAG, "onScrollStateChanged: " + newState);
             }
 
             @Override
@@ -217,7 +218,7 @@ public class FragmentNavigation extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 isScroll = false;
-                Log.i(TAG, "position: " + position);
+                LogUtil.i(TAG, "position: " + position);
                 adapterWanNaviLeft.setSelectedPosition(position);
                 ((LinearLayoutManager) rightRecyclerView.getLayoutManager()).scrollToPositionWithOffset(position, 0);
             }

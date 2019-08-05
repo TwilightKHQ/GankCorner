@@ -14,6 +14,7 @@ import com.gankcorner.Bean.OneBean;
 import com.gankcorner.Interface.One;
 import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
+import com.gankcorner.Utils.LogUtil;
 import com.gankcorner.View.ImageViewHeight;
 
 import retrofit2.Call;
@@ -70,7 +71,7 @@ public class PageBeauty extends BaseFragment {
         call.enqueue(new Callback<OneBean>() {
             @Override
             public void onResponse(Call<OneBean> call, Response<OneBean> response) {
-                Log.d(TAG, "One_response: " + response.toString());
+                LogUtil.d(TAG, "One_response: " + response.toString());
                 OneBean oneBean = response.body();
                 String Desc = null;
                 String size = null;
@@ -78,7 +79,7 @@ public class PageBeauty extends BaseFragment {
                     Desc = oneBean.getData().getImg_url();
                     size = oneBean.getData().getForward();
                 }
-                Log.d(TAG, "Desc: " + Desc + " Size:" + size);
+                LogUtil.d(TAG, "Desc: " + Desc + " Size:" + size);
                 Glide.with(getContext())
                         .load(Desc)
                         .into(mPic);

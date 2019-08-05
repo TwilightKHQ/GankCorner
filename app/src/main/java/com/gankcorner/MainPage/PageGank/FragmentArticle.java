@@ -25,6 +25,7 @@ import com.gankcorner.Utils.AppUtil;
 import com.gankcorner.Utils.BannerImageLoader;
 import com.gankcorner.Utils.BaseFragment;
 import com.gankcorner.Utils.CommonUtils;
+import com.gankcorner.Utils.LogUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -38,7 +39,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.gankcorner.Utils.CommonUtils.changeSpecialChar;
 import static com.gankcorner.Utils.CommonUtils.getHeightPix;
 
 public class FragmentArticle extends BaseFragment {
@@ -99,7 +99,7 @@ public class FragmentArticle extends BaseFragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (CommonUtils.isWillBottom(recyclerView) && !gettingData) {
                     getWanAndroidArticle(currentPage);
-                    Log.d(TAG, "onScrollStateChanged: " + currentPage);
+                    LogUtil.d(TAG, "onScrollStateChanged: " + currentPage);
                 }
             }
         });
@@ -170,7 +170,7 @@ public class FragmentArticle extends BaseFragment {
         call.enqueue(new Callback<WanArticleBean>() {
             @Override
             public void onResponse(@NonNull Call<WanArticleBean> call, @NonNull Response<WanArticleBean> response) {
-                Log.d(TAG, "response: " + response.toString());
+                LogUtil.d(TAG, "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 WanArticleBean wanArticleBean = response.body();
                 String Desc = null;
@@ -179,9 +179,9 @@ public class FragmentArticle extends BaseFragment {
                     Desc = wanArticleBean.getData().getDatas().get(0).getTitle();
                     size = wanArticleBean.getData().getDatas().size();
                 }
-                Log.d(TAG, "String: " + Desc + " Size:" + size);
+                LogUtil.d(TAG, "String: " + Desc + " Size:" + size);
                 currentPage = wanArticleBean.getData().getCurPage();
-                Log.d(TAG, "onResponse: " + currentPage);
+                LogUtil.d(TAG, "onResponse: " + currentPage);
                 addArticleData(wanArticleBean);
                 mSwipeRefreshLayout.setRefreshing(false);
                 gettingData = false;
@@ -225,14 +225,14 @@ public class FragmentArticle extends BaseFragment {
         call.enqueue(new Callback<BannerBean>() {
             @Override
             public void onResponse(@NonNull Call<BannerBean> call, @NonNull Response<BannerBean> response) {
-                Log.d(TAG, "response: " + response.toString());
+                LogUtil.d(TAG, "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 BannerBean bannerBean = response.body();
                 String Desc = null;
                 if (bannerBean != null) {
                     Desc = bannerBean.getData().get(0).getDesc();
                 }
-                Log.d(TAG, "UpdateInfo: " + Desc);
+                LogUtil.d(TAG, "UpdateInfo: " + Desc);
                 initBannerData(bannerBean);
             }
 

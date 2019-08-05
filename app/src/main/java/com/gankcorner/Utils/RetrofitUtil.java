@@ -26,14 +26,14 @@ public class RetrofitUtil {
         call.enqueue(new Callback<GankArticleBean>() {
             @Override
             public void onResponse(Call<GankArticleBean> call, Response<GankArticleBean> response) {
-                Log.d("Test", "response: " + response.toString());
+                LogUtil.d("Test", "response: " + response.toString());
                 //完成解析后可以直接获取数据
                 GankArticleBean gankArticleBean = response.body();
                 String Desc = null;
                 if (gankArticleBean != null) {
                     Desc = gankArticleBean.getResults().get(0).getDesc();
                 }
-                Log.d("Test", "UpdateInfo: " + Desc);
+                LogUtil.d("Test", "UpdateInfo: " + Desc);
             }
 
             @Override
