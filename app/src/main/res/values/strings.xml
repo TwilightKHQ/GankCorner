@@ -43,17 +43,6 @@
 
     <!--ActivityRead 部分-->
     <string name="read_title">闲读 —— 读那些值得读的</string>
-    <string-array name="read_page">
-        <item>科技资讯</item>
-        <item>趣味软件/游戏</item>
-        <item>装备党</item>
-        <item>独立思想</item>
-        <item>Android</item>
-        <item>iOS</item>
-        <item>草根新闻</item>
-        <item>创业新闻</item>
-        <item>团队博客</item>
-    </string-array>
 
     <string name="all">全部</string>
     <string name="select_other">换一个？</string>

@@ -37,6 +37,8 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    //HTML 解析
+    implementation 'org.jsoup:jsoup:1.10.2'
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0' // 用Gson解析json的转换器

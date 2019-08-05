@@ -41,7 +41,6 @@ public class PageBeauty extends BaseFragment {
 
         initView(view);
 
-
         return view;
     }
 

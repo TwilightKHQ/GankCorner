@@ -12,15 +12,15 @@ import java.util.List;
 public class AdapterFragment extends FragmentPagerAdapter {
 
     private Context context;
-    private String[] titles;
+    private List<String> titleList;
     private List<Fragment> fragmentList;
 
     public AdapterFragment(FragmentManager fragmentManager, Context context,
-                           List<Fragment> fragmentList, String[] titles) {
+                           List<Fragment> fragmentList, List<String> titleList) {
         super(fragmentManager);
         this.context = context;
         this.fragmentList = fragmentList;
-        this.titles = titles;
+        this.titleList = titleList;
     }
 
     /**
@@ -48,8 +48,8 @@ public class AdapterFragment extends FragmentPagerAdapter {
      */
     @Override
     public CharSequence getPageTitle(int position) {
-        if (titles != null && titles.length > 0) {
-            return titles[position];
+        if (titleList != null && titleList.size() > 0) {
+            return titleList.get(position);
         }
         return null;
     }
@@ -57,10 +57,5 @@ public class AdapterFragment extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragmentList == null ? 0 : fragmentList.size();
-    }
-
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-
     }
 }

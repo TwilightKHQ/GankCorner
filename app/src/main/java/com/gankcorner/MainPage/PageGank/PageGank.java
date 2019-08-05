@@ -16,6 +16,7 @@ import com.gankcorner.R;
 import com.gankcorner.Utils.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PageGank extends BaseFragment {
@@ -46,7 +47,7 @@ public class PageGank extends BaseFragment {
         fragmentList.add(new FragmentNavigation());
         final String[] titles = getResources().getStringArray(R.array.gank_title);
         AdapterFragment adapterFragment = new AdapterFragment(getChildFragmentManager(),
-                getContext(), fragmentList, titles);
+                getContext(), fragmentList, Arrays.asList(titles));
 
         //在Fragment当中
         mViewPager.setAdapter(adapterFragment);

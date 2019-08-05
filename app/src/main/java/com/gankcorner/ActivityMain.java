@@ -18,13 +18,14 @@ import android.widget.Toast;
 import com.gankcorner.Adapter.AdapterFragment;
 import com.gankcorner.MainPage.PageGank.PageGank;
 import com.gankcorner.MainPage.PageMine;
-import com.gankcorner.MainPage.PageRead;
+import com.gankcorner.MainPage.PageRead.PageRead;
 import com.gankcorner.MainPage.PageBeauty;
 import com.gankcorner.Utils.AppUtil;
 import com.gankcorner.Utils.BaseActivity;
 import com.gankcorner.View.DrawableTextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -64,7 +65,7 @@ public class ActivityMain extends BaseActivity implements View.OnClickListener {
         fragmentList.add(new PageGank());
         String[] titles = getResources().getStringArray(R.array.title);
         AdapterFragment adapterFragment = new AdapterFragment(getSupportFragmentManager(),
-                this, fragmentList, titles);
+                this, fragmentList, Arrays.asList(titles));
         mViewPager.setAdapter(adapterFragment);
         mViewPager.setCurrentItem(0);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
