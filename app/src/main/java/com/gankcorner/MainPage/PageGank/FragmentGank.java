@@ -186,14 +186,15 @@ public class FragmentGank extends BaseFragment {
                 if (!type.equals(data.getStringExtra("refresh_type"))) {
                     type = data.getStringExtra("refresh_type");
                     if (type.equals("all")) {
-                        type = getResources().getString(R.string.all);
+                        headerText.setText(getResources().getString(R.string.all));
+                    } else {
+                        headerText.setText(type);
                     }
                     refresh();
-                    headerText.setText(type);
                 } else {
                     Toast.makeText(getContext(), "呲！", Toast.LENGTH_SHORT).show();
                 }
-                LogUtil.i(TAG, "onActivityResult: " + type);
+                LogUtil.i(TAG, "refresh_type: " + type);
             }
         }
     }

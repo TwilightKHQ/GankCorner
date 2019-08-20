@@ -41,7 +41,7 @@ public class FragmentKnowledge extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.wanandroid_knowledge, container, false);
+        View view = inflater.inflate(R.layout.ganhuo_knowledge, container, false);
 
         initViews(view);
 

@@ -19,19 +19,22 @@ import android.widget.Toast;
 
 
 import com.gankcorner.Utils.BaseActivity;
+import com.gankcorner.Utils.LogUtil;
 import com.gankcorner.View.DialogBottom;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
 public class ActivityWeb extends BaseActivity implements View.OnClickListener {
 
-    private String TAG = "========zzq";
+    private String TAG = ActivityWeb.class.getSimpleName();
 
     private ProgressBar progressBar;
     private WebView webView;
 
     private String desc;
     private String url;
+
+    private TextView webTitle;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -68,8 +71,10 @@ public class ActivityWeb extends BaseActivity implements View.OnClickListener {
         mWebSettings.setLoadWithOverviewMode(true);
         /* HTML5的地理位置服务,设置为true,启用地理定位 */
         mWebSettings.setGeolocationEnabled(true);
-        /* 设置是否允许WebView使用缩放的功能*/
+        /* 设置是否允许WebView使用缩放的功能 */
         mWebSettings.setBuiltInZoomControls(true);
+        /* 不显示webview缩放按钮 */
+        mWebSettings.setDisplayZoomControls(false);
         /* 提高网页渲染的优先级 */
         mWebSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         /* 设置显示水平滚动条,就是网页右边的滚动条.我这里设置的不显示 */
@@ -80,6 +85,13 @@ public class ActivityWeb extends BaseActivity implements View.OnClickListener {
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
         webView.setWebChromeClient(new WebChromeClient() {
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                webTitle.setText(title);
+                webTitle.setSelected(true);
+            }
 
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -110,6 +122,7 @@ public class ActivityWeb extends BaseActivity implements View.OnClickListener {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 progressBar.setVisibility(View.VISIBLE);
+                webTitle.setText(getResources().getString(R.string.loading));
                 super.onPageStarted(view, url, favicon);
             }
 
@@ -118,8 +131,6 @@ public class ActivityWeb extends BaseActivity implements View.OnClickListener {
                 Toast.makeText(ActivityWeb.this, "加载失败", Toast.LENGTH_SHORT).show();
                 super.onReceivedError(view, errorCode, description, failingUrl);
             }
-
-
         });
         webView.loadUrl(url);
 
@@ -136,8 +147,9 @@ public class ActivityWeb extends BaseActivity implements View.OnClickListener {
         ImageButton closeButton = (ImageButton) findViewById(R.id.web_exit);
         closeButton.setOnClickListener(this);
 
-        TextView webTitle = (TextView) findViewById(R.id.web_title);
-        webTitle.setText(desc);
+        webTitle = (TextView) findViewById(R.id.web_title);
+        webTitle.setText(getResources().getString(R.string.loading));
+        webTitle.setSelected(true);
 
         ImageButton shareButton = (ImageButton) findViewById(R.id.web_share);
         shareButton.setOnClickListener(this);
@@ -147,7 +159,6 @@ public class ActivityWeb extends BaseActivity implements View.OnClickListener {
         progressBar = (ProgressBar) findViewById(R.id.web_progress);
 
         webView = (WebView) findViewById(R.id.web_page);
-
     }
 
     @Override

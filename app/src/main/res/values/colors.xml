@@ -3,6 +3,7 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FAFAFA</color>
     <color name="colorAccent">#F0F0F0</color>
+    <color name="colorControlHighlight">#ADADAD</color>
 
     <color name="bilibili">#F87298</color>
 

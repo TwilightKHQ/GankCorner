@@ -85,7 +85,7 @@ public class PageRead extends BaseFragment implements View.OnClickListener {
             public void run() {
                 try {
                     //解析 html
-                    Document doc = Jsoup.connect(API_URL).get()
+                    Document doc = Jsoup.connect(API_URL).get();
                     Element element = doc.getElementById("xiandu_cat");
                     LogUtil.i(TAG, element.html());
                     Elements elements = element.getElementsByTag("a");

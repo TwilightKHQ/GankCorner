@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,7 +54,7 @@ public class FragmentNavigation extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.wanandroid_navigation, container, false);
+        View view = inflater.inflate(R.layout.gabhuo_navigation, container, false);
 
         initViews(view);
         initLinkageListener();

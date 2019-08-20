@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,7 @@ public class FragmentArticle extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.wanandroid_home, container, false);
+        View view = inflater.inflate(R.layout.ganhuo_article, container, false);
 
         initViews(view);
         initClickEvents();
@@ -88,7 +87,7 @@ public class FragmentArticle extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // 设置adapter
         adapterWanArticle = new AdapterWanArticle(R.layout.item_wanandroid, mWanArticleList);
-//        //设置HeaderView
+        //设置HeaderView
         View headerView = getHeaderView();
         mRecyclerView.setAdapter(adapterWanArticle);
         adapterWanArticle.addHeaderView(headerView);
