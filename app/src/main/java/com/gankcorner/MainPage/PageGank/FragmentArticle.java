@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -188,7 +189,8 @@ public class FragmentArticle extends BaseFragment {
 
             @Override
             public void onFailure(@NonNull Call<WanArticleBean> call, @NonNull Throwable t) {
-
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }
@@ -198,7 +200,9 @@ public class FragmentArticle extends BaseFragment {
         List<WanArticle> tempList = new ArrayList<>();
         for (int i = 0; i < numPerPage; i++) {
             WanArticleBean.DataBean.DatasBean dateBean = wanArticleBean.getData().getDatas().get(i);
-            WanArticle wanArticle = new WanArticle(dateBean.getAuthor(), dateBean.getChapterName(),
+            String author = dateBean.getAuthor();
+            if (author.equals("")) author = dateBean.getShareUser();
+            WanArticle wanArticle = new WanArticle(author.trim(), dateBean.getChapterName(),
                     dateBean.getLink(), dateBean.getNiceDate(), dateBean.getSuperChapterName(), dateBean.getTitle());
 //            Log.d(TAG, "addData: " + wanArticle.getTitle());
             tempList.add(wanArticle);
@@ -237,7 +241,8 @@ public class FragmentArticle extends BaseFragment {
 
             @Override
             public void onFailure(@NonNull Call<BannerBean> call, @NonNull Throwable t) {
-
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }

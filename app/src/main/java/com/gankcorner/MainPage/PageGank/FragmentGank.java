@@ -27,11 +27,13 @@ import com.gankcorner.Utils.CommonUtils;
 import com.gankcorner.Utils.LogUtil;
 import com.gankcorner.View.DialogSelect;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.HttpException;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -142,7 +144,8 @@ public class FragmentGank extends BaseFragment {
 
             @Override
             public void onFailure(@NonNull Call<GankArticleBean> call, @NonNull Throwable t) {
-
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }

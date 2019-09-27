@@ -134,6 +134,8 @@ public class PageMine extends BaseFragment {
             public void onFailure(Call<NetEaseBannerBean> call, Throwable t) {
                 Toast.makeText(getContext(), "网络错误", Toast.LENGTH_SHORT).show();
                 mSwipeRefreshLayout.setRefreshing(false);
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }
@@ -177,6 +179,8 @@ public class PageMine extends BaseFragment {
             public void onFailure(Call<NetEaseSongListBean> call, Throwable t) {
                 Toast.makeText(getContext(), "网络错误", Toast.LENGTH_SHORT).show();
                 mSwipeRefreshLayout.setRefreshing(false);
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }

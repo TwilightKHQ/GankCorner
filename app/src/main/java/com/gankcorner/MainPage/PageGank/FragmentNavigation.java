@@ -142,7 +142,8 @@ public class FragmentNavigation extends BaseFragment {
 
             @Override
             public void onFailure(@NonNull Call<WanNavigationBean> call, @NonNull Throwable t) {
-
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }
@@ -226,7 +227,6 @@ public class FragmentNavigation extends BaseFragment {
             public void onItemLongClick(View view, int position) {
 
             }
-
 
         });
     }

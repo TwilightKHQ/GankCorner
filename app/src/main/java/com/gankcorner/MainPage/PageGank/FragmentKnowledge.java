@@ -113,7 +113,8 @@ public class FragmentKnowledge extends BaseFragment {
 
             @Override
             public void onFailure(@NonNull Call<WanKnowledgeBean> call, @NonNull Throwable t) {
-
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }

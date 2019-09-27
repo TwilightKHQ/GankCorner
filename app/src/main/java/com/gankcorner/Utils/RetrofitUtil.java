@@ -38,7 +38,8 @@ public class RetrofitUtil {
 
             @Override
             public void onFailure(Call<GankArticleBean> call, Throwable t) {
-
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }

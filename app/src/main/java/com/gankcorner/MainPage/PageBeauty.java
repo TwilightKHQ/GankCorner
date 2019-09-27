@@ -89,7 +89,8 @@ public class PageBeauty extends BaseFragment {
 
             @Override
             public void onFailure(Call<OneBean> call, Throwable t) {
-
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.getMessage());
+                LogUtil.i("ERROR_INFO", "onFailure------> " + t.toString());
             }
         });
     }
